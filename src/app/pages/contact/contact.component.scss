@@ -1,0 +1,65 @@
+.contact_form-card{
+  background-color: #c4c4c4;
+  border: none;
+  border-radius: 0;
+  position: relative;
+  padding: 25px;
+  top: -34px;
+
+
+  .contact_form-input{
+    border:  none;
+    background-color: transparent;
+    border-bottom:1px solid  #000;
+    border-radius:  0;
+
+    &:focus  {
+      box-shadow:  none !important;
+      outline: none !important;
+      border-bottom: 1px solid #0995d6;
+    }
+
+    &:hover{
+      box-shadow:  none !important;
+      outline: none !important;
+    }
+
+  }
+  .contact_form-input::placeholder{
+    color: #fff !important;
+    font-size: 17px;
+
+  }
+  .send-btn{
+    background-color: #7b7b7b;
+    color: #fff;
+    padding: 16px 50px;
+    border-radius: 0;
+    font-size: 17px;
+    &:hover {
+      background-color: #0995d6;
+    }
+  }
+}
+.contact-section
+{
+  padding-bottom: 80px;
+}
+
+
+.company-info-wrapper{
+  padding-top: 130px;
+  padding-left: 30px;
+@media screen and (max-width:992px) {
+  padding-top: 20px;
+}
+
+  .contact-item {
+    a{
+      color: #000;
+      &:hover {
+        color: #0995d6;
+      }
+    }
+  }
+}

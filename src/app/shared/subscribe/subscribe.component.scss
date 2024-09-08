@@ -1,0 +1,32 @@
+.subscribe-btn
+{
+  background: #000;
+  color: #FFF;
+
+  padding: 14px 50px;
+  border-radius: 0;
+  &:hover{
+    background-color: #5a5959;
+  }
+}
+
+.subscribe-input{
+  &:hover {
+    box-shadow: none;
+    outline: none;
+  }
+  &:focus {
+    box-shadow: none;
+    outline: none;
+    border: 1px solid #0b566d;
+  }
+}
+.subscribe-title{
+  font-size: 19px;
+  font-weight: 500;
+}
+
+.subtitle{
+  font-size: 25px;
+  font-weight: 600;
+}

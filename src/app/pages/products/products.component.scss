@@ -1,0 +1,15 @@
+
+.product_section{
+  padding: 60px 0;
+}
+
+
+.product-search-control{
+  position: relative;
+  &::before {
+    position: absolute;
+    content: '\F5EF';
+    left: 0;
+
+  }
+}

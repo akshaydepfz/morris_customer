@@ -1,0 +1,78 @@
+<section class="breadcrumb-sec" style="background-color: #eee;">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">Products</li>
+    </ol>
+  </nav>
+
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a [routerLink]="['/home']" routerLinkActive="router-link-active" >Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Products</li>
+    </ol>
+  </nav>
+
+
+</section>
+
+<section class="product_section">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 mt-3">
+        <div class="w-50 me-auto">
+          <input type="search" class="form-control product-search-control" placeholder="Search Products" name="" id="">
+
+        </div>
+      </div>
+
+
+
+    </div>
+
+    <div class="row">
+      <div class="col-lg-3 mt-3">
+        <div class="">
+          <h6>Filter</h6>
+        </div>
+      </div>
+
+      <div class="col-lg-9 mt-3">
+       <div class="row">
+        <div class="col-lg-4 mt-3">
+          <div class="card product_card" style="min-height: 400px;" routerLink="/products-details">
+
+          </div>
+        </div>
+
+        <div class="col-lg-4 mt-3">
+          <div class="card product_card" style="min-height: 400px;" routerLink="/products-details">
+
+          </div>
+        </div>
+
+        <div class="col-lg-4 mt-3">
+          <div class="card product_card" style="min-height: 400px;">
+
+          </div>
+        </div>
+        <div class="col-lg-4 mt-3">
+          <div class="card product_card" style="min-height: 400px;" routerLink="/products-details">
+
+          </div>
+        </div>
+        <div class="col-lg-4 mt-3">
+          <div class="card product_card" style="min-height: 400px;">
+
+          </div>
+        </div>
+        <div class="col-lg-4 mt-3">
+          <div class="card product_card" style="min-height: 400px;">
+
+          </div>
+        </div>
+       </div>
+      </div>
+    </div>
+  </div>
+</section>
