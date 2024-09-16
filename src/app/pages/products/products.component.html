@@ -1,5 +1,5 @@
-<section class="breadcrumb-sec" style="background-color: #eee;">
-  <nav aria-label="breadcrumb">
+<section class="breadcrumb-sec product-bg">
+  <!-- <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item active" aria-current="page">Products</li>
     </ol>
@@ -10,16 +10,30 @@
       <li class="breadcrumb-item"><a [routerLink]="['/home']" routerLinkActive="router-link-active" >Home</a></li>
       <li class="breadcrumb-item active" aria-current="page">Products</li>
     </ol>
-  </nav>
+  </nav> -->
 
 
 </section>
 
+
+
+
 <section class="product_section">
 
   <div class="container">
+
+      <div class="row">
+        <div class="col-lg-12 col-12 text-center py-3">
+          <h1 class="section-title">Explore Our Range of Genuine Spare Parts</h1>
+
+          <p class="section-para">Explore our selection of original spare parts, sourced from leading brands to ensure optimal performance and durability for your machinery</p>
+        </div>
+      </div>
+
+
+
     <div class="row">
-      <div class="col-lg-12 mt-3">
+      <div class="col-lg-12 mt-3 pt-3">
         <div class="w-50 me-auto">
           <input type="search" class="form-control product-search-control" placeholder="Search Products" name="" id="">
 
@@ -32,47 +46,110 @@
 
     <div class="row">
       <div class="col-lg-3 mt-3">
-        <div class="">
-          <h6>Filter</h6>
-        </div>
+
+        <ul class="nav filter-tab flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+          <li class="nav-link filter_tab-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">PERKINS</li>
+          <li class="nav-link filter_tab-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">FG WILSON</li>
+          <li class="nav-link filter_tab-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">CUMMINS</li>
+          <li class="nav-link filter_tab-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">STANFORD</li>
+        </ul>
       </div>
 
       <div class="col-lg-9 mt-3">
-       <div class="row">
-        <div class="col-lg-4 mt-3">
-          <div class="card product_card" style="min-height: 400px;" routerLink="/products-details">
+        <div class="tab-content" id="v-pills-tabContent">
+          <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+            <div class="category_head-bx">
+              <img src="assets/category/Perkins_Logo.svg" class="cateogory-icon" width="100" alt="">
+             </div>
+            <div class="row">
+
+
+
+              <div class="col-lg-4 mt-3">
+                <div class="card product_card"  routerLink="/product">
+                  <img src="assets/category/cat1.png" width="330px" height="443" class="" alt="">
+
+                  <div class="product-title-bx">
+                    <h4 class="product-title">Engine</h4>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="col-lg-4 mt-3">
+                <div class="card product_card"  routerLink="/product">
+                  <img src="assets/category/cat2.png" width="330px" height="443" class="" alt="">
+
+                  <div class="product-title-bx">
+                    <h4 class="product-title">PARTS</h4>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4 mt-3">
+                <div class="card product_card"  routerLink="/product">
+                  <img src="assets/category/cat3.png" width="330px" height="443" class="" alt="">
+
+                  <div class="product-title-bx">
+                    <h4 class="product-title">CATALOGUE</h4>
+                  </div>
+                </div>
+              </div>
+
+              </div>
 
           </div>
-        </div>
 
-        <div class="col-lg-4 mt-3">
-          <div class="card product_card" style="min-height: 400px;" routerLink="/products-details">
 
+          <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+            <div class="row">
+
+              <div class="col-lg-4 mt-3">
+                <div class="card product_card"  routerLink="/products-details">
+                  <img src="assets/category/cat1.png" width="330px" height="443" class="" alt="">
+
+                  <div class="product-title-bx">
+                    <h4 class="product-title">Engine</h4>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="col-lg-4 mt-3">
+                <div class="card product_card"  routerLink="/products-details">
+                  <img src="assets/category/cat2.png" width="330px" height="443" class="" alt="">
+
+                  <div class="product-title-bx">
+                    <h4 class="product-title">PARTS</h4>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4 mt-3">
+                <div class="card product_card"  routerLink="/products-details">
+                  <img src="assets/category/cat3.png" width="330px" height="443" class="" alt="">
+
+                  <div class="product-title-bx">
+                    <h4 class="product-title">CATALOGUE</h4>
+                  </div>
+                </div>
+              </div>
+
+              </div>
           </div>
-        </div>
 
-        <div class="col-lg-4 mt-3">
-          <div class="card product_card" style="min-height: 400px;">
 
-          </div>
-        </div>
-        <div class="col-lg-4 mt-3">
-          <div class="card product_card" style="min-height: 400px;" routerLink="/products-details">
 
-          </div>
-        </div>
-        <div class="col-lg-4 mt-3">
-          <div class="card product_card" style="min-height: 400px;">
 
-          </div>
-        </div>
-        <div class="col-lg-4 mt-3">
-          <div class="card product_card" style="min-height: 400px;">
-
-          </div>
-        </div>
        </div>
       </div>
+
+
+
+
+
+
+
     </div>
   </div>
 </section>

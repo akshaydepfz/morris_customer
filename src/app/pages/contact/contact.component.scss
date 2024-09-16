@@ -1,18 +1,18 @@
 .contact_form-card{
-  background-color: #c4c4c4;
-  border: none;
-  border-radius: 0;
-  position: relative;
-  padding: 25px;
-  top: -34px;
+  background-color: var(--primary);
+    border: none;
+    border-radius: 0;
+    position: relative;
+    padding: 60px;
+    top: -91px;
 
 
   .contact_form-input{
     border:  none;
     background-color: transparent;
-    border-bottom:1px solid  #000;
+    border-bottom:1px solid  #ffffff;
     border-radius:  0;
-
+  color: #ffffff;
     &:focus  {
       box-shadow:  none !important;
       outline: none !important;
@@ -31,13 +31,15 @@
 
   }
   .send-btn{
-    background-color: #7b7b7b;
-    color: #fff;
+    background-color: #ffffff;
+    color: var(--primary);
+    font-weight: 600;
     padding: 16px 50px;
     border-radius: 0;
     font-size: 17px;
     &:hover {
-      background-color: #0995d6;
+      background-color: var(--secondary);
+      color: #fff;
     }
   }
 }
@@ -48,7 +50,7 @@
 
 
 .company-info-wrapper{
-  padding-top: 130px;
+  padding-top: 80px;
   padding-left: 30px;
 @media screen and (max-width:992px) {
   padding-top: 20px;
@@ -56,10 +58,21 @@
 
   .contact-item {
     a{
-      color: #000;
+      color: #313131;
       &:hover {
-        color: #0995d6;
+        color: var(--primary);
       }
     }
   }
+}
+.getin-para{
+
+font-size: 18px;
+color: rgba(49, 49, 49, 0.80);
+font-weight: 400;
+.company-title{
+  color: rgba(49, 49, 49, 0.80);
+  font-weight: 600;
+
+}
 }
