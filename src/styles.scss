@@ -1,3 +1,14 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Orbitron:wght@400..900&display=swap');
+
+
+:root {
+  --primary: #023E8A;
+  --secondary :#BB0A1E;
+  --primary-font : "Inter", sans-serif;
+  --secondary-font : "Orbitron", sans-serif;
+}
+
 html,
 body {
   margin: 0;
@@ -5,7 +16,12 @@ body {
   background: #fff;
   box-sizing: border-box;
   overflow-x: hidden;
+  font-family: var(--primary-font );
 }
+
+
+
+
 
 img {
   max-width: 100%;
@@ -20,10 +36,16 @@ a {
 .py-80{
   padding: 80px 0;
 }
+
+.pt-80{
+  padding-top: 80px;
+}
 .breadcrumb-sec{
   padding: 100px;
 }
-
+.section-title{
+  font-family: var(--secondary-font);
+}
 
 @media screen and (min-width:1200px) {
    .custom-container {
@@ -53,3 +75,25 @@ a {
 }
 
 }
+
+
+
+#productSection .owl-theme .owl-dots .owl-dot span {
+  width:38px ;
+  height: 6px ;
+  margin: 5px 7px;
+  background: #D6D6D6;
+  display: block;
+  -webkit-backface-visibility: visible;
+  transition: opacity .2s ease;
+  border-radius: 30px;
+}
+#productSection .owl-theme .owl-dots, .owl-theme .owl-nav {
+  text-align: left;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#productSection .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+  background: var(--primary);
+}
+

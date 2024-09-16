@@ -1,24 +1,33 @@
 .subscribe-btn
 {
-  background: #000;
+  background: var(--primary);
   color: #FFF;
 
   padding: 14px 50px;
   border-radius: 0;
   &:hover{
     background-color: #5a5959;
+
+
+  }
+  @media screen and (max-width:992px) {
+    padding: 11px 22px;
+    font-size: 14px;
   }
 }
 
 .subscribe-input{
+  border: 1px solid var(--primary);
+  border-radius:  0;
   &:hover {
     box-shadow: none;
     outline: none;
+    border: 1px solid var(--primary);
   }
   &:focus {
     box-shadow: none;
     outline: none;
-    border: 1px solid #0b566d;
+    border: 1px solid var(--primary);
   }
 }
 .subscribe-title{
@@ -28,5 +37,9 @@
 
 .subtitle{
   font-size: 25px;
-  font-weight: 600;
+  font-weight: 500;
+}
+.cmpny-title{
+  color: var(--primary);
+  font-family: var(--secondary-font);
 }

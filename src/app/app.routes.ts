@@ -4,11 +4,14 @@ import { AboutComponent } from './pages/about/about.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
+import { ProductListComponent } from './pages/product-list/product-list.component';
 
 export const routes: Routes = [
-  {path:'' ,component:HomeComponent, title:"Home",},
-  {path:'about' ,component:AboutComponent, title:"About"},
-  {path:'contact' ,component:ContactComponent, title:"Contact"},
+  {path:'' ,component:HomeComponent, title:"Morris | Home",},
+   {path:'about' ,component:AboutComponent, title:"About"},
+   {path:'contact' ,component:ContactComponent, title:"Contact"},
   {path:'products' ,component:ProductsComponent, title:"Products"},
-  {path:'products-details' ,component:ProductDetailsComponent, title:"Product"},
+  // {path:'products-details' ,component:ProductDetailsComponent, title:"Product"},
+  {path:'product' ,component:ProductListComponent, title:"Product"},
+
 ];
