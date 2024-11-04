@@ -1,22 +1,37 @@
-import { Component,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { AfterViewChecked, Component,CUSTOM_ELEMENTS_SCHEMA, Inject, OnInit, PLATFORM_ID  } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { SubscribeComponent } from '../../shared/subscribe/subscribe.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import * as AOS from 'aos';
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink,RouterLinkActive,SubscribeComponent,CarouselModule,CommonModule],
+  imports: [RouterLink,RouterLinkActive,SubscribeComponent,CarouselModule,CommonModule,],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  
+
 })
-export class HomeComponent {
-
-
+export class HomeComponent implements OnInit ,AfterViewChecked  {
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      // Initialize AOS only on the client-side (browser)
+      AOS.init({
+        duration: 1000,
+        once: true,
+        easing: 'ease-in-out',
+      });
+    }
+  }
+  ngAfterViewChecked(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      AOS.refresh();
+    }
+  }
+  constructor(@Inject(PLATFORM_ID) private platformId: object) {}
   items = [
     {
       "image":"assets/Products/p1.png",
@@ -94,6 +109,8 @@ export class HomeComponent {
     touchDrag: true,
     pullDrag: true,
     dots: false,
+    autoplay:true,
+    smartSpeed : 2000,
     navSpeed: 600,
     margin:20,
     navText: ['&#8249;', '&#8250;'],

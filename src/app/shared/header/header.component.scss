@@ -52,3 +52,16 @@
     }
   }
 }
+.scl-icon{
+  transition: all ease 0.3s;
+  transform: translateY(0px);
+  &:hover {
+    transition: all ease 0.3s;
+    transform: translateY(-5px);
+  }
+}
+
+
+.fixed-top {
+  transition: all 0.5s;
+}

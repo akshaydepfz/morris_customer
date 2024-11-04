@@ -1,3 +1,5 @@
-export interface Product {
-  
+export interface Cateogory {
+  title : string,
+  image : string,
+  id : number,
 }

@@ -9,16 +9,22 @@ export class ProductService {
   constructor(private http : HttpClient) { }
 
 
+  apiUrl = ''
 
 
-
-  getproducts(){
-    return this.http.get('');
+  getCategories(){
+    return this.http.get<any>('assets/categories.json');
   }
 
 
   getproduct(id:string){
-    return this.http.get('');
+    return this.http.get<any>('assets/products.json');
   }
+
+
+  getsubproducts(id:string){
+    this.http.post(`${this.apiUrl},`,id)
+  }
+
 
 }

@@ -1,5 +1,5 @@
 .about-bg {
-  background: url(../../../../public/assets/breadcrumb/about-bg.png);
+  background: url('../../../../public/assets/breadcrumb/about-bg.png');
   min-height: 443px;
   height: auto;
   background-size: cover;
@@ -8,7 +8,7 @@
 }
 
 .aboutpic {
-  background: url(../../../../public/assets/breadcrumb/about.png);
+  background: url('../../../../public/assets/breadcrumb/about.png');
 }
 .subscrbe-sec {
   width: 50%;
@@ -24,9 +24,23 @@
   right: 0;
   padding: 114px;
   margin-left: -50%;
+  @media screen and (max-width:992px) {
+    position: relative;
+    margin-left: unset;
+    top: 0px;
+    padding: 10px;
+    height: 100%;
+  }
 }
 .para{
   font-size: 24px;
   line-height: 40px; /* 166.667% */
 letter-spacing: 0.72px;
+@media screen and (max-width:992px) {
+  font-size: 18px;
+  line-height: 35px;
+  text-align: justify;
+
+}
+
 }

@@ -1,0 +1,25 @@
+{
+  "cateogories" :[
+    {
+      "id" :1,
+      "title" : "Perkins"
+    },
+    {
+      "id" :2,
+      "title" : "FG WILSON"
+    },
+    {
+      "id" :3,
+      "title" : "Perkins"
+    },
+    {
+      "id" :4,
+      "title" : "CUMMINS"
+    },
+    {
+      "id" :5,
+      "title" : "STANFORD"
+    }
+
+  ]
+}

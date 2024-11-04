@@ -14,26 +14,45 @@
       <div class="col-lg-6">
         <div class="card contact_form-card">
             <h1 class="text-center h3 contact-title text-white section-title ">Contact Details</h1>
-          <form class="card-body  contact_form-card-body">
-            <div class="my-4 py-3">
-              <input type="text" name="name" class="form-control contact_form-input" autocomplete="off" id="name" placeholder="Name" >
-            </div>
-            <div class="my-4 py-3">
-              <input type="text" name="phone" class="form-control contact_form-input" autocomplete="off" id="Email" placeholder="Phone" >
-            </div>
-            <div class="my-4 py-3">
-              <input type="email" name="email" class="form-control contact_form-input" autocomplete="off" id="Email" placeholder="Email ID" >
-            </div>
+            <form class="card-body contact_form-card-body" [formGroup]="form" (ngSubmit)="onSubmit()">
+              <div class="my-4 py-3">
+                <input type="text" formControlName="name" class="form-control contact_form-input" autocomplete="off" id="name" placeholder="Name" required>
 
-            <div class="my-4 py-3">
-              <textarea class="form-control contact_form-input" autocomplete="off" placeholder="Message" id="Message"></textarea>
 
-            </div>
-            <div class="text-center">
+                <div *ngIf="form.get('name')?.invalid && (form.get('name')?.touched || formSubmitAttempt)" class="text-danger error">
+                  Name is required
+                </div>
+              </div>
 
-              <button type="submit" class="btn send-btn text-uppercase w-100">Send Message</button>
-            </div>
-          </form>
+
+              <div class="my-4 py-3">
+                <input type="text" formControlName="phone" class="form-control contact_form-input" autocomplete="off" id="phone" placeholder="Phone" required>
+
+                <div *ngIf="form.get('phone')?.invalid && (form.get('phone')?.touched || formSubmitAttempt)" class="text-danger error">
+                  Phone is required
+                </div>
+              </div>
+
+              <div class="my-4 py-3">
+                <input type="email" formControlName="email" class="form-control contact_form-input" autocomplete="off" id="email" placeholder="Email ID" required>
+
+                <div *ngIf="form.get('email')?.invalid && (form.get('email')?.touched || formSubmitAttempt)" class="text-danger error">
+                  Valid email is required
+                </div>
+              </div>
+
+              <div class="my-4 py-3">
+                <textarea formControlName="message" class="form-control contact_form-input" autocomplete="off" placeholder="Message" id="Message" required></textarea>
+
+                <div *ngIf="form.get('message')?.invalid && (form.get('message')?.touched || formSubmitAttempt)" class="text-danger error">
+                  Message is required
+                </div>
+              </div>
+
+              <div class="text-center">
+                <button type="submit"  class="btn send-btn text-uppercase w-100">Send Message</button>
+              </div>
+            </form>
 
         </div>
       </div>
