@@ -18,7 +18,7 @@ body {
   overflow-x: hidden;
   font-family: var(--primary-font );
   scroll-behavior: smooth;
-  
+
 }
 
 
@@ -101,6 +101,7 @@ a {
 
 ::-webkit-scrollbar {
   width: 10px;
+  height: 6px;
 }
 
 /* Track */
@@ -118,4 +119,45 @@ a {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #b30000;
+}
+.p-datatable-thead > tr > th,.p-datatable-tbody > tr
+{
+  background-color: #FFF !important;
+  color: #000 !important;
+  border:  1px solid #aaa !important;
+}
+
+.p-paginator {
+  background-color: #FFF !important;
+  color: #000 !important;
+}
+.p-paginator-page.p-paginator-page-selected {
+  background: var(--p-paginator-nav-button-selected-background);
+  color: rgb(0 0 0 / 87%);
+}
+
+.p-select {
+  background-color: #FFF !important;
+  color: #000 !important;
+}
+
+.p-select-label {
+  color: #000 !important;
+}
+.p-datatable-tbody > tr > td
+{
+  padding: 9px;
+  font-size: 13px;
+}
+.p-datatable-thead ,tr{
+  background: #000 !important;
+}
+
+.p-datatable-tbody > tr > td {
+  text-align: start;
+  border-color: #dbdbdb !important;
+}
+.p-datatable-thead > tr > th
+{
+  background-color: #eee;
 }
