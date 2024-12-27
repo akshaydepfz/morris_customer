@@ -64,3 +64,33 @@
     font-weight: 200;
   }
 }
+
+
+.form-label {
+  font-size: 13px;
+  font-weight: 500;
+
+}
+.form-control {
+  font-size: 13px;
+
+  &:hover {
+    box-shadow: none;
+    outline: none;
+  }
+  &:focus {
+    box-shadow: none;
+    outline: none;
+
+  }
+}
+.save-btn {
+  background: var(--primary);
+  color: #FFF;
+  padding: 4px 22px;
+  border-radius: 0px;
+  font-size: 14px;
+  &:hover {
+    background-color: var(--secondary);
+  }
+}

@@ -1,17 +1,38 @@
 <section>
 
 
-  <swiper-container loop="true" autoplay="true" pagination="true" speed="1000"
-    style="--swiper-pagination-color:#ffffff;
+  <swiper-container
+  loop="true"
+  autoplay="true"
+  pagination="true"
+  speed="1000"
+  style="--swiper-pagination-color: #ffffff;"
+  class="my-swiper-container"
+  pagination-clickable="true"
+  pagination-dynamic-bullets="true"
+>
+  <ng-container *ngIf="isBrowser && bannerlist.length > 0">
+    <swiper-slide *ngFor="let item of bannerlist"  class="swiper-item" >
+      <img src="{{item.image}}"  class="banner-img" alt="">
 
-
-
-    "
-  class="my-swiper-container"  pagination-clickable="true"
-  pagination-dynamic-bullets="true">
-    <swiper-slide style="background:url('assets/banner-3.jpg');" class="swiper-item">
       <div class="container">
         <div class="row">
+          <div class="col-lg-12">
+            <div class="banner_content-wrapper">
+              <h1 class="banner-title">{{ item.title }}</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </swiper-slide>
+  </ng-container>
+</swiper-container>
+
+
+
+    <!-- <swiper-slide style="background:url('assets/banner-1.jpg');" class="swiper-item">
+          <div class="container">
+            <div class="row">
           <div class="col-lg-12">
             <div class="banner_content-wrapper">
               <h1 class="banner-title">Discover Authentic Spare Parts <br>
@@ -21,21 +42,7 @@
         </div>
       </div>
 
-    </swiper-slide>
-
-    <swiper-slide style="background:url('assets/banner-1.jpg');" class="swiper-item">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="banner_content-wrapper">
-              <h1 class="banner-title">Discover Authentic Spare Parts <br>
-                Quality You Can Trust</h1>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </swiper-slide>
+      </swiper-slide>
 
     <swiper-slide style="background:url('assets/banner-2.png');" class="swiper-item">
       <div class="container">
@@ -49,14 +56,13 @@
         </div>
       </div>
 
-    </swiper-slide>
+    </swiper-slide> -->
 
 
-  </swiper-container>
 </section>
 
 
-<section class="pt-80" >
+<section class="pt-80">
   <div class="container">
     <div class="row">
       <div class="col-lg-12 col-md-12 col-12  py-2 text-center">
@@ -68,13 +74,13 @@
 
       <div class="col-lg-12 col-md-12 col-12 mt-4">
         <owl-carousel-o [options]="customOptions2">
-          <ng-container *ngFor="let item of items2">
+          <ng-container *ngFor="let item of companySlider">
             <ng-template carouselSlide>
 
               <div class="item ">
                 <div class="brand-card my-2">
 
-                  <img [src]="item" class="brand-img" alt="Image" />
+                  <img src="{{item.image}}" class="brand-img" width="100%" height="100%" alt="Image" />
                 </div>
 
               </div>
@@ -124,31 +130,36 @@
     <div class="row">
       <div class="col-lg-6 col-md-6 col-sm-12 col-12 ">
         <h3 class="h2  section-title pb-4">About us</h3>
-        <div class="img-wrapper d-block d-lg-none " >
-          <img src="assets/about-section.png"  alt="image">
+        <div class="img-wrapper d-block d-lg-none ">
+          <img src="assets/about-section.png" alt="image">
         </div>
-        <p class="about-para mt-lg-0 mt-3"> <span class="about-cmpny-name">Morris General Trading LLC</span> is a trusted Dubai-based supplier of genuine
+        <p class="about-para mt-lg-0 mt-3"> <span class="about-cmpny-name">Morris General Trading LLC</span> is a
+          trusted Dubai-based supplier of genuine
           spare parts for top brands
           like FG Wilson, Perkins, Volvo Penta, Caterpillar, and JCB. We ensure fast and reliable delivery of
           high-quality, original components, serving industries like construction, manufacturing, and power generation.
-          With a focus on exceptional service and efficiency, <span class="about-cmpny-name">Morris General Trading LLC</span> is your dependable partner for
+          With a focus on exceptional service and efficiency, <span class="about-cmpny-name">Morris General Trading
+            LLC</span> is your dependable partner for
           all your spare parts needs</p>
 
-        <a  class="readmore-link" [routerLink]="['/about']" routerLinkActive="router-link-active"> Read more <svg width="28" class="ms-3 arrow" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g clip-path="url(#clip0_1383_149)">
-          <path d="M18.6784 13.7832L-4 13.9498V14.9499V15.9498L18.6784 16.1165V19.6165L23.3334 14.9499L18.6784 10.2832V13.7832Z" />
-          </g>
-          <defs>
-          <clipPath id="clip0_1383_149">
-          <rect width="28" height="28" fill="white" transform="translate(0 0.950195)"/>
-          </clipPath>
-          </defs>
+        <a class="readmore-link" [routerLink]="['/about']" routerLinkActive="router-link-active"> Read more <svg
+            width="28" class="ms-3 arrow" height="29" viewBox="0 0 28 29" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_1383_149)">
+              <path
+                d="M18.6784 13.7832L-4 13.9498V14.9499V15.9498L18.6784 16.1165V19.6165L23.3334 14.9499L18.6784 10.2832V13.7832Z" />
+            </g>
+            <defs>
+              <clipPath id="clip0_1383_149">
+                <rect width="28" height="28" fill="white" transform="translate(0 0.950195)" />
+              </clipPath>
+            </defs>
           </svg></a>
       </div>
 
       <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-lg-0  mt-3">
 
-        <div class="img-wrapper d-sm-none d-none d-lg-block" >
+        <div class="img-wrapper d-sm-none d-none d-lg-block">
           <img src="assets/about-section.png" alt="" data-aos="fade-left">
         </div>
 
@@ -171,11 +182,13 @@
         <div class="contact-wrapper">
           <ul class="ps-lg-0 ps-3">
             <li class="contact-item">
-              <a href="mailto:info&#64;morriesuae.com" data-aos="fade-right"> <i class="bi bi-envelope me-2"></i> info&#64;morriesuae.com</a>
+              <a href="mailto:info&#64;morriesuae.com" data-aos="fade-right"> <i class="bi bi-envelope me-2"></i>
+                info&#64;morriesuae.com</a>
             </li>
 
             <li class="contact-item">
-              <a href="tel:+971544760020" data-aos="fade-right"> <i class="bi bi-telephone me-2"></i>+971 544 760 020</a>
+              <a href="tel:+971544760020" data-aos="fade-right"> <i class="bi bi-telephone me-2"></i>+971 544 760
+                020</a>
             </li>
 
             <li class="contact-item">
@@ -203,7 +216,7 @@
 
         <div class="">
           <iframe
-           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3608.8189273519156!2d55.30182627842309!3d25.24302307231866!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43e7928321c3%3A0x3acba115d0ac0ba7!2zWmFh4oCZYmVlbCByb2Fk!5e0!3m2!1sen!2sin!4v1726381104613!5m2!1sen!2sin"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3608.8189273519156!2d55.30182627842309!3d25.24302307231866!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43e7928321c3%3A0x3acba115d0ac0ba7!2zWmFh4oCZYmVlbCByb2Fk!5e0!3m2!1sen!2sin!4v1726381104613!5m2!1sen!2sin"
             width="100%" height="290" style="border:0;" allowfullscreen="" loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>

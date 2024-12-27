@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -10,6 +10,9 @@ export class ProductService {
 
 
   apiUrl = ''
+
+  apiUrl1 = 'https://morris.koyeb.app/'; // Replace with your API
+  token = 'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
 
 
   getCategories(){
@@ -26,5 +29,10 @@ export class ProductService {
     this.http.post(`${this.apiUrl},`,id)
   }
 
+
+  getBanners(p0: string, p1: { headers: HttpHeaders; }) {
+   
+    return this.http.get<any>(`${this.apiUrl1}/banner`);
+  }
 
 }

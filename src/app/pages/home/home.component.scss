@@ -52,6 +52,9 @@ swiper-container{
   .banner-title {
     line-height: 59px;
     font-size: 51px;
+    max-width: 68rem;
+    margin: auto;
+    text-wrap: auto;
     @media screen and (max-width:768px) {
       font-size: 31px;
     }
@@ -183,4 +186,10 @@ swiper-pagination-custom {
   @media screen and (max-width:992px) {
     width: 100%;
   }
+}
+
+.banner-img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
 }

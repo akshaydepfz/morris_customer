@@ -19,8 +19,8 @@ export const routes: Routes = [
       { path: 'about', component: AboutComponent, title: 'Morris | About' },
       { path: 'contact', component: ContactComponent, title: 'Morris | Contact' },
       { path: 'products', component: ProductsComponent, title: 'Morris | Products' },
-      { path: 'product', component: ProductListComponent, title: 'Morris | Product' },
-      { path: 'sub-product', component: SubproductsComponent, title: 'Morris | Product' },
+      { path: 'product/:category/:id', component: ProductListComponent, title: 'Morris | Product' },
+      { path: 'sub-product/:category/:subcategory', component: SubproductsComponent, title: 'Morris | Product' },
     ],
   },
   {

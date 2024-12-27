@@ -65,3 +65,35 @@
 .fixed-top {
   transition: all 0.5s;
 }
+.btn {
+  &:hover {
+    box-shadow:  none;
+    outline: none;
+  }
+  &:focus{
+    box-shadow:  none;
+    outline: none;
+  }
+}
+.navbar-toggler-icon{
+  color: var(--primary);
+}
+.offcanvas-body
+{
+
+  
+  .navbar-nav
+{
+  display: flex; align-items: center;
+  justify-content: center;
+  height: 83vh;
+}
+  .nav-link{
+    color: #fff;
+    font-size: 33px;
+    padding: 30px;
+    &:hover {
+      color: var(--secondary);
+    }
+  }
+}
