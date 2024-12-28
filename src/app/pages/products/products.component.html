@@ -45,8 +45,11 @@
 
     </div> -->
 
-    <div class="row">
-      <div class="col-lg-3 mt-3">
+    <div class="row position-relative">
+      @if (isLoading) {
+        <app-loader/>
+      }
+      <div class="col-lg-3 mt-3 ">
 
 
         <ul class="nav filter-tab flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -63,8 +66,10 @@
         </ul>
       </div>
 
-      <div class="col-lg-9 mt-3">
-        <div class="tab-content" id="v-pills-tabContent">
+      <div class="col-lg-9 mt-3 ">
+
+        <div class="tab-content " id="v-pills-tabContent">
+
 
           @for (item of cateogories; track $index) {
 
@@ -154,12 +159,6 @@
 
        </div>
       </div>
-
-
-
-
-
-
 
     </div>
   </div>

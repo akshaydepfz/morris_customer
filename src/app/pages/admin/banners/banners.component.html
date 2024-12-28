@@ -1,0 +1,110 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body px-0 pb-0">
+        <div class="d-flex justify-content-between px-3 align-items-center">
+          <h5 class="card-title">Banners</h5>
+
+          <button type="button" class="btn save-btn mb-3 float-end" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">
+            Add <i class="bi bi-plus-lg"></i>
+          </button>
+
+        </div>
+
+        <div class="table-responsive category_table position-relative">
+          <table class="table table-bordered mb-0">
+            <thead class="thead-bg">
+              <tr class="thead-bg">
+                <th scope="col" style="width: 50px;">Action</th>
+                <th scope="col">Category</th>
+                <th scope="col" style="width: 300px;">Image</th>
+
+              </tr>
+            </thead>
+            <tbody class="position-relative">
+              <!-- Shimmer Loading Placeholder -->
+              <ng-container *ngIf="isLoading; else dataRows">
+                <tr *ngFor="let _ of [].constructor(3)">
+                  <td><div class="shimmer shimmer-cell"></div></td>
+                  <td><div class="shimmer shimmer-cell"></div></td>
+                  <td><div class="shimmer shimmer-cell" style="width: 300px; height: 100px;"></div></td>
+
+                </tr>
+              </ng-container>
+              <ng-template #dataRows>
+                <tr *ngFor="let banner of banners; trackByIndex: ">
+                  <td><i class="bi bi-trash3 btn btn-danger" style="padding: 3px 6px;" (click)="deleteBanner(banner.id)"></i></td>
+                  <td>{{banner.title}}</td>
+
+                  <td><img src="{{banner.image}}" class="banner-img" width="100%" height="100%" alt=""></td>
+
+                </tr>
+              </ng-template>
+              <!-- @for(banner of banners; track $index) {
+              <tr>
+                <th scope="row"><i class="bi bi-trash3 btn btn-danger" (click)="deleteBanner(banner.id)"></i></th>
+                <td>{{banner.title}}</td>
+                <td><img src="{{banner.image}}" class="banner-img" width="100%" height="100%" alt=""></td>
+
+              </tr>
+              } -->
+
+
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal add_product-modal" id="exampleModal" #exampleModal  tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add Category</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form (ngSubmit)="addBanner()">
+        <div class="modal-body">
+          <div class="row">
+            <!-- Category Name Input -->
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="banner_title" class="form-label">Banner Title</label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="bannerTitle"
+                name="banner_title"
+                placeholder="Enter Banner Title"
+                id="banner_title"
+                required
+              />
+            </div>
+
+            <!-- Image File Input -->
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="image" class="form-label">Image</label>
+              <input
+                type="file"
+                class="form-control"
+                (change)="onFileSelected($event)"
+                id="image"  #imageInput
+                required
+              />
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button"  class="btn btn-secondary"data-bs-dismiss="modal"> Close</button>
+          <button type="submit" class="btn save-btn" data-bs-dismiss="modal">Add</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,8 @@
 <section>
 
-
+  @if (isloading) {
+    <app-loader></app-loader>
+  }
   <swiper-container
   loop="true"
   autoplay="true"
@@ -72,8 +74,12 @@
           reliability, performance, and longevity for your machinery</p>
       </div>
 
-      <div class="col-lg-12 col-md-12 col-12 mt-4">
+      <div class="col-lg-12 col-md-12 col-12 mt-4 position-relative" >
+        @if (isloading) {
+          <app-loader></app-loader>
+        }
         <owl-carousel-o [options]="customOptions2">
+
           <ng-container *ngFor="let item of companySlider">
             <ng-template carouselSlide>
 
@@ -106,18 +112,26 @@
 
     <div class="row">
       <div class="col-lg-12">
-        <owl-carousel-o [options]="customOptions">
-          <ng-container *ngFor="let item of items">
-            <ng-template carouselSlide>
-              <div class="card product-card">
-                <img [src]="item.image" alt="Image" class="product-img" width="315" height="333" />
-                <div class="card-body product-card-body">
-                  <h5 class="">{{item.Name}}</h5>
+        @defer {
+          <owl-carousel-o [options]="customOptions">
+            <ng-container *ngFor="let item of items">
+              <ng-template carouselSlide>
+                <div class="card product-card">
+                  <img [src]="item.image" alt="Image" class="product-img" width="315" height="333" />
+                  <div class="card-body product-card-body">
+                    <h5 class="">{{item.Name}}</h5>
+                  </div>
                 </div>
-              </div>
-            </ng-template>
-          </ng-container>
-        </owl-carousel-o>
+              </ng-template>
+            </ng-container>
+          </owl-carousel-o>
+        } @loading {
+          <app-loader/>
+        } @placeholder {
+          
+          <p>Placeholder content</p>
+        }
+
       </div>
     </div>
   </div>

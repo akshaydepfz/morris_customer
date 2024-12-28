@@ -5,9 +5,11 @@
 </section>
 <section class="product_section py-80">
 
-  <div class="container">
+  <div class="container position-relative">
 
-
+    @if (isLoading) {
+      <app-loader/>
+    }
 
 
 
@@ -33,7 +35,7 @@
 
         <div class="w-50 me-auto position-relative">
           <i class="bi bi-search search-icon"></i>
-          <input type="search" class="form-control product-search-control" placeholder="Search by product name or part number" name="" id="">
+          <input type="search" class="form-control product-search-control" [(ngModel)]="searchQuery" placeholder="Search parts" name="" id="">
 
         </div>
       </div>
@@ -42,9 +44,9 @@
 
     </div>
 
-    <div class="row">
+    <div class="row ">
 
-      @for (item of products; track $index) {
+      @for (item of products| search: searchQuery:['Sub_category_name']; track $index) {
 
         <div class="col-lg-3 col-md-4 col-sm-6 col-12 mt-3">
           <div class="card product_card" routerLink="/product">

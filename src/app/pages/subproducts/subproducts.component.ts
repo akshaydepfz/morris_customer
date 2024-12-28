@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { SearchPipe } from '../../core/filters/search.pipe';
+import { LoaderComponent } from '../../shared/loader/loader.component';
 
 export interface Product {
   id: number;
@@ -23,7 +25,7 @@ export interface Product {
 @Component({
   selector: 'app-subproducts',
   standalone: true,
-  imports: [CommonModule,FormsModule,ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, SearchPipe,LoaderComponent],
   templateUrl: './subproducts.component.html',
   styleUrl: './subproducts.component.scss',
 })
@@ -33,13 +35,13 @@ export class SubproductsComponent implements OnInit {
   token =
     'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
   http = inject(HttpClient);
-
+  searchQuery: string = '';
   products: Product[] = [];
   mainCategory = '';
   subacategory = '';
   enquiryForm: FormGroup;
   selectedProduct: any = null; // Track the selected product
-
+  isLoading = true; // Track the loading state
   constructor(private fb: FormBuilder,private route: ActivatedRoute) {
     // Initialize the form group
     this.enquiryForm = this.fb.group({
@@ -51,10 +53,6 @@ export class SubproductsComponent implements OnInit {
   ngOnInit(): void {
     this.mainCategory = this.route.snapshot.paramMap.get('category') || '';
     this.subacategory = this.route.snapshot.paramMap.get('subcategory') || '';
-
-    console.log("this.mainCategory",this.mainCategory);
-    console.log("this.subacategory",this.subacategory);
-
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.token}`,
       'Content-Type': 'application/json',
@@ -63,18 +61,17 @@ export class SubproductsComponent implements OnInit {
     const params = new HttpParams()
       .set('main_category', this.mainCategory)
       .set('sub_category', this.subacategory);
-
       this.http.get<Product[]>(this.apiUrl1, { params, headers }).subscribe({
         next: (response) => {
           console.log('Item Response:', response);
           this.products = response;
+           this.isLoading = false;
         },
         error: (err) => {
           console.error('Error occurred:', err);
         },
       });
-    // this.categoryTitle = this.category;
-    // this.subcategory = this.id;
+
   }
 
   openModal(item: any) {

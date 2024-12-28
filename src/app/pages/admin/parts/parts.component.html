@@ -1,0 +1,182 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body px-0 pb-0">
+        <div class="d-flex justify-content-between px-3 align-items-center">
+          <h5 class="card-title">Parts</h5>
+
+          <button type="button" class="btn save-btn mb-3 float-end" data-bs-toggle="modal" (click)="openModal()"
+            data-bs-target="#exampleModal">
+            Add <i class="bi bi-plus-lg" ></i>
+          </button>
+
+        </div>
+
+        <div class="table-responsive category_table position-relative">
+
+          <table class="table table-bordered mb-0">
+            <thead class="thead-bg">
+              <tr class="thead-bg">
+                <th scope="col" class="table-header" style="width: 50px;">Action</th>
+                <th scope="col" class="table-header" style="width: 100px;">Name</th>
+                <th scope="col" class="table-header" style="width: 112px;">Part Number</th>
+                <th scope="col" class="table-header" style="width: 100px;">Part description</th>
+                <th scope="col" class="table-header" style="width: 110px;">Super ss number</th>
+                <th scope="col" class="table-header" style="width: 50px;">Weight</th>
+                <th scope="col" class="table-header" style="width: 120px;">Hs code</th>
+                <th scope="col" class="table-header" style="width: 100px;">Remain part number</th>
+                <th scope="col" class="table-header" style="width: 50px;">Coo</th>
+                <th scope="col" class="table-header" style="width: 90px;">Ref no</th>
+                <th scope="col" class="table-header" style="width: 60px;">Image</th>
+                <th scope="col" class="table-header" style="width: 80px;">Category</th>
+                <th scope="col" class="table-header" style="width: 90px;">Sub category</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Shimmer Loading Placeholder -->
+              <ng-container *ngIf="isLoading; else dataRows">
+                <tr *ngFor="let _ of [].constructor(5)">
+                  <td><div class="shimmer shimmer-cell"></div></td>
+                  <td><div class="shimmer shimmer-cell"></div></td>
+                  <td><div class="shimmer shimmer-cell"></div></td>
+                  <td><div class="shimmer shimmer-cell"></div></td>
+                  <td><div class="shimmer shimmer-cell"></div></td>
+                  <td><div class="shimmer shimmer-cell"></div></td>
+                  <td><div class="shimmer shimmer-cell"></div></td>
+                  <td><div class="shimmer shimmer-cell"></div></td>
+                  <td><div class="shimmer shimmer-cell"></div></td>
+                  <td><div class="shimmer shimmer-cell"></div></td>
+                  <td><div class="shimmer shimmer-cell" style="width: 60px; height: 40px;"></div></td>
+                  <td><div class="shimmer shimmer-cell"></div></td>
+                  <td><div class="shimmer shimmer-cell"></div></td>
+                </tr>
+              </ng-container>
+
+              <!-- Actual Data Rows -->
+              <ng-template #dataRows>
+                <tr *ngFor="let item of Parts; trackByIndex: ">
+                  <td><i class="bi bi-trash3 btn btn-danger" style="padding: 3px 6px;" (click)="deleteParts(item.id)"></i></td>
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.part_number }}</td>
+                  <td>{{ item.part_description }}</td>
+                  <td>{{ item.super_ss_number }}</td>
+                  <td>{{ item.weight }}</td>
+                  <td>{{ item.hs_code }}</td>
+                  <td>{{ item.remain_part_number }}</td>
+                  <td>{{ item.coo }}</td>
+                  <td>{{ item.ref_no }}</td>
+                  <td>
+                    <img src="{{ item.image }}" class="cat-img" width="100%" height="100%" alt="">
+                  </td>
+                  <td>{{ item.main_category }}</td>
+                  <td>{{ item.sub_category }}</td>
+                </tr>
+              </ng-template>
+            </tbody>
+          </table>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal add_product-modal" id="exampleModal" #exampleModal  tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add Category</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form (ngSubmit)="addParts()">
+        <div class="modal-body">
+          <div class="row">
+            <!-- Category Name Input -->
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="categories" class="form-label">Select Category</label>
+              <select name="categoryName" class="form-select" id="categories" [(ngModel)]="categoryName">
+                <option value="" selected disabled>Select Category</option>
+               @for (item of categories; track $index) {
+
+                 <option value="{{item.category_name}}" class="option"   >{{item.category_name}}</option>
+               }
+              </select>
+            </div>
+
+            <!-- Image File Input -->
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="SubcategoryName" class="form-label">Select Sub category</label>
+              <select name="SubcategoryName" class="form-select" id="SubcategoryName" [(ngModel)]="SubcategoryName">
+                <option value="" selected disabled>Select Sub category</option>
+               @for (item of subCategories; track $index) {
+
+                 <option value="{{item.Sub_category_name}}" class="option"   >{{item.Sub_category_name}}</option>
+               }
+              </select>
+            </div>
+
+
+
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="itemName" class="form-label">Category Name</label>
+              <input type="text"
+                class="form-control"[(ngModel)]="itemName"name="itemName" placeholder="Enter Name"  id="itemName" required/>
+            </div>
+
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="part_number" class="form-label">Part Number</label>
+              <input type="text" class="form-control" [(ngModel)]="part_number" name="part_number" placeholder="Enter  Name" id="part_number" required/>
+            </div>
+
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="itemName" class="form-label">Part description</label>
+              <input type="text" class="form-control" [(ngModel)]="part_description" name="part_description" placeholder="Enter description" id="part_description" required/>
+            </div>
+
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="super_ss_number" class="form-label">Super ss number</label>
+              <input type="text" class="form-control" [(ngModel)]="super_ss_number" name="super_ss_number" placeholder="Enter super ss number" id="super_ss_number" required/>
+            </div>
+
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="weight" class="form-label">weight</label>
+              <input type="text" class="form-control" [(ngModel)]="weight" name="super_ss_number" placeholder="Enter weight" id="weight" required/>
+            </div>
+
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="hs_code" class="form-label">hs_code</label>
+              <input type="text" class="form-control" [(ngModel)]="hs_code" name="hs_code" placeholder="Enter hs code" id="hs_code" required/>
+            </div>
+
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="remain_part_number" class="form-label">remain_part_number</label>
+              <input type="text" class="form-control" [(ngModel)]="remain_part_number" name="remain_part_number" placeholder="Enter remain part number" id="remain_part_number" required/>
+            </div>
+
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="coo" class="form-label">Coo</label>
+              <input type="text" class="form-control" [(ngModel)]="coo" name="coo" placeholder="Enter super ss number" id="coo" required/>
+            </div>
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="ref_no" class="form-label">Ref no</label>
+              <input type="text" class="form-control" [(ngModel)]="ref_no" name="ref_no" placeholder="Enter super ss number" id="ref_no" required/>
+            </div>
+
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="selectedFile" class="form-label">Image</label>
+              <input type="file" class="form-control" #imageInput  (change)="onFileSelected($event)"  name="selectedFile" placeholder="" id="selectedFile" required/>
+            </div>
+
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Close </button>
+          <button type="submit" class="btn save-btn" data-bs-dismiss="modal">Add</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

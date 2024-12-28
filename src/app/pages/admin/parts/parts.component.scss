@@ -1,0 +1,76 @@
+.cat-img{
+  width: 200px;
+  height: 100%;
+  max-height: 50px;
+}
+.thead-bg{
+
+th{
+  background-color: var(--primary);
+  font-size: 14px;
+  color: #fff;
+}
+}
+
+tbody tr td, tbody tr  th {
+  vertical-align: middle;
+  font-size: 13px;
+  white-space: nowrap;
+
+}
+tbody tr  th {
+  text-align: center;
+}
+.category_table
+{
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+
+}
+.table-header{
+  white-space: nowrap;
+  font-size: 13px;
+}
+.card-title {
+  font-family: var(--secondary-font);
+}
+.card {
+  border: none;
+  box-shadow: rgba(14, 63, 126, 0.06) 0px 0px 0px 1px, rgba(42, 51, 70, 0.03) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 2px 2px -1px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.03) 0px 5px 5px -2.5px, rgba(42, 51, 70, 0.03) 0px 10px 10px -5px, rgba(42, 51, 70, 0.03) 0px 24px 24px -8px;
+}
+.modal-dialog-scrollable .modal-body {
+  overflow-y: auto;
+  max-height: 495px;
+}
+
+
+.shimmer {
+  background: linear-gradient(
+    to right,
+    #f6f6f6 0%,
+    #eaeaea 50%,
+    #f6f6f6 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer-animation 1.5s infinite;
+}
+
+@keyframes shimmer-animation {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer-cell {
+  height: 20px;
+  width: 100%;
+  border-radius: 4px;
+}
+thead {
+  position: sticky;
+  top: 0;
+  z-index: 9;
+}

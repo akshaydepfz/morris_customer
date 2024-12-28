@@ -23,10 +23,12 @@
 .wrapper {
   margin-top: 20px;
 }
-
-.add_product-modal .modal-dialog {
-  min-width: 800px;width: 800px;
+@media screen and (min-width:992px) {
+  .add_product-modal .modal-dialog {
+    min-width: 800px;width: 800px;
+  }
 }
+
 .save-btn {
   background: var(--primary);
   color: #FFF;

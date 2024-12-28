@@ -33,7 +33,7 @@
 
         <div class="w-50 me-auto position-relative">
           <i class="bi bi-search search-icon"></i>
-          <input type="search" class="form-control product-search-control"
+          <input type="search" class="form-control product-search-control" [(ngModel)]="searchQuery"
             placeholder="Search by product name or part number" name="" id="">
 
         </div>
@@ -43,10 +43,13 @@
 
     </div>
 
-    <div class="row">
+    <div class="row position-relative">
 
+      @if (isLoading) {
+        <app-loader/>
+      }
 
-      @for(item of products; track $index) {
+      @for(item of products | search: searchQuery:['part_number','name']; track $index) {
 
       <div class="col-lg-3 col-md-4 col-sm-6 col-12 mt-3">
         <div class="card product_card" >

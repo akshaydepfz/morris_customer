@@ -14,6 +14,8 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import * as AOS from 'aos';
 import { ProductService } from '../../core/services/product.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { LoaderComponent } from '../../shared/loader/loader.component';
+import { LayoutComponent } from "../../shared/layout/layout.component";
 
 @Component({
   selector: 'app-home',
@@ -22,14 +24,17 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
     RouterLink,
     RouterLinkActive,
     SubscribeComponent,
-    CarouselModule,
+    CarouselModule, LoaderComponent,
     CommonModule,
-  ],
+    LayoutComponent
+],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomeComponent implements OnInit, AfterViewChecked {
+
+  isloading = true;
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       // Initialize AOS only on the client-side (browser)
@@ -158,6 +163,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
       next: (response) => {
         console.log('API Response:', response); // Confirm the structure
         this.bannerlist = response;
+        this.isloading= false
       },
       error: (err) => {
         console.error('Error occurred:', err);
@@ -178,6 +184,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
       next: (response) => {
         console.log('CompanySLider Response:', response);
         this.companySlider = response;
+        this.isloading= false
       },
       error: (err) => {
         console.error('Error occurred:', err);

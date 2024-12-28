@@ -1,0 +1,39 @@
+.cat-img{
+  width: 300px;
+  height: 100%;
+  max-height: 40px;
+  object-fit: contain;
+}
+.thead-bg{
+
+th{
+  background-color: var(--primary);
+  font-size: 14px;
+  color: #fff;
+}
+}
+
+tbody tr td, tbody tr  th {
+  vertical-align: middle;
+  font-size: 14px;
+}
+tbody tr  th {
+  text-align: center;
+}
+.category_table
+{
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+}
+.card-title {
+  font-family: var(--secondary-font);
+}
+.card {
+  border: none;
+  box-shadow: rgba(14, 63, 126, 0.06) 0px 0px 0px 1px, rgba(42, 51, 70, 0.03) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 2px 2px -1px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.03) 0px 5px 5px -2.5px, rgba(42, 51, 70, 0.03) 0px 10px 10px -5px, rgba(42, 51, 70, 0.03) 0px 24px 24px -8px;
+}
+thead {
+  position: sticky;
+  top: 0;
+  z-index: 9;
+}
