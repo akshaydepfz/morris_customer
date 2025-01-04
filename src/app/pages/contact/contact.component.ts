@@ -31,11 +31,11 @@ export class ContactComponent {
     this.formSubmitAttempt = true; // Set the flag to true when form is submitted
     if (this.form.valid) {
       const formData = this.form.value;
-      console.log("formData",formData)
+      
 
       this.coreservice.postForm(formData);
     } else {
-      console.log('Form is invalid!');
+
     }
   }
 

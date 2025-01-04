@@ -6,18 +6,22 @@
     </div>
     <ul class="sidebar-nav">
       <li class="" routerLinkActive="active"  [routerLinkActiveOptions]="{exact :true}">
-        <a routerLink="/admin"><i class="bi bi-bookmark"></i> Categories</a>
+        <a routerLink="/admin"><i class="sidemenu-icons bi bi-bookmark"></i> Categories</a>
       </li>
 
 
       <li routerLinkActive="active">
-        <a routerLink="/admin/subcategories"><i class="bi bi-bookmarks"></i> Sub Categories</a>
+        <a routerLink="/admin/subcategories"><i class="sidemenu-icons bi bi-bookmarks"></i> Sub Categories</a>
       </li >
       <li routerLinkActive="active">
-        <a routerLink="/admin/parts"><i class="bi bi-archive"></i> Parts</a>
+        <a routerLink="/admin/parts"><i class="sidemenu-icons bi bi-archive"></i> Parts</a>
       </li>
       <li class="" routerLinkActive="active" >
-        <a routerLink="/admin/banner"><i class="bi bi-card-heading"></i> Banners</a>
+        <a routerLink="/admin/banner"><i class="sidemenu-icons bi bi-card-heading"></i> Banners</a>
+      </li>
+
+      <li class="" routerLinkActive="active" >
+        <a routerLink="/admin/enquiries"><i class="sidemenu-icons bi bi-person-lines-fill"></i> Enquiries</a>
       </li>
     </ul>
   </aside>
@@ -29,9 +33,9 @@
           <a  class="navbar-brand" id="sidebar-toggle" (click)="toggleSidebar($event)"><i class="bi bi-list"></i></a>
         </div>
         <ul class="nav ps-0">
-          <li class="nav-item "><a routerLink="/" class="btn logoutbtn">View Website</a></li>
+          <li class="nav-item"><a routerLink="/" class="btn link">View Website <i class="bi bi-globe"></i></a></li>
           <li>
-            <a href="" class="btn logoutbtn">Logout <i class="bi bi-box-arrow-right"></i></a>
+            <a  class="btn logoutbtn" (click)="authService.logout()">Logout <i class="bi bi-box-arrow-right"></i></a>
           </li>
         </ul>
 

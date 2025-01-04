@@ -34,12 +34,12 @@ export class ProductsComponent implements OnInit {
 
       this.http.get<any>(`${this.apiUrl1}`, { headers }).subscribe({
         next: (response) => {
-          console.log('cate Response:', response);
-          this.cateogories = response;
+
+          this.cateogories = response ;
           this.isLoading = false
         },
         error: (err) => {
-          console.error('Error occurred:', err);
+        
         },
       });
     }

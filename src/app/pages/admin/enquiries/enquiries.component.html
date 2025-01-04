@@ -1,0 +1,74 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body px-0 pb-0">
+        <div class="d-flex justify-content-between px-3 align-items-center">
+          <h5 class="card-title">Enquiries</h5>
+
+
+
+        </div>
+
+        <div class="table-responsive category_table position-relative">
+          <table class="table table-bordered mb-0">
+            <thead class="thead-bg">
+              <tr class="thead-bg">
+
+                <th scope="col" style="width: 150px;">Parts Number</th>
+                <th scope="col" style="width: 300px;">Name</th>
+                <th scope="col" style="width: 300px;">Email</th>
+                <th scope="col" style="width: 300px;">Phone</th>
+                <th scope="col" style="width: 300px;">Enquiry</th>
+                <th scope="col" style="width: 150px;">Attachments</th>
+
+              </tr>
+            </thead>
+            <tbody class="position-relative">
+              <!-- Shimmer Loading Placeholder -->
+              <ng-container *ngIf="isLoading; else dataRows">
+                <tr *ngFor="let _ of [].constructor(5)">
+                  <td style="width: 150px;">
+                    <div class="shimmer shimmer-cell"></div>
+                  </td>
+                  <td style="width: 300px;">
+                    <div class="shimmer shimmer-cell"></div>
+                  </td>
+                  <td style="width: 300px;">
+                    <div class="shimmer shimmer-cell"></div>
+                  </td>
+                  <td style="width: 300px;">
+                    <div class="shimmer shimmer-cell"></div>
+                  </td>
+                  <td style="width: 50px;">
+                    <div class="shimmer shimmer-cell"></div>
+                  </td>
+
+
+                </tr>
+              </ng-container>
+              <ng-template #dataRows>
+                @for(enquiry of enquiries | paginate: { itemsPerPage: 50, currentPage: currentPage }; track $index) {
+                <tr>
+                  <td>{{enquiry.part_no}}</td>
+                  <td>{{enquiry.name}}</td>
+                  <td>{{enquiry.email}}</td>
+                  <td>{{enquiry.phone}}</td>
+                  <td>{{enquiry.enquiry}}</td>
+                  <td> <a href="{{enquiry.attachment}}" download="{{enquiry.attachment}}"> Download  File <i class="bi bi-file-earmark-arrow-down"></i></a>
+                  </td>
+
+                </tr>
+                }
+
+              </ng-template>
+            </tbody>
+          </table>
+          <div class="pagination-controls">
+            <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

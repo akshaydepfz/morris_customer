@@ -33,7 +33,7 @@
                 </tr>
               </ng-container>
               <ng-template #dataRows>
-                @for(item of cateogories; track $index) {
+                @for(item of cateogories | paginate: { itemsPerPage: 50, currentPage: currentPage }; track $index) {
                   <tr>
                     <th scope="row"><i class="bi bi-trash3 btn btn-danger" (click)="deleteCategories(item.id)"></i></th>
                     <td>{{item.category_name}}</td>
@@ -47,6 +47,9 @@
 
             </tbody>
           </table>
+          <div class="pagination-controls">
+            <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+          </div>
         </div>
 
       </div>

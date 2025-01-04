@@ -44,23 +44,35 @@
 
     </div>
 
-    <div class="row ">
+    <div class="row  position-relative">
+      @if (isLoading) {
+        <app-loader/>
+      }
+      @if (products.length > 0 || products != null) {
 
-      @for (item of products| search: searchQuery:['Sub_category_name']; track $index) {
+        @for (item of products| search: searchQuery:['Sub_category_name']; track $index) {
 
-        <div class="col-lg-3 col-md-4 col-sm-6 col-12 mt-3">
-          <div class="card product_card" routerLink="/product">
-            <img src="{{item.image}}" width="380px" height="332px" class="product-img" alt="">
+          <div class="col-lg-3 col-md-4 col-sm-6 col-12 mt-3">
+            <div class="card product_card" routerLink="/product">
+              <img src="{{item.image}}" width="380px" height="332px" class="product-img" alt="">
 
-            <div class="card-body product_card-body">
-              <h4 class="card-title"> <a routerLink="/sub-product/{{item.category_name}}/{{item.Sub_category_name}}" class="buybtn">{{item.Sub_category_name}}</a></h4>
+              <div class="card-body product_card-body">
+                <h4 class="card-title"> <a routerLink="/sub-product/{{item.category_name}}/{{item.Sub_category_name}}" class="buybtn">{{item.Sub_category_name}}</a></h4>
+              </div>
             </div>
+
           </div>
 
-        </div>
 
-
+        }
       }
+      @else {
+        <div class="empty">
+          <p class="">No data to display</p>
+
+        </div>
+      }
+
 
 
       <!-- <div class="col-lg-3 col-md-4 col-sm-6 col-12 mt-3">

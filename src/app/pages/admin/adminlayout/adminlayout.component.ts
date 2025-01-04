@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-adminlayout',
@@ -14,4 +15,6 @@ export class AdminlayoutComponent {
     event.preventDefault();
     this.isToggled = !this.isToggled;
   }
+
+  authService = inject (AuthService)
 }

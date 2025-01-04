@@ -13,6 +13,11 @@ import { CategoriesComponent } from './pages/admin/categories/categories.compone
 import { SubcategoriesComponent } from './pages/admin/subcategories/subcategories.component';
 import { BannersComponent } from './pages/admin/banners/banners.component';
 import { PartsComponent } from './pages/admin/parts/parts.component';
+import { CompanyProductsComponent } from './pages/company-products/company-products.component';
+import { HomeProductsComponent } from './pages/home-products/home-products.component';
+import { EnquiriesComponent } from './pages/admin/enquiries/enquiries.component';
+import { authGuard } from './core/services/auth.guard';
+import { LoginComponent } from './pages/login/login.component';
 
 export const routes: Routes = [
   {
@@ -41,21 +46,31 @@ export const routes: Routes = [
         component: SubproductsComponent,
         title: 'Morris | Product',
       },
+
+      {
+        path: 'company-products/:category',
+        component: CompanyProductsComponent,
+        title: 'Morris | Product',
+      },
+
+      {
+        path: 'subcategory-products/:subcategoryitem',
+        component: HomeProductsComponent,
+        title: 'Morris | Product',
+      },
     ],
   },
+  { path: 'login', component: LoginComponent, title: 'Login' },
   {
     path: 'admin',
-    component: AdminlayoutComponent,
+    component: AdminlayoutComponent, canActivate: [authGuard], // Protect admin routes
     children: [
       // { path: '', component: AdminportalComponent, title: 'Admin Portal' },
       { path: '', component: CategoriesComponent, title: 'categories' },
       { path: 'banner', component: BannersComponent, title: 'Banner' },
-      {
-        path: 'subcategories',
-        component: SubcategoriesComponent,
-        title: 'subcategories',
-      },
+      {  path: 'subcategories', component: SubcategoriesComponent, title: 'subcategories',},
       { path: 'parts', component: PartsComponent, title: 'Parts' },
+      { path: 'enquiries', component: EnquiriesComponent, title: 'Enquiries' },
     ],
   },
 ];

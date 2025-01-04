@@ -1,38 +1,30 @@
-<section>
+<section class="position-relative">
 
-  @if (isloading) {
-    <app-loader></app-loader>
-  }
-  <swiper-container
-  loop="true"
-  autoplay="true"
-  pagination="true"
-  speed="1000"
-  style="--swiper-pagination-color: #ffffff;"
-  class="my-swiper-container"
-  pagination-clickable="true"
-  pagination-dynamic-bullets="true"
->
-  <ng-container *ngIf="isBrowser && bannerlist.length > 0">
-    <swiper-slide *ngFor="let item of bannerlist"  class="swiper-item" >
-      <img src="{{item.image}}"  class="banner-img" alt="">
 
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="banner_content-wrapper">
-              <h1 class="banner-title">{{ item.title }}</h1>
+
+
+  <swiper-container loop="true" autoplay="true" pagination="true" speed="1000"
+    style="--swiper-pagination-color: #ffffff;" class="my-swiper-container" pagination-clickable="true"
+    pagination-dynamic-bullets="true">
+    <ng-container *ngIf="isBrowser && bannerlist.length > 0">
+      <swiper-slide *ngFor="let item of bannerlist" class="swiper-item">
+        <img ngSrc="{{item.image}}" class="banner-img" alt="" fill priority>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="banner_content-wrapper">
+                <h1 class="banner-title">{{ item.title }}</h1>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </swiper-slide>
-  </ng-container>
-</swiper-container>
+      </swiper-slide>
+    </ng-container>
+  </swiper-container>
 
 
-
-    <!-- <swiper-slide style="background:url('assets/banner-1.jpg');" class="swiper-item">
+  <!-- <swiper-slide style="background:url('assets/banner-1.jpg');" class="swiper-item">
           <div class="container">
             <div class="row">
           <div class="col-lg-12">
@@ -74,9 +66,9 @@
           reliability, performance, and longevity for your machinery</p>
       </div>
 
-      <div class="col-lg-12 col-md-12 col-12 mt-4 position-relative" >
+      <div class="col-lg-12 col-md-12 col-12 mt-4 position-relative">
         @if (isloading) {
-          <app-loader></app-loader>
+        <app-loader></app-loader>
         }
         <owl-carousel-o [options]="customOptions2">
 
@@ -86,7 +78,8 @@
               <div class="item ">
                 <div class="brand-card my-2">
 
-                  <img src="{{item.image}}" class="brand-img" width="100%" height="100%" alt="Image" />
+                  <img src="{{item.image}}" class="brand-img" width="100%" height="100%" alt="Image"
+                    routerLink="/company-products/{{item.name}}" />
                 </div>
 
               </div>
@@ -113,23 +106,25 @@
     <div class="row">
       <div class="col-lg-12">
         @defer {
-          <owl-carousel-o [options]="customOptions">
-            <ng-container *ngFor="let item of items">
-              <ng-template carouselSlide>
-                <div class="card product-card">
-                  <img [src]="item.image" alt="Image" class="product-img" width="315" height="333" />
-                  <div class="card-body product-card-body">
-                    <h5 class="">{{item.Name}}</h5>
-                  </div>
+        <owl-carousel-o [options]="customOptions">
+          <ng-container *ngFor="let item of products">
+            <ng-template carouselSlide>
+              <div class="card product-card">
+                <img src="{{item.image}}" alt="Image" class="product-img" width="315" height="333"
+                  routerLink="/subcategory-products/{{item.Sub_category_name}}" />
+                <div class="card-body product-card-body">
+                  <h5 class="" routerLink="/subcategory-products/{{item.Sub_category_name}}">{{item.Sub_category_name}}
+                  </h5>
                 </div>
-              </ng-template>
-            </ng-container>
-          </owl-carousel-o>
+              </div>
+            </ng-template>
+          </ng-container>
+        </owl-carousel-o>
         } @loading {
-          <app-loader/>
+        <app-loader />
         } @placeholder {
-          
-          <p>Placeholder content</p>
+
+        <p>Placeholder content</p>
         }
 
       </div>
@@ -147,14 +142,21 @@
         <div class="img-wrapper d-block d-lg-none ">
           <img src="assets/about-section.png" alt="image">
         </div>
-        <p class="about-para mt-lg-0 mt-3"> <span class="about-cmpny-name">Morris General Trading LLC</span> is a
-          trusted Dubai-based supplier of genuine
-          spare parts for top brands
-          like FG Wilson, Perkins, Volvo Penta, Caterpillar, and JCB. We ensure fast and reliable delivery of
-          high-quality, original components, serving industries like construction, manufacturing, and power generation.
-          With a focus on exceptional service and efficiency, <span class="about-cmpny-name">Morris General Trading
-            LLC</span> is your dependable partner for
-          all your spare parts needs</p>
+        <p class="about-para mt-lg-0 mt-3"> <span class="about-cmpny-name">Morris General Trading LLC</span> boasts a
+          strong and expanding presence in the Middle East, including the GCC, as well as a growing footprint worldwide.
+          The company is committed to creating significant value by offering competitive pricing, a wide range of
+          products, and exceptional service quality to its international business partners and customers.
+
+
+        </p>
+
+        <p class="about-para">
+          As the business landscape evolves at a rapid pace, we encounter new challenges every day. In response, we
+          remain dedicated to upholding transparency and fairness in all our operations, building trust, and earning the
+          appreciation of our partners throughout the Middle East. Our guiding principle remains steadfast: delivering
+          value for our customers.
+
+        </p>
 
         <a class="readmore-link" [routerLink]="['/about']" routerLinkActive="router-link-active"> Read more <svg
             width="28" class="ms-3 arrow" height="29" viewBox="0 0 28 29" fill="none"
@@ -212,11 +214,16 @@
                   <i class="bi bi-geo-alt-fill me-2"></i>
 
                 </span>
-                <span class="address" data-aos="fade-right">
-                  Morris General Training LLC <br>
+                <span class="address" data-aos="fade-right" style="font-size: 15px;">
+                  <!-- Morris General Training LLC <br>
                   Montana business centre <br>
                   Zaa’beel road Karama  <br>
-                  Dubai, United Arab Emirates
+                  Dubai, United Arab Emirates -->
+
+                  Morris General Trading LLC, <br>
+                  Office No. 146 3rd Floor, <br>
+                  Unique Word Business Centre <br>
+                  Al Karma | Dubai | United Arab Emirates
 
                 </span>
 
@@ -230,7 +237,7 @@
 
         <div class="">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3608.8189273519156!2d55.30182627842309!3d25.24302307231866!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43e7928321c3%3A0x3acba115d0ac0ba7!2zWmFh4oCZYmVlbCByb2Fk!5e0!3m2!1sen!2sin!4v1726381104613!5m2!1sen!2sin"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3608.6334591289046!2d55.30601812538356!3d25.249267777677446!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f432958555551%3A0x19d59190950ee7aa!2sUnique%20World%20Business%20Center%20LLC!5e0!3m2!1sen!2sin!4v1735566346747!5m2!1sen!2sin"
             width="100%" height="290" style="border:0;" allowfullscreen="" loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>

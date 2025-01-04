@@ -16,7 +16,7 @@ import { ProductService } from '../../core/services/product.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoaderComponent } from '../../shared/loader/loader.component';
 import { LayoutComponent } from "../../shared/layout/layout.component";
-
+import { NgOptimizedImage } from '@angular/common';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -26,7 +26,7 @@ import { LayoutComponent } from "../../shared/layout/layout.component";
     SubscribeComponent,
     CarouselModule, LoaderComponent,
     CommonModule,
-    LayoutComponent
+    LayoutComponent,NgOptimizedImage
 ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
@@ -50,6 +50,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
       this.getbannerdata();
     }
     this.getCompanySlider()
+    this.getproducts()
   }
   ngAfterViewChecked(): void {
     if (isPlatformBrowser(this.platformId)) {
@@ -161,7 +162,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
 
     this.http.get<any>(`${this.apiUrl1}`, { headers }).subscribe({
       next: (response) => {
-        console.log('API Response:', response); // Confirm the structure
+
         this.bannerlist = response;
         this.isloading= false
       },
@@ -182,8 +183,30 @@ export class HomeComponent implements OnInit, AfterViewChecked {
 
     this.http.get<any>(`${this.apiUrl2}`, { headers }).subscribe({
       next: (response) => {
-        console.log('CompanySLider Response:', response);
+
         this.companySlider = response;
+        this.isloading= false
+      },
+      error: (err) => {
+        console.error('Error occurred:', err);
+      },
+    });
+  }
+
+
+  products:any[] =[]
+  productApi ="https://morris.koyeb.app/subcategory";
+
+  getproducts() {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.token}`,
+      'Content-Type': 'application/json',
+    });
+
+    this.http.get<any>(`${this.productApi}`, { headers }).subscribe({
+      next: (response) => {
+       
+        this.products = response;
         this.isloading= false
       },
       error: (err) => {

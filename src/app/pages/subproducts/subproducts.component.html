@@ -1,16 +1,8 @@
-<section class="breadcrumb-sec product-bg">
+<section class="breadcrumb-sec product-bg"></section>
 
-
-
-</section>
 <section class="product_section py-80">
 
   <div class="container">
-
-
-
-
-
     <div class="row">
       <div class="col-lg-12 mt-3 pt-3">
         <div class="category_head-bx">
@@ -34,8 +26,8 @@
         <div class="w-50 me-auto position-relative">
           <i class="bi bi-search search-icon"></i>
           <input type="search" class="form-control product-search-control" [(ngModel)]="searchQuery"
-            placeholder="Search by product name or part number" name="" id="">
-
+            placeholder="Search by  Part number or Refernce" name="" id="">
+          <p class="text-danger ft-small">The country of origin or weight may change</p>
         </div>
       </div>
 
@@ -46,54 +38,72 @@
     <div class="row position-relative">
 
       @if (isLoading) {
-        <app-loader/>
+      <app-loader />
       }
+      @if (products.length > 0 || products != null) {
 
       @for(item of products | search: searchQuery:['part_number','name']; track $index) {
 
       <div class="col-lg-3 col-md-4 col-sm-6 col-12 mt-3">
-        <div class="card product_card" >
-          <img src="{{item.image}}" width="380px" height="332px" class="product-img" alt="" data-bs-toggle="modal" data-bs-target="#staticBackdrop"  (click)="openModal(item)">
+        <div class="card product_card">
+          <div class="prod-img-card">
+            <div class="overaly">
+              <img src="assets/Untitled design (1).png" alt=""  alt="" data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop" (click)="openModal(item)">
+            </div>
+            @if (item.image) {
+              <img src="{{item.image}}" width="380px" height="332px" class="product-img" alt="" data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop" (click)="openModal(item)">
+            }@else {
+              <img src="assets/Products/noproduct.jpg" width="380px" height="332px" class="product-img" alt="" data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop" (click)="openModal(item)">
+            }
+          </div>
 
-          <div class="card-body product_card-body" data-bs-toggle="modal" data-bs-target="#staticBackdrop"  (click)="openModal(item)">
-            <h5 class="card-title"> <a  class="buybtn">{{item.name }}</a></h5>
+          <div class="card-body product_card-body" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+            (click)="openModal(item)">
+            <h5 class="card-title"> <a class="buybtn">{{item.name }}</a></h5>
 
             <ul class="ps-0">
+              <li class="itemsinfo d-flex">
+                <div class="info-title"> Part no : </div>
+                <div>{{item.part_number}}</div>
+              </li>
+
               <li class="itemsinfo d-flex">
                 <div class="info-title">Description : </div>
                 <div>{{item.part_description}}</div>
               </li>
               <li class="itemsinfo d-flex">
-                <div class="info-title">Supersed : </div>
-                <div>{{item.super_ss_number}}</div>
+                <div class="info-title">COO : </div>
+                <div>{{item.coo}}</div>
               </li>
-
               <li class="itemsinfo d-flex">
                 <div class="info-title">Weight : </div>
                 <div>{{item.weight}}</div>
               </li>
+              <!-- <li class="itemsinfo d-flex">
+                <div class="info-title">Supersed : </div>
+                <div>{{item.super_ss_number}}</div>
+              </li> -->
+
+
 
 
               <li class="itemsinfo d-flex">
-                <div class="info-title">HS code : </div>
+                <div class="info-title">HS code: </div>
                 <div>{{item.hs_code}}</div>
               </li>
 
 
-              <li class="itemsinfo d-flex">
-                <div class="info-title">Co orgin : </div>
-                <div>{{item.coo}}</div>
-              </li>
+
 
               <li class="itemsinfo d-flex">
-                <div class="info-title"> Ref No : </div>
+                <div class="info-title"> Refernce : </div>
                 <div>{{item.ref_no}}</div>
               </li>
 
-              <li class="itemsinfo d-flex">
-                <div class="info-title"> Part Number : </div>
-                <div>{{item.part_number}}</div>
-              </li>
+
 
             </ul>
           </div>
@@ -101,7 +111,14 @@
 
       </div>
       }
+      }
 
+      @else {
+      <div class="empty">
+        <p class="">No data to display</p>
+
+      </div>
+      }
 
 
 
@@ -111,59 +128,83 @@
   </div>
 </section>
 
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Enquiry</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form [formGroup]="enquiryForm"  (ngSubmit)="submitEnquiry()">
-      <div class="modal-body" >
-        <div class="row">
-          <div class="mb-3 col-lg-6 col-md-6 col-12">
-            <label for="email" class="form-label">Email</label>
-            <input
-              type="email"
-              class="form-control"
-              placeholder="Enter Your Email"
-              id="email"
-              formControlName="email">
-            <div *ngIf="enquiryForm.get('email')?.invalid && enquiryForm.get('email')?.touched" class="text-danger">
-              Valid email is required.
+      <form [formGroup]="enquiryForm" (ngSubmit)="submitEnquiry()" method="POST" enctype="multipart/form-data">
+        <div class="modal-body">
+          <div class="row">
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" placeholder="Enter Your Email" id="email"
+                formControlName="email">
+              <div *ngIf="enquiryForm.get('email')?.invalid && enquiryForm.get('email')?.touched" class="text-danger validator-text">
+                Valid email is required.
+              </div>
+            </div>
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" placeholder="Enter Your Name" id="name" formControlName="name">
+              <div *ngIf="enquiryForm.get('name')?.invalid && enquiryForm.get('name')?.touched" class="text-danger validator-text">
+                Name is required.
+              </div>
+            </div>
+
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="phone" class="form-label">Phone</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter Your phone"
+                id="phone"
+                formControlName="phone"
+                inputmode="tel"
+                (keypress)="allowOnlyPhoneNumbers($event)"
+                (paste)="validatePaste($event)"
+              >
+              <div *ngIf="enquiryForm.get('phone')?.invalid && enquiryForm.get('phone')?.touched" class="text-danger validator-text">
+                Phone must start with a "+" (optional) and contain only numbers.
+              </div>
+            </div>
+
+
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="image" class="form-label">Attachments</label>
+              <input
+                type="file"
+                class="form-control"
+                (change)="onFileSelected($event)"
+                id="attachement"  #imageInput
+                formControlName="attachement"
+
+              />
+              <div *ngIf="fileError" class="text-danger validator-text">
+                {{ fileError }}
+              </div>
+
+            </div>
+            <div class="mb-3 col-lg-12 col-md-12 col-12">
+              <label for="comment" class="form-label">Comment</label>
+              <textarea class="form-control" placeholder="Enter Your Comment" id="comment"
+                formControlName="comment"></textarea>
+              <div *ngIf="enquiryForm.get('comment')?.invalid && enquiryForm.get('comment')?.touched"
+                class="text-danger validator-text">
+                Comment is required.
+              </div>
             </div>
           </div>
-          <div class="mb-3 col-lg-6 col-md-6 col-12">
-            <label for="name" class="form-label">Name</label>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Enter Your Name"
-              id="name"
-              formControlName="name">
-            <div *ngIf="enquiryForm.get('name')?.invalid && enquiryForm.get('name')?.touched" class="text-danger">
-              Name is required.
-            </div>
-          </div>
-          <div class="mb-3 col-lg-12 col-md-12 col-12">
-            <label for="comment" class="form-label">Comment</label>
-            <textarea
-              class="form-control"
-              placeholder="Enter Your Comment"
-              id="comment"
-              formControlName="comment"></textarea>
-            <div *ngIf="enquiryForm.get('comment')?.invalid && enquiryForm.get('comment')?.touched" class="text-danger">
-              Comment is required.
-            </div>
-          </div>
-        </div>
 
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" style="border-radius:0; font-size: 14px;
-          padding: 5px 22px; "data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="save-btn btn" [disabled]="enquiryForm.invalid"  style="border-radius:0; font-size: 14px;
-          padding: 5px 22px; " >Submit</button>
+          padding: 5px 22px; " data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="save-btn btn" [disabled]="enquiryForm.invalid" data-bs-dismiss="modal" style="border-radius:0; font-size: 14px;
+          padding: 5px 22px; ">Submit</button>
         </div>
       </form>
     </div>

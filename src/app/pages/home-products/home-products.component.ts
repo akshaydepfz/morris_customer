@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import {
   FormBuilder,
   FormGroup,
@@ -11,59 +10,45 @@ import {
 } from '@angular/forms';
 import { SearchPipe } from '../../core/filters/search.pipe';
 import { LoaderComponent } from '../../shared/loader/loader.component';
+import { ActivatedRoute } from '@angular/router';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { ToastrService } from 'ngx-toastr';
-
-export interface Product {
-  id: number;
-  name: string;
-  part_number: string;
-  part_description: string;
-  super_ss_number: string;
-  weight: string;
-  hs_code: string;
-  remain_part_number: string;
-  coo: string;
-  ref_no: string;
-  image: string;
-  main_category: string;
-  sub_category: string;
-}
-
 @Component({
-  selector: 'app-subproducts',
+  selector: 'app-home-products',
   standalone: true,
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
     SearchPipe,
     LoaderComponent,
+    ReactiveFormsModule,
+    NgxPaginationModule,
   ],
-  templateUrl: './subproducts.component.html',
-  styleUrl: './subproducts.component.scss',
+  templateUrl: './home-products.component.html',
+  styleUrl: './home-products.component.scss',
 })
-export class SubproductsComponent implements OnInit {
-  apiUrl1 = 'https://morris.koyeb.app/morrisparts';
+export class HomeProductsComponent implements OnInit {
+  companyProducts: any[] = [];
+  searchQuery: string = '';
+  isLoading = true;
+  enquiryForm: FormGroup;
+  image: string = '';
+  mainCategory = '';
+  subacategory = '';
+  currentPage = 1;
+  selectedFile: File | null = null; // Variable to hold selected file
   enquiryApi = 'https://morris.koyeb.app/enquiries';
+
+  apiUrl1 = 'https://morris.koyeb.app/part/subcategory';
   token =
     'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
   http = inject(HttpClient);
-  searchQuery: string = '';
-  products: Product[] = [];
-  mainCategory = '';
-  subacategory = '';
-  enquiryForm: FormGroup;
-  selectedProduct: any = null;
-  isLoading = true;
-  fileError: string | null = null;
-  selectedFile: File | null = null;
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private toastr: ToastrService
   ) {
-
     this.enquiryForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       name: ['', Validators.required],
@@ -72,36 +57,38 @@ export class SubproductsComponent implements OnInit {
       comment: ['', Validators.required],
     });
   }
+
   ngOnInit(): void {
-    this.mainCategory = this.route.snapshot.paramMap.get('category') || '';
-    this.subacategory = this.route.snapshot.paramMap.get('subcategory') || '';
+
+    this.mainCategory =
+      this.route.snapshot.paramMap.get('subcategoryitem') || '';
+   
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.token}`,
       'Content-Type': 'application/json',
     });
 
-    const params = new HttpParams()
-      .set('main_category', this.mainCategory)
-      .set('sub_category', this.subacategory);
-    this.http.get<Product[]>(this.apiUrl1, { params, headers }).subscribe({
+    const params = new HttpParams().set('sub_category', this.mainCategory);
+    this.http.get<any[]>(this.apiUrl1, { params, headers }).subscribe({
       next: (response) => {
 
-        this.products = response || [];
+        this.companyProducts = response || [];
         this.isLoading = false;
       },
       error: (err) => {
-       
+
       },
     });
   }
-
-  openModal(item: any) {
+  selectedProduct: any = null; // Track the selected product
+  openModal(item: string) {
     this.selectedProduct = item;
     this.enquiryForm.reset();
 
   }
 
   submitEnquiry() {
+
     if (!this.selectedProduct) {
       console.error('No product selected');
       return;
@@ -111,7 +98,6 @@ export class SubproductsComponent implements OnInit {
       console.error('Invalid file: ', this.fileError);
       return;
     }
-
     const toastrRef = this.toastr.info('Submit enquiry...', 'Please wait', {
       disableTimeOut: true,
       closeButton: true,
@@ -130,8 +116,7 @@ export class SubproductsComponent implements OnInit {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.token}`,
     });
-    this.http
-      .post(this.enquiryApi, payload, { headers, responseType: 'text' })
+    this.http.post(this.enquiryApi, payload, { headers, responseType: 'text' })
       .subscribe({
         next: (response: string) => {
           this.toastr.remove(toastrRef.toastId);
@@ -140,12 +125,12 @@ export class SubproductsComponent implements OnInit {
           this.selectedFile = null;
         },
         error: (error: any) => {
-
-          this.toastr.remove(toastrRef.toastId);
-          this.toastr.error('Enquiry submitted successfully', error);
+          this.toastr.error('Error submitting enquiry',error);
         },
       });
   }
+
+  fileError: string | null = null;
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;

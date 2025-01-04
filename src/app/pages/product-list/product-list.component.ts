@@ -52,8 +52,8 @@ export class ProductListComponent implements OnInit {
 
     this.http.get<any>(this.apiUrl1, { params, headers }).subscribe({
       next: (response) => {
-        console.log('Item Response:', response);
-        this.products = response;
+        
+        this.products = response || [];
         this.isLoading = false; // Hide the loader
       },
       error: (err) => {
@@ -66,16 +66,6 @@ export class ProductListComponent implements OnInit {
     this.subcategory = this.id;
   }
 
-
-
-  // this.productService.getproduct("2").subscribe((response)=>{
-
-  //   // console.log("data",response)
-  //   this.products = response.products,
-  //   this.categoryTitle = response.Category,
-  //   this.subcategory = response.subcategory
-  // })
-  // };
 
   loading = true;
 }

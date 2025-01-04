@@ -8,16 +8,19 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-categories',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule,NgxPaginationModule],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.scss',
 })
 export class CategoriesComponent implements OnInit {
   isLoading = true;
+  currentPage = 1;
   apiUrl1 = 'https://morris.koyeb.app/categories'; // Replace with your API
   token =
     'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
@@ -29,6 +32,9 @@ export class CategoriesComponent implements OnInit {
   @ViewChild('exampleModal') modal!: ElementRef;
   @ViewChild('imageInput') imageInput!: ElementRef;
 
+  constructor(private toastr: ToastrService){
+
+  }
   ngOnInit(): void {
     this.getcategories();
   }
@@ -56,17 +62,23 @@ export class CategoriesComponent implements OnInit {
       'Content-Type': 'application/json',
     });
 
-    console.log('Deleting category with ID:', id);
-
+    const toastrRef = this.toastr.info('Deleting Data...', 'Please wait', {
+      disableTimeOut: true,
+      closeButton: true,
+    });
     this.http
       .delete<number>(`${this.apiUrl1}?id=${id}`, { headers })
       .subscribe({
         next: (response) => {
-          console.log('Successfully deleted:', response);
+          this.toastr.remove(toastrRef.toastId);
+          this.toastr.success('Successfully deleted');
           this.getcategories();
+          this.isLoading = false;
         },
         error: (err) => {
-          console.error('Error occurred:', err);
+          this.toastr.remove(toastrRef.toastId);
+          this.toastr.error('Error occurred:', err);
+          this.isLoading = false;
         },
       });
   }
@@ -84,6 +96,10 @@ export class CategoriesComponent implements OnInit {
       return;
     }
     this.isLoading = true;
+    const toastrRef = this.toastr.info('Adding Data...', 'Please wait', {
+      disableTimeOut: true,
+      closeButton: true,
+    });
     const formData = new FormData();
     formData.append('category_name', this.categoryName);
     formData.append('image', this.selectedFile);
@@ -92,13 +108,16 @@ export class CategoriesComponent implements OnInit {
     });
     this.http.post(this.apiUrl1, formData, { headers }).subscribe({
       next: (response) => {
-        console.log('Category added successfully:', response);
+        this.toastr.remove(toastrRef.toastId);
+          this.toastr.success('Category added successfully');
         this.getcategories();
         this.resetForm();
+        this.isLoading = false;
       },
       error: (err) => {
-        console.error('Error adding category:', err);
-        alert('Failed to add category.');
+        this.toastr.remove(toastrRef.toastId);
+        this.toastr.error('Error adding category:', err);
+        this.isLoading = false;
       },
     });
   }

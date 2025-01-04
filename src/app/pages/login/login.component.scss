@@ -1,0 +1,52 @@
+
+.login-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.login-section{
+  background-color: #f1f1f1;
+}
+.btn-login:hover{
+  box-shadow: none;
+  outline: none;
+}
+.btn-login:focus {
+  box-shadow: none;
+  outline: none;
+}
+.btn-login{
+  background-color: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 0;
+  font-size: 14px;
+  &:hover{
+    background-color: var(--secondary);
+  }
+}
+::placeholder{
+  font-size: 14px;
+}
+
+.form-control:hover{
+  box-shadow: none;
+  outline: none;
+}
+.form-control:focus {
+  box-shadow: none;
+  background: #fff;
+  outline: none;
+}
+.form-control{
+  font-size: 14px;
+  background-color: #fff;
+}
+input:-internal-autofill-selected {
+  appearance: menulist-button;
+  background-image: none !important;
+  background-color: #fff !important;
+  color: fieldtext !important;
+}

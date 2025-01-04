@@ -80,7 +80,7 @@ export class AdminportalComponent implements OnInit {
 
     this.http.get<Product[]>(`${this.apiUrl}`, { headers }).subscribe({
       next: (response) => {
-        console.log('API Response:', response); // Confirm the structure
+    
         // this.products = [...this.products, ...response];
         this.rowData = response;
       },
@@ -182,7 +182,7 @@ export class AdminportalComponent implements OnInit {
   ];
 
   editItem(data: Product): void {
-    console.log('Edit Item Data:', data);
+
 
     // Set form values based on the data from the selected row
     this.form.patchValue({
@@ -207,7 +207,7 @@ export class AdminportalComponent implements OnInit {
     if (confirm('Are you sure you want to delete this item?')) {
       // this.apiService.delete<any>(`${this.apiUrl}/${id}`, { headers }).subscribe({
       //   next: (response) => {
-      //     console.log('Product deleted:', response);
+      //
       //     this.fetchData();
       //   },
       //   error: (err) => {

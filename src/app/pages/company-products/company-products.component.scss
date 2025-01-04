@@ -95,6 +95,17 @@
   }
 }
 
+
+
+.empty {
+  min-height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: red;
+  border: 1px solid #eee;
+  margin: 15px;
+}
 .prod-img-card{
   width: 100%;
   height: 340px;
@@ -118,4 +129,3 @@
     }
   }
 }
-

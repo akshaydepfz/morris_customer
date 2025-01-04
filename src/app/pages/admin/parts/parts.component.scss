@@ -74,3 +74,19 @@ thead {
   top: 0;
   z-index: 9;
 }
+
+.search-icon
+{
+  position: absolute;
+    top: 7px;
+    z-index: 999;
+    left: 8px;
+}
+.product-search-control
+{
+  padding-left: 32px;
+  font-size: 14px;
+  &::placeholder {
+    font-size: 13px;
+  }
+}

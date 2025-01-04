@@ -92,7 +92,7 @@ a:focus {
   border-radius: 0;
 }
 #navbar-wrapper .navbar a {
-  color: #757575;
+  color: var(--primary);
 }
 #navbar-wrapper .navbar a:hover {
   color: var(--secondary);
@@ -235,4 +235,17 @@ a:focus {
     position: relative;
     margin-right: 250px;
   }
+}
+.link {
+  font-size: 14px;
+}
+.logoutbtn{
+  font-size: 14px;
+  // color: var(--secondary) !important;
+
+}
+
+.sidemenu-icons {
+  font-size: 18px;
+  margin-right: 8px;
 }

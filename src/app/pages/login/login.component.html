@@ -1,0 +1,63 @@
+
+
+
+
+<section class="login-section">
+
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-12 mx-auto">
+
+        <div class="login-wrapper">
+
+          <div class="card border-0 shadow rounded-3 my-5">
+            <div class="card-body p-4 p-sm-5">
+              <div class="text-center mb-3">
+
+                <a class="navbar-brand" routerLink="/"><img src="assets/logo-header.svg" width="107" height="40" alt=""></a>
+              </div>
+              <form (ngSubmit)="login()">
+                <div class="mb-3">
+                  <input
+                    type="text"
+                    class="form-control login_control"
+                    id="username" autocomplete="off"
+                    placeholder="Username"
+                   [(ngModel)]="username"
+                    name="username"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <input autocomplete="off"
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    placeholder="Password"
+                  [(ngModel)]="password"
+                    name="password"
+                    required
+                  />
+                </div>
+                <div class="d-grid">
+                  <button class="btn btn-login text-uppercase fw-bold"type="submit" >
+                    Sign in
+                  </button>
+                </div>
+                @if (errorMessage) {
+                  <p class="text-danger validator-text">{{ errorMessage }}</p>
+
+                }
+              </form>
+            </div>
+          </div>
+
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+  </section>

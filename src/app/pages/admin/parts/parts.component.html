@@ -4,10 +4,17 @@
       <div class="card-body px-0 pb-0">
         <div class="d-flex justify-content-between px-3 align-items-center">
           <h5 class="card-title">Parts</h5>
+          <div class="w-25 position-relative">
+            <i class="bi bi-search search-icon"></i>
+            <input type="search" class="form-control product-search-control" [(ngModel)]="searchQuery"
+              placeholder="Search Part Number or Ref number" name="" id="">
+
+          </div>
+
 
           <button type="button" class="btn save-btn mb-3 float-end" data-bs-toggle="modal" (click)="openModal()"
             data-bs-target="#exampleModal">
-            Add <i class="bi bi-plus-lg" ></i>
+            Add <i class="bi bi-plus-lg"></i>
           </button>
 
         </div>
@@ -36,26 +43,57 @@
               <!-- Shimmer Loading Placeholder -->
               <ng-container *ngIf="isLoading; else dataRows">
                 <tr *ngFor="let _ of [].constructor(5)">
-                  <td><div class="shimmer shimmer-cell"></div></td>
-                  <td><div class="shimmer shimmer-cell"></div></td>
-                  <td><div class="shimmer shimmer-cell"></div></td>
-                  <td><div class="shimmer shimmer-cell"></div></td>
-                  <td><div class="shimmer shimmer-cell"></div></td>
-                  <td><div class="shimmer shimmer-cell"></div></td>
-                  <td><div class="shimmer shimmer-cell"></div></td>
-                  <td><div class="shimmer shimmer-cell"></div></td>
-                  <td><div class="shimmer shimmer-cell"></div></td>
-                  <td><div class="shimmer shimmer-cell"></div></td>
-                  <td><div class="shimmer shimmer-cell" style="width: 60px; height: 40px;"></div></td>
-                  <td><div class="shimmer shimmer-cell"></div></td>
-                  <td><div class="shimmer shimmer-cell"></div></td>
+                  <td>
+                    <div class="shimmer shimmer-cell"></div>
+                  </td>
+                  <td>
+                    <div class="shimmer shimmer-cell"></div>
+                  </td>
+                  <td>
+                    <div class="shimmer shimmer-cell"></div>
+                  </td>
+                  <td>
+                    <div class="shimmer shimmer-cell"></div>
+                  </td>
+                  <td>
+                    <div class="shimmer shimmer-cell"></div>
+                  </td>
+                  <td>
+                    <div class="shimmer shimmer-cell"></div>
+                  </td>
+                  <td>
+                    <div class="shimmer shimmer-cell"></div>
+                  </td>
+                  <td>
+                    <div class="shimmer shimmer-cell"></div>
+                  </td>
+                  <td>
+                    <div class="shimmer shimmer-cell"></div>
+                  </td>
+                  <td>
+                    <div class="shimmer shimmer-cell"></div>
+                  </td>
+                  <td>
+                    <div class="shimmer shimmer-cell" style="width: 60px; height: 40px;"></div>
+                  </td>
+                  <td>
+                    <div class="shimmer shimmer-cell"></div>
+                  </td>
+                  <td>
+                    <div class="shimmer shimmer-cell"></div>
+                  </td>
                 </tr>
               </ng-container>
 
               <!-- Actual Data Rows -->
               <ng-template #dataRows>
-                <tr *ngFor="let item of Parts; trackByIndex: ">
-                  <td><i class="bi bi-trash3 btn btn-danger" style="padding: 3px 6px;" (click)="deleteParts(item.id)"></i></td>
+                <tr
+                  *ngFor="let item of Parts | search: searchQuery:['part_number','ref_no'] | paginate: { itemsPerPage: 50, currentPage: currentPage }; trackByIndex: ">
+                  <td><i class="bi bi-trash3 btn btn-danger" style="padding: 3px 6px;"
+                      (click)="deleteParts(item.id)"></i>
+                    <i class="bi bi-pencil-fill btn btn-success ms-2" style="padding: 3px 6px;" data-bs-toggle="modal"
+                      data-bs-target="#updateModal" (click)="updateParts(item.id)"></i>
+                  </td>
                   <td>{{ item.name }}</td>
                   <td>{{ item.part_number }}</td>
                   <td>{{ item.part_description }}</td>
@@ -66,7 +104,14 @@
                   <td>{{ item.coo }}</td>
                   <td>{{ item.ref_no }}</td>
                   <td>
+                    @if (item.image) {
+
                     <img src="{{ item.image }}" class="cat-img" width="100%" height="100%" alt="">
+                    }@else {
+
+                    <img src="assets/Products/noproduct.jpg" class="cat-img" width="100%" height="100%" alt="">
+                    }
+
                   </td>
                   <td>{{ item.main_category }}</td>
                   <td>{{ item.sub_category }}</td>
@@ -74,7 +119,9 @@
               </ng-template>
             </tbody>
           </table>
-
+          <div class="pagination-controls">
+            <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+          </div>
         </div>
 
       </div>
@@ -82,12 +129,12 @@
   </div>
 </div>
 
-<div class="modal add_product-modal" id="exampleModal" #exampleModal  tabindex="-1" aria-labelledby="exampleModalLabel"
+<div class="modal add_product-modal" id="exampleModal" #exampleModal tabindex="-1" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Add Category</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add Parts</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form (ngSubmit)="addParts()">
@@ -96,77 +143,86 @@
             <!-- Category Name Input -->
             <div class="mb-3 col-lg-6 col-md-6 col-12">
               <label for="categories" class="form-label">Select Category</label>
-              <select name="categoryName" class="form-select" id="categories" [(ngModel)]="categoryName">
+              <select name="categoryName" class="form-select" id="categories" [(ngModel)]="main_category">
                 <option value="" selected disabled>Select Category</option>
-               @for (item of categories; track $index) {
+                @for (item of categories; track $index) {
 
-                 <option value="{{item.category_name}}" class="option"   >{{item.category_name}}</option>
-               }
+                <option value="{{item.category_name}}" class="option">{{item.category_name}}</option>
+                }
               </select>
             </div>
 
             <!-- Image File Input -->
             <div class="mb-3 col-lg-6 col-md-6 col-12">
               <label for="SubcategoryName" class="form-label">Select Sub category</label>
-              <select name="SubcategoryName" class="form-select" id="SubcategoryName" [(ngModel)]="SubcategoryName">
+              <select name="SubcategoryName" class="form-select" id="SubcategoryName" [(ngModel)]="sub_category">
                 <option value="" selected disabled>Select Sub category</option>
-               @for (item of subCategories; track $index) {
+                @for (item of subCategories; track $index) {
 
-                 <option value="{{item.Sub_category_name}}" class="option"   >{{item.Sub_category_name}}</option>
-               }
+                <option value="{{item.Sub_category_name}}" class="option">{{item.Sub_category_name}}</option>
+                }
               </select>
             </div>
 
 
 
             <div class="mb-3 col-lg-6 col-md-6 col-12">
-              <label for="itemName" class="form-label">Category Name</label>
-              <input type="text"
-                class="form-control"[(ngModel)]="itemName"name="itemName" placeholder="Enter Name"  id="itemName" required/>
+              <label for="itemName" class="form-label">Name</label>
+              <input type="text" class="form-control" [(ngModel)]="itemName" name="itemName" placeholder="Enter Name"
+                id="itemName" />
             </div>
 
             <div class="mb-3 col-lg-6 col-md-6 col-12">
               <label for="part_number" class="form-label">Part Number</label>
-              <input type="text" class="form-control" [(ngModel)]="part_number" name="part_number" placeholder="Enter  Name" id="part_number" required/>
+              <input type="text" class="form-control" [(ngModel)]="part_number" name="part_number"
+                placeholder="Enter  Name" id="part_number" />
             </div>
 
             <div class="mb-3 col-lg-6 col-md-6 col-12">
               <label for="itemName" class="form-label">Part description</label>
-              <input type="text" class="form-control" [(ngModel)]="part_description" name="part_description" placeholder="Enter description" id="part_description" required/>
+              <input type="text" class="form-control" [(ngModel)]="part_description" name="part_description"
+                placeholder="Enter description" id="part_description" />
             </div>
 
             <div class="mb-3 col-lg-6 col-md-6 col-12">
               <label for="super_ss_number" class="form-label">Super ss number</label>
-              <input type="text" class="form-control" [(ngModel)]="super_ss_number" name="super_ss_number" placeholder="Enter super ss number" id="super_ss_number" required/>
+              <input type="text" class="form-control" [(ngModel)]="super_ss_number" name="super_ss_number"
+                placeholder="Enter super ss number" id="super_ss_number" />
             </div>
 
             <div class="mb-3 col-lg-6 col-md-6 col-12">
               <label for="weight" class="form-label">weight</label>
-              <input type="text" class="form-control" [(ngModel)]="weight" name="super_ss_number" placeholder="Enter weight" id="weight" required/>
+              <input type="text" class="form-control" [(ngModel)]="weight" name="super_ss_number"
+                placeholder="Enter weight" id="weight" />
             </div>
 
             <div class="mb-3 col-lg-6 col-md-6 col-12">
               <label for="hs_code" class="form-label">hs_code</label>
-              <input type="text" class="form-control" [(ngModel)]="hs_code" name="hs_code" placeholder="Enter hs code" id="hs_code" required/>
+              <input type="text" class="form-control" [(ngModel)]="hs_code" name="hs_code" placeholder="Enter hs code"
+                id="hs_code" />
             </div>
 
             <div class="mb-3 col-lg-6 col-md-6 col-12">
               <label for="remain_part_number" class="form-label">remain_part_number</label>
-              <input type="text" class="form-control" [(ngModel)]="remain_part_number" name="remain_part_number" placeholder="Enter remain part number" id="remain_part_number" required/>
+              <input type="text" class="form-control" [(ngModel)]="remain_part_number" name="remain_part_number"
+                placeholder="Enter remain part number" id="remain_part_number" />
             </div>
 
             <div class="mb-3 col-lg-6 col-md-6 col-12">
               <label for="coo" class="form-label">Coo</label>
-              <input type="text" class="form-control" [(ngModel)]="coo" name="coo" placeholder="Enter super ss number" id="coo" required/>
+              <input type="text" class="form-control" [(ngModel)]="coo" name="coo" placeholder="Enter super ss number"
+                id="coo" />
             </div>
             <div class="mb-3 col-lg-6 col-md-6 col-12">
               <label for="ref_no" class="form-label">Ref no</label>
-              <input type="text" class="form-control" [(ngModel)]="ref_no" name="ref_no" placeholder="Enter super ss number" id="ref_no" required/>
+              <input type="text" class="form-control" [(ngModel)]="ref_no" name="ref_no"
+                placeholder="Enter super ss number" id="ref_no" />
             </div>
 
             <div class="mb-3 col-lg-6 col-md-6 col-12">
               <label for="selectedFile" class="form-label">Image</label>
-              <input type="file" class="form-control" #imageInput  (change)="onFileSelected($event)"  name="selectedFile" placeholder="" id="selectedFile" required/>
+              <input type="file" class="form-control" #imageInput (change)="onFileSelected($event)" name="selectedFile"
+                placeholder="" id="selectedFile" />
             </div>
 
 
@@ -175,6 +231,125 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Close </button>
           <button type="submit" class="btn save-btn" data-bs-dismiss="modal">Add</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal add_product-modal" id="updateModal" tabindex="-1" aria-labelledby="updateModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="updateModal">Edit Parts</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form (ngSubmit)="updateitem()">
+        <div class="modal-body">
+          <div class="row">
+            <!-- Category Name Input -->
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="categories" class="form-label">Select Category</label>
+              <select name="categoryName" class="form-select" id="categories" [(ngModel)]="main_category">
+                <option value="" selected disabled>Select Category</option>
+                @for (item of categories; track $index) {
+
+                <option [value]="item.category_name" class="option">{{item.category_name}}</option>
+                }
+              </select>
+            </div>
+
+            <!-- Image File Input -->
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="SubcategoryName" class="form-label">Select Sub category</label>
+              <select name="SubcategoryName" class="form-select" id="SubcategoryName" [(ngModel)]="sub_category">
+                <option value="" selected disabled>Select Sub category</option>
+                @for (item of subCategories; track $index) {
+
+                <option [value]="item.Sub_category_name" class="option">{{item.Sub_category_name}}</option>
+                }
+              </select>
+            </div>
+
+
+
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="itemName" class="form-label">Name</label>
+              <input type="text" class="form-control" [(ngModel)]="itemName" name="itemName" placeholder="Enter Name"
+                id="itemName" />
+            </div>
+
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="part_number" class="form-label">Part Number</label>
+              <input type="text" class="form-control" [(ngModel)]="part_number" name="part_number"
+                placeholder="Enter  Name" id="part_number" />
+            </div>
+
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="itemName" class="form-label">Part description</label>
+              <input type="text" class="form-control" [(ngModel)]="part_description" name="part_description"
+                placeholder="Enter description" id="part_description" />
+            </div>
+
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="super_ss_number" class="form-label">Super ss number</label>
+              <input type="text" class="form-control" [(ngModel)]="super_ss_number" name="super_ss_number"
+                placeholder="Enter super ss number" id="super_ss_number" />
+            </div>
+
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="weight" class="form-label">weight</label>
+              <input type="text" class="form-control" [(ngModel)]="weight" name="super_ss_number"
+                placeholder="Enter weight" id="weight" />
+            </div>
+
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="hs_code" class="form-label">hs_code</label>
+              <input type="text" class="form-control" [(ngModel)]="hs_code" name="hs_code" placeholder="Enter hs code"
+                id="hs_code" />
+            </div>
+
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="remain_part_number" class="form-label">remain_part_number</label>
+              <input type="text" class="form-control" [(ngModel)]="remain_part_number" name="remain_part_number"
+                placeholder="Enter remain part number" id="remain_part_number" />
+            </div>
+
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="coo" class="form-label">Coo</label>
+              <input type="text" class="form-control" [(ngModel)]="coo" name="coo" placeholder="Enter super ss number"
+                id="coo" />
+            </div>
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="ref_no" class="form-label">Ref no</label>
+              <input type="text" class="form-control" [(ngModel)]="ref_no" name="ref_no"
+                placeholder="Enter super ss number" id="ref_no" />
+            </div>
+
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="selectedFile" class="form-label">Image</label>
+              <input type="file" class="form-control" #imageupdate (change)="onFileSelected($event)" name="selectedFile" id="selectedFile" />
+              <!-- Image preview -->
+              <div class="mt-3">
+                <img [src]="previewImage || 'assets/Products/noproduct.jpg'" alt="Preview" class="img-thumbnail" style="max-width: 150px; max-height: 150px;" />
+              </div>
+            </div>
+
+
+
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Close </button>
+          <button type="submit" class="btn save-btn" data-bs-dismiss="modal" [disabled]="isLoading">
+              @if (isLoading) {
+              <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>Loading...
+              }
+              <span *ngIf="!isLoading">Update</span>
+            </button>
         </div>
       </form>
     </div>

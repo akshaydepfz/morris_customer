@@ -203,3 +203,113 @@ a {
   width: 100%;
   border-radius: 4px;
 }
+.ft-small{
+  font-size: 12px;
+}
+.empty {
+  min-height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: red;
+  border: 1px solid #eee;
+  margin: 15px;
+}
+.validator-text{
+  font-size: 10px;
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: end;
+  margin-top: 15px;
+  position: sticky;
+    bottom: 0;
+    background: #fff;
+}
+
+.pagination-controls .ngx-pagination {
+  list-style: none;
+  display: flex;
+  gap: 5px;
+}
+
+.pagination-controls .ngx-pagination li {
+  padding: 3px 8px;
+  // border: 1px solid #ddd;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+.pagination-controls .ngx-pagination .current {
+  background-color: var(--primary);
+  color: white;
+
+}
+.product-search-control
+{
+  padding-left: 32px;
+  font-size: 14px;
+  &::placeholder {
+    font-size: 13px;
+  }
+}
+.modal-footer {
+  position: sticky;
+  bottom: 0;
+  background-color: #fff;
+}
+.form-label {
+  font-size: 14px;
+}
+.form-control::placeholder{
+  font-size: 13px;
+}
+.form-control , .form-select{
+  font-size: 14px;
+}
+
+
+/* Override the toaster container */
+.toast-bottom-right {
+  bottom: 20px; /* Adjust the position */
+  right: 20px;
+}
+
+/* Customize the toast itself */
+.toast {
+  background-color: #333; /* Change background color */
+  color: #fff; /* Change text color */
+  border-radius: 8px; /* Add rounded corners */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Add shadow */
+}
+
+/* Customize the title */
+.toast-title {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* Customize the message */
+.toast-message {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* Add custom styles for success, error, warning, info types */
+.toast-success {
+  background-color: #28a745; /* Green for success */
+
+}
+
+.toast-error {
+  background-color: #dc3545; /* Red for error */
+}
+
+.toast-warning {
+  background-color: #ffc107; /* Yellow for warning */
+}
+
+.toast-info {
+  background-color: #17a2b8; /* Blue for info */
+}
