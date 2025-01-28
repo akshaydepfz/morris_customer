@@ -149,7 +149,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
   };
 
   productService = inject(ProductService);
-  apiUrl1 = 'https://morris.koyeb.app/banner'; // Replace with your API
+  apiUrl1 = 'https://immediate-heda-morrisuae-d6b96914.koyeb.app/banner'; // Replace with your API
   token =
     'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
   http = inject(HttpClient);
@@ -172,7 +172,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
     });
   }
 
-  apiUrl2 = 'https://morris.koyeb.app/homesliders';
+  apiUrl2 = 'https://immediate-heda-morrisuae-d6b96914.koyeb.app/homesliders';
   companySlider: any[] = [];
 
   getCompanySlider() {
@@ -195,7 +195,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
 
 
   products:any[] =[]
-  productApi ="https://morris.koyeb.app/subcategory";
+  productApi ="https://immediate-heda-morrisuae-d6b96914.koyeb.app/subcategory";
 
   getproducts() {
     const headers = new HttpHeaders({
@@ -205,7 +205,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
 
     this.http.get<any>(`${this.productApi}`, { headers }).subscribe({
       next: (response) => {
-       
+
         this.products = response;
         this.isloading= false
       },

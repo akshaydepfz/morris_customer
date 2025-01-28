@@ -26,12 +26,12 @@ export class PartsComponent implements OnInit , AfterViewInit{
 constructor(private toastr: ToastrService){}
 
   partId!: number;
-  apiUrl1 = 'https://morris.koyeb.app/admin/parts'; // Replace with your API
-  deleteApi = 'https://morris.koyeb.app/morrisparts';
-  categoryAPI = 'https://morris.koyeb.app/categories';
-  postParts = 'https://morris.koyeb.app/morrisparts';
-  subCategoryAPI = 'https://morris.koyeb.app/admin/subcategory';
-  updateApi = 'https://morris.koyeb.app/morrisparts';
+  apiUrl1 = 'https://immediate-heda-morrisuae-d6b96914.koyeb.app/admin/parts'; // Replace with your API
+  deleteApi = 'https://immediate-heda-morrisuae-d6b96914.koyeb.app/morrisparts';
+  categoryAPI = 'https://immediate-heda-morrisuae-d6b96914.koyeb.app/categories';
+  postParts = 'https://immediate-heda-morrisuae-d6b96914.koyeb.app/morrisparts';
+  subCategoryAPI = 'https://immediate-heda-morrisuae-d6b96914.koyeb.app/admin/subcategory';
+  updateApi = 'https://immediate-heda-morrisuae-d6b96914.koyeb.app/morrisparts';
   token =
     'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
   http = inject(HttpClient);
@@ -295,7 +295,7 @@ constructor(private toastr: ToastrService){}
       .delete<number>(`${this.deleteApi}?id=${id}`, { headers })
       .subscribe({
         next: (response) => {
-         
+
           this.isLoading = false;
           this.toastr.remove(toastrRef.toastId);
           this.toastr.success("Successfully deleted")

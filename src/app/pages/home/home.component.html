@@ -60,16 +60,17 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 col-md-12 col-12  py-2 text-center">
-        <h2 class="section-title">Genuine Spare Parts for Trusted Brands</h2>
+        <h2 class="section-title">Our Clients</h2>
 
-        <p class="section-desc">We provide genuine spare parts from trusted industry leaders, ensuring unmatched
-          reliability, performance, and longevity for your machinery</p>
+        <!-- <p class="section-desc">We provide genuine spare parts from trusted industry leaders, ensuring unmatched
+          reliability, performance, and longevity for your machinery</p> -->
       </div>
 
       <div class="col-lg-12 col-md-12 col-12 mt-4 position-relative">
         @if (isloading) {
         <app-loader></app-loader>
         }
+        @defer () {
         <owl-carousel-o [options]="customOptions2">
 
           <ng-container *ngFor="let item of companySlider">
@@ -78,14 +79,20 @@
               <div class="item ">
                 <div class="brand-card my-2">
 
-                  <img src="{{item.image}}" class="brand-img" width="100%" height="100%" alt="Image"
-                    routerLink="/company-products/{{item.name}}" />
+                  <img src="{{item.image}}" class="brand-img" width="100%" height="100%" alt="Image" />
+                  <!-- routerLink="/company-products/{{item.name}}" -->
                 </div>
 
               </div>
             </ng-template>
           </ng-container>
         </owl-carousel-o>
+        }
+        @loading {
+        <app-loader></app-loader>
+
+        }
+
       </div>
     </div>
   </div>
@@ -93,7 +100,7 @@
 </section>
 
 
-<section class="py-80" id="productSection">
+<!-- <section class="py-80" id="productSection">
 
   <div class="container">
     <div class="row">
@@ -130,7 +137,7 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 
 <section class="pt-80">
@@ -142,19 +149,20 @@
         <div class="img-wrapper d-block d-lg-none ">
           <img src="assets/about-section.png" alt="image">
         </div>
-        <p class="about-para mt-lg-0 mt-3"> <span class="about-cmpny-name">Morris General Trading LLC</span> boasts a
-          strong and expanding presence in the Middle East, including the GCC, as well as a growing footprint worldwide.
-          The company is committed to creating significant value by offering competitive pricing, a wide range of
-          products, and exceptional service quality to its international business partners and customers.
+        <p class="about-para mt-lg-0 mt-3"> <span class="about-cmpny-name">Morris General Trading LLC </span> stands as
+          a reliable sourcing agent with a strong and expanding
+          presence in the Middle East, including the GCC, and an ever-growing global footprint. We are
+          dedicated to creating significant value by offering competitive pricing, a diverse range of
+          products, and exceptional service quality to our international business partners and clients.
 
 
         </p>
 
         <p class="about-para">
-          As the business landscape evolves at a rapid pace, we encounter new challenges every day. In response, we
-          remain dedicated to upholding transparency and fairness in all our operations, building trust, and earning the
-          appreciation of our partners throughout the Middle East. Our guiding principle remains steadfast: delivering
-          value for our customers.
+          In the fast-evolving business landscape, we navigate challenges daily with agility and
+          commitment. As a sourcing agent, we prioritize transparency and fairness in every operation,
+          building trust and long-lasting partnerships across the Middle East and beyond. Our guiding
+          principle remains clear: delivering unparalleled value and sourcing solutions for our clients.
 
         </p>
 

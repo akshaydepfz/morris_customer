@@ -28,7 +28,7 @@ export class ProductListComponent implements OnInit {
   id!: string;
 
 
-  apiUrl1 = 'https://morris.koyeb.app/subcategories'; // Replace with your API
+  apiUrl1 = 'https://immediate-heda-morrisuae-d6b96914.koyeb.app/subcategories'; // Replace with your API
     token =
       'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
     http = inject(HttpClient);
@@ -52,7 +52,7 @@ export class ProductListComponent implements OnInit {
 
     this.http.get<any>(this.apiUrl1, { params, headers }).subscribe({
       next: (response) => {
-        
+
         this.products = response || [];
         this.isLoading = false; // Hide the loader
       },
