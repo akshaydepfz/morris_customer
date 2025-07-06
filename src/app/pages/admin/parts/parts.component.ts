@@ -26,12 +26,12 @@ export class PartsComponent implements OnInit , AfterViewInit{
 constructor(private toastr: ToastrService){}
 
   partId!: number;
-  apiUrl1 = 'https://immediate-heda-morrisuae-d6b96914.koyeb.app/admin/parts'; // Replace with your API
-  deleteApi = 'https://immediate-heda-morrisuae-d6b96914.koyeb.app/morrisparts';
-  categoryAPI = 'https://immediate-heda-morrisuae-d6b96914.koyeb.app/categories';
-  postParts = 'https://immediate-heda-morrisuae-d6b96914.koyeb.app/morrisparts';
-  subCategoryAPI = 'https://immediate-heda-morrisuae-d6b96914.koyeb.app/admin/subcategory';
-  updateApi = 'https://immediate-heda-morrisuae-d6b96914.koyeb.app/morrisparts';
+  apiUrl1 = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/admin/parts'; // Replace with your API
+  deleteApi = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/morrisparts';
+  categoryAPI = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/categories';
+  postParts = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/morrisparts';
+  subCategoryAPI = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/admin/subcategory';
+  updateApi = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/morrisparts';
   token =
     'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
   http = inject(HttpClient);

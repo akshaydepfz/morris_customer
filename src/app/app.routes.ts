@@ -26,19 +26,12 @@ export const routes: Routes = [
     children: [
       { path: '', component: HomeComponent, title: 'Morris | Home' },
       { path: 'about', component: AboutComponent, title: 'Morris | About' },
+      { path: 'contact', component: ContactComponent, title: 'Morris | Contact', },
+      { path: 'products', component: SubproductsComponent, title: 'Morris | Products',},
+
+
       {
-        path: 'contact',
-        component: ContactComponent,
-        title: 'Morris | Contact',
-      },
-      {
-        path: 'products',
-        component: ProductsComponent,
-        title: 'Morris | Products',
-      },
-      {
-        path: 'product/:category/:id',
-        component: ProductListComponent,
+        path: 'product/:category/:id',component: ProductListComponent,
         title: 'Morris | Product',
       },
       {
@@ -58,8 +51,23 @@ export const routes: Routes = [
         component: HomeProductsComponent,
         title: 'Morris | Product',
       },
+
+      {
+        path: 'details/:id',
+        component: ProductDetailsComponent,
+        title: 'Morris | Product',
+      },
+
+
     ],
+
+
   },
+
+
+
+
+
   { path: 'login', component: LoginComponent, title: 'Login' },
   {
     path: 'admin',
@@ -68,7 +76,7 @@ export const routes: Routes = [
       // { path: '', component: AdminportalComponent, title: 'Admin Portal' },
       { path: '', component: CategoriesComponent, title: 'categories' },
       { path: 'banner', component: BannersComponent, title: 'Banner' },
-      {  path: 'subcategories', component: SubcategoriesComponent, title: 'subcategories',},
+      { path: 'subcategories', component: SubcategoriesComponent, title: 'subcategories', },
       { path: 'parts', component: PartsComponent, title: 'Parts' },
       { path: 'enquiries', component: EnquiriesComponent, title: 'Enquiries' },
     ],

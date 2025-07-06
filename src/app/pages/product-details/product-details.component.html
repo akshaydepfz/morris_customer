@@ -16,60 +16,65 @@
 </section>
 
 
-<section class="py-70">
+<section class="py-70" style="padding: 120px 0;">
   <div class="container">
     <div class="row">
-      <div class="col-lg-4 col-12">
-        <div class="product Single-image" style="height: 300px; background-color: tan;">
-          <img src="" class="" alt="">
+      <div class="col-lg-6 col-12">
+        <div class="product-single-image">
+          @if (productData.image) {
+           <img src="{{productData.image}}" class="product-img" alt="morriesuae">
+
+          }
+          @else {
+            <img src="assets/Products/noproduct.jpg" class="product-img" alt="morriesuae">
+
+          }
+
+
+
         </div>
-        <ul class="product-items-wrapper ps-0 d-flex gap-3 mt-3">
-          <li class="" style="height: 80px; width: 100px; background-color: tan; flex: 1 auto;">
-              item
-          </li>
-          <li class="" style="height: 80px; width: 100px; background-color: tan; flex: 1 auto;">
-            item
-        </li>
-        <li class="" style="height: 80px; width: 100px; background-color: tan; flex: 1 auto;">
-          item
-      </li>
-        </ul>
+
       </div>
-      <div class="col-lg-8 col-12">
+      <div class="col-lg-6 col-12">
 
         <div class="product-info-wrapper">
-          <h3 class="prouduct-title"> Product Name</h3>
+          <h3 class="prouduct-title">{{productData.part_number}} {{productData.part_description}}</h3>
           <ul class="ps-0">
-            <li class="d-flex gap-4">
+            <!-- <li class="d-flex gap-4">
               <p class="info-title">Description:</p>
-              <p>Lorem ipsum dolor, sit amet consectetur adipisicin fuga. </p>
-            </li>
-            <li class="d-flex gap-4">
-              <p class="info-title">Supersed :</p>
-              <p>Lorem ipsum dolor, sit amet consectetur adipisicing. </p>
+              <p>{{productData.part_description}} </p>
+            </li> -->
+            <li class="d-flex gap-1">
+              <p class="info-title">COO :</p>
+              <p>{{productData.super_ss_number}}</p>
             </li>
 
-            <li class="d-flex gap-4">
+            <li class="d-flex gap-1">
               <p class="info-title">Weight :</p>
-              <p>Lorem ipsum dolor</p>
+              <p>{{productData.weight}}</p>
             </li>
 
-            <li class="d-flex gap-4">
-              <p class="info-title">HS Code#:</p>
-              <p>Lorem ipsum dolor</p>
+            <li class="d-flex gap-1">
+              <p class="info-title">HS Code:</p>
+              <p>{{productData.hs_code}}</p>
             </li>
 
-            <li class="d-flex gap-4">
-              <p class="info-title">Co Orgin#:</p>
-              <p>Lorem ipsum dolor</p>
+            <li class="d-flex gap-1">
+              <p class="info-title">Reference:</p>
+             <p>{{productData.ref_no}}</p>
             </li>
 
-            <li class="d-flex gap-4">
-              <p class="info-title">FG  Wilson Referencr:</p>
-              <p>Lorem ipsum dolor</p>
+             <li class="d-flex gap-1">
+              <p class="info-title">Price :</p>
+             <p> @if(productData.price ){ {{productData.price}} } @else {00.0 AED}</p>
             </li>
 
           </ul>
+
+           <div class="">
+            <button class="btn enq-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+            (click)="openModal('item')">Enquiry Now</button>
+           </div>
         </div>
       </div>
     </div>
@@ -78,3 +83,88 @@
 
 
 
+
+
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Enquiry</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form [formGroup]="enquiryForm" (ngSubmit)="submitEnquiry()" method="POST" enctype="multipart/form-data">
+        <div class="modal-body">
+          <div class="row">
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" placeholder="Enter Your Email" id="email"
+                formControlName="email">
+              <div *ngIf="enquiryForm.get('email')?.invalid && enquiryForm.get('email')?.touched" class="text-danger validator-text">
+                Valid email is required.
+              </div>
+            </div>
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" placeholder="Enter Your Name" id="name" formControlName="name">
+              <div *ngIf="enquiryForm.get('name')?.invalid && enquiryForm.get('name')?.touched" class="text-danger validator-text">
+                Name is required.
+              </div>
+            </div>
+
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="phone" class="form-label">Phone</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter Your phone"
+                id="phone"
+                formControlName="phone"
+                inputmode="tel"
+                (keypress)="allowOnlyPhoneNumbers($event)"
+                (paste)="validatePaste($event)"
+              >
+              <div *ngIf="enquiryForm.get('phone')?.invalid && enquiryForm.get('phone')?.touched" class="text-danger validator-text">
+                Phone must start with a "+" (optional) and contain only numbers.
+              </div>
+            </div>
+
+
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="image" class="form-label">Attachments</label>
+              <input
+                type="file"
+                class="form-control"
+                (change)="onFileSelected($event)"
+                id="attachement"  #imageInput
+                formControlName="attachement"
+
+              />
+              <div *ngIf="fileError" class="text-danger validator-text">
+                {{ fileError }}
+              </div>
+
+            </div>
+            <div class="mb-3 col-lg-12 col-md-12 col-12">
+              <label for="comment" class="form-label">Comment</label>
+              <textarea class="form-control" placeholder="Enter Your Comment" id="comment"
+                formControlName="comment"></textarea>
+              <div *ngIf="enquiryForm.get('comment')?.invalid && enquiryForm.get('comment')?.touched"
+                class="text-danger validator-text">
+                Comment is required.
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" style="border-radius:0; font-size: 14px;
+          padding: 5px 22px; " data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="save-btn btn" [disabled]="enquiryForm.invalid" data-bs-dismiss="modal" style="border-radius:0; font-size: 14px;
+          padding: 5px 22px; ">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -26,15 +26,32 @@ import { NgOptimizedImage } from '@angular/common';
     SubscribeComponent,
     CarouselModule, LoaderComponent,
     CommonModule,
-    LayoutComponent,NgOptimizedImage
-],
+    LayoutComponent, NgOptimizedImage
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomeComponent implements OnInit, AfterViewChecked {
 
+  token = 'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
+
+  productApi = "https://mysterious-alejandra-morrisuae-99776981.koyeb.app/subcategory";
+  apiUrl2 = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/homesliders';
+  apiUrl1 = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/banner';
+
   isloading = true;
+  isBrowser: boolean;
+  productService = inject(ProductService);
+
+  products: any[] = []
+  companySlider: any[] = [];
+  bannerlist: any[] = [];
+  http = inject(HttpClient);
+
+
+
+
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       // Initialize AOS only on the client-side (browser)
@@ -60,9 +77,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
 
   }
 
-  bannerlist: any[] = [];
 
-  isBrowser: boolean;
 
   constructor(@Inject(PLATFORM_ID) private platformId: object) {
     this.isBrowser = isPlatformBrowser(platformId);
@@ -148,11 +163,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
     nav: false,
   };
 
-  productService = inject(ProductService);
-  apiUrl1 = 'https://immediate-heda-morrisuae-d6b96914.koyeb.app/banner'; // Replace with your API
-  token =
-    'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
-  http = inject(HttpClient);
+
 
   getbannerdata() {
     const headers = new HttpHeaders({
@@ -164,7 +175,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
       next: (response) => {
 
         this.bannerlist = response;
-        this.isloading= false
+        this.isloading = false
       },
       error: (err) => {
         console.error('Error occurred:', err);
@@ -172,8 +183,6 @@ export class HomeComponent implements OnInit, AfterViewChecked {
     });
   }
 
-  apiUrl2 = 'https://immediate-heda-morrisuae-d6b96914.koyeb.app/homesliders';
-  companySlider: any[] = [];
 
   getCompanySlider() {
     const headers = new HttpHeaders({
@@ -183,9 +192,9 @@ export class HomeComponent implements OnInit, AfterViewChecked {
 
     this.http.get<any>(`${this.apiUrl2}`, { headers }).subscribe({
       next: (response) => {
-
+       
         this.companySlider = response;
-        this.isloading= false
+        this.isloading = false
       },
       error: (err) => {
         console.error('Error occurred:', err);
@@ -194,8 +203,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
   }
 
 
-  products:any[] =[]
-  productApi ="https://immediate-heda-morrisuae-d6b96914.koyeb.app/subcategory";
+
 
   getproducts() {
     const headers = new HttpHeaders({
@@ -207,7 +215,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
       next: (response) => {
 
         this.products = response;
-        this.isloading= false
+        this.isloading = false
       },
       error: (err) => {
         console.error('Error occurred:', err);

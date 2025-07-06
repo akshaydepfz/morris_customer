@@ -5,6 +5,23 @@ import { ProductService } from '../../core/services/product.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoaderComponent } from '../../shared/loader/loader.component';
 
+
+export interface Product {
+  id: number;
+  name: string;
+  part_number: string;
+  part_description: string;
+  super_ss_number: string;
+  weight: string;
+  hs_code: string;
+  remain_part_number: string;
+  coo: string;
+  ref_no: string;
+  image: string;
+  
+}
+
+
 @Component({
   selector: 'app-products',
   standalone: true,
@@ -17,7 +34,7 @@ export class ProductsComponent implements OnInit {
   productService = inject(ProductService);
   isLoading = true
   cateogories :any[] = []
-  apiUrl1 = 'https://immediate-heda-morrisuae-d6b96914.koyeb.app/categories'; // Replace with your API
+  apiUrl1 = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/categories'; // Replace with your API
   token ='eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
   http = inject(HttpClient);
 

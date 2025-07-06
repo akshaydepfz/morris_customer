@@ -22,9 +22,9 @@ export class SubcategoriesComponent implements OnInit {
   isLoading = true;
   subCategories: any[] = [];
   cateogories: any[] = [];
-  apiUrl1 = 'https://immediate-heda-morrisuae-d6b96914.koyeb.app/admin/subcategory'; // Replace with your API
-  postapi = 'https://immediate-heda-morrisuae-d6b96914.koyeb.app/subcategories'; // Replace with your API
-  catapi = 'https://immediate-heda-morrisuae-d6b96914.koyeb.app/categories'; // Replace with your API
+  apiUrl1 = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/admin/subcategory'; // Replace with your API
+  postapi = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/subcategories'; // Replace with your API
+  catapi = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/categories'; // Replace with your API
   token =
     'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
   http = inject(HttpClient);
@@ -75,6 +75,7 @@ export class SubcategoriesComponent implements OnInit {
     });
   }
   showModal() {
+
     this.getcategories();
   }
 
@@ -150,6 +151,7 @@ export class SubcategoriesComponent implements OnInit {
   resetForm(): void {
     this.categoryName = '';
     this.selectedFile = null;
+    this.subCategoryName =''
     if (this.imageInput) {
       this.imageInput.nativeElement.value = '';
     }

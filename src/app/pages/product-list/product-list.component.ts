@@ -16,6 +16,8 @@ import { LoaderComponent } from '../../shared/loader/loader.component';
 })
 export class ProductListComponent implements OnInit {
 
+  apiUrl1 = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/subcategories'; // Replace with your API
+  token ='eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
 
   productService = inject(ProductService)
   searchQuery: string = '';
@@ -23,19 +25,16 @@ export class ProductListComponent implements OnInit {
   subcategory = ''
   products :any[] = []
   isLoading =true
-
+  http = inject(HttpClient);
   category!: string;
   id!: string;
 
-
-  apiUrl1 = 'https://immediate-heda-morrisuae-d6b96914.koyeb.app/subcategories'; // Replace with your API
-    token =
-      'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
-    http = inject(HttpClient);
-
-
-
   constructor(private route: ActivatedRoute) {}
+
+
+
+
+
 
   ngOnInit() {
     this.category = this.route.snapshot.paramMap.get('category') || '';
@@ -52,13 +51,13 @@ export class ProductListComponent implements OnInit {
 
     this.http.get<any>(this.apiUrl1, { params, headers }).subscribe({
       next: (response) => {
-
+       
         this.products = response || [];
-        this.isLoading = false; // Hide the loader
+        this.isLoading = false;
       },
       error: (err) => {
         console.error('Error occurred:', err);
-        this.isLoading = false; // Hide the loader even on error
+        this.isLoading = false;
       },
     });
 

@@ -11,7 +11,7 @@ export class ProductService {
 
   apiUrl = ''
 
-  apiUrl1 = 'https://immediate-heda-morrisuae-d6b96914.koyeb.app/'; // Replace with your API
+  apiUrl1 = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/'; // Replace with your API
   token = 'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
 
 

@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink, } from '@angular/router';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 import {
   FormBuilder,
   FormGroup,
@@ -25,8 +27,8 @@ export interface Product {
   coo: string;
   ref_no: string;
   image: string;
-  main_category: string;
-  sub_category: string;
+  // main_category: string;
+  // sub_category: string;
 }
 
 @Component({
@@ -38,13 +40,14 @@ export interface Product {
     ReactiveFormsModule,
     SearchPipe,
     LoaderComponent,
+    NgxPaginationModule,RouterLink,
   ],
   templateUrl: './subproducts.component.html',
   styleUrl: './subproducts.component.scss',
 })
 export class SubproductsComponent implements OnInit {
-  apiUrl1 = 'https://immediate-heda-morrisuae-d6b96914.koyeb.app/morrisparts';
-  enquiryApi = 'https://immediate-heda-morrisuae-d6b96914.koyeb.app/enquiries';
+  apiUrl1 = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/admin/parts';
+  enquiryApi = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/enquiries';
   token =
     'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
   http = inject(HttpClient);
@@ -55,6 +58,7 @@ export class SubproductsComponent implements OnInit {
   enquiryForm: FormGroup;
   selectedProduct: any = null;
   isLoading = true;
+  currentPage = 1;
   fileError: string | null = null;
   selectedFile: File | null = null;
 
@@ -72,6 +76,8 @@ export class SubproductsComponent implements OnInit {
       comment: ['', Validators.required],
     });
   }
+
+
   ngOnInit(): void {
     this.mainCategory = this.route.snapshot.paramMap.get('category') || '';
     this.subacategory = this.route.snapshot.paramMap.get('subcategory') || '';
@@ -87,7 +93,7 @@ export class SubproductsComponent implements OnInit {
       next: (response) => {
 
         this.products = response || [];
-        this.isLoading = false;
+         this.isLoading = false;
       },
       error: (err) => {
 
