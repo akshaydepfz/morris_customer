@@ -1,0 +1,108 @@
+<section class="breadcrumb-sec product-bg"></section>
+
+<section class="product_section py-80" style="padding-bottom: 193px;">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 mt-3 pt-3">
+        <!-- <div class="category_head-bx">
+          <img src="assets/category/Perkins_Logo.svg" class="cateogory-icon" width="100" alt="">
+
+          <h6 class="pt-2">{{mainCategory}} - {{subacategory}}</h6>
+
+
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a routerLink="/products" class="">Products</a></li>
+              <li class="breadcrumb-item">{{mainCategory}}</li>
+              <li class="breadcrumb-item active" aria-current="page">{{subacategory}}</li>
+            </ol>
+          </nav>
+        </div> -->
+
+
+
+
+        <div class="w-50 me-auto position-relative">
+          <i class="bi bi-search search-icon"></i>
+          <input type="search" class="form-control product-search-control" [(ngModel)]="searchQuery"
+            placeholder="Search by  Part number or Refernce" name="" id="">
+          <p class="text-danger ft-small">The country of origin or weight may change</p>
+        </div>
+      </div>
+
+
+
+    </div>
+
+
+    <div class="row position-relative" style="min-height: 400px;">
+
+      @if (isLoading) {
+      <app-loader />
+      }
+      @if (products.length > 0 || products != null) {
+
+      @for(item of products | search: searchQuery:['part_number','name'] | paginate: { itemsPerPage: 20, currentPage: currentPage }; track $index) {
+
+      <div class="col-lg-3 col-md-4 col-sm-6 col-12 mt-3">
+        <div class="card product_card">
+          <a class="prod-img-card" href="{{item.pdf_url}}">
+            <div class="overaly">
+              <img src="assets/Untitled design (1).png" alt=""  >
+            </div>
+            @if (item.image) {
+              <img src="{{item.image}}" width="380px" height="332px" class="product-img"   >
+            }@else {
+              <img src="assets/Products/noproduct.jpg" width="380px" height="332px" class="product-img" >
+            }
+          </a>
+
+          <div class="card-body product_card-body">
+            <h5 class="card-title"> <a class="buybtn">{{item.part_number }}</a></h5>
+
+            <ul class="ps-0">
+              <li class="itemsinfo d-flex">
+                <div class="info-title">Name : </div>
+                <div>{{item.title}}hz</div>
+              </li>
+
+              <li class="itemsinfo d-flex">
+                <div class="info-title">Description: {{item.description}}</div>
+
+              </li>
+
+
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      }
+
+
+
+
+        <div class="pagination-controls web">
+            <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+          </div>
+
+      }
+
+      @else {
+      <div class="empty">
+        <p class="">No data to display</p>
+
+      </div>
+      }
+
+
+
+
+
+    </div>
+
+
+  </div>
+</section>

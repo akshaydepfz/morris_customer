@@ -9,6 +9,7 @@ th{
   background-color: var(--primary);
   font-size: 14px;
   color: #fff;
+  vertical-align: middle;
 }
 }
 
@@ -89,4 +90,21 @@ thead {
   &::placeholder {
     font-size: 13px;
   }
+}
+
+.removepreviewimage-btn{
+  position: absolute;
+    top: -12px;
+    right: -12px;
+    background-color: #2f2828b8;
+    color: #ffffff;
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+    border: 1px solid #ffffff00;
+    display: flex
+;
+    justify-content: center;
+    align-items: center;
+
 }

@@ -1,6 +1,6 @@
 import { Cateogory } from './../../core/models/product';
 import { Component, inject, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductService } from '../../core/services/product.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoaderComponent } from '../../shared/loader/loader.component';
@@ -18,7 +18,7 @@ export interface Product {
   coo: string;
   ref_no: string;
   image: string;
-  
+
 }
 
 
@@ -37,11 +37,18 @@ export class ProductsComponent implements OnInit {
   apiUrl1 = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/categories'; // Replace with your API
   token ='eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
   http = inject(HttpClient);
-
+  productId: string | null = null;
 
   ngOnInit(): void {
+
+     this.productId = this.route.snapshot.paramMap.get('id');
+    console.log(this.productId); // will print the id from URL
+
     this.getcategories()
+
   }
+
+    constructor(private route: ActivatedRoute) {}
 
   getcategories() {
       const headers = new HttpHeaders({

@@ -1,28 +1,33 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { AfterViewInit, Component, HostListener, inject, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, RouterLink, RouterModule } from '@angular/router';
 
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators, } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { LoaderComponent } from '../../shared/loader/loader.component';
 
 
 
 export interface Product {
-  coo: string;
-  hs_code: string;
   id: number;
-  image: string;
-  main_category: string;
   name: string;
-  part_description: string;
   part_number: string;
-  ref_no: string;
-  remain_part_number: string;
-  sub_category: string;
+  part_description: string;
   super_ss_number: string;
   weight: string;
-  price :string;
+  hs_code: string;
+  remain_part_number: string;
+  coo: string;
+  ref_no: string;
+  image: string;
+  images: string[] | null;
+  main_category: string;
+  sub_category: string;
+  dimension: string;
+  compatible_engine_models: string;
+  available_location: string;
+  price: number; // ✅ number
 }
 
 
@@ -30,25 +35,29 @@ export interface Product {
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [RouterLink, ReactiveFormsModule, FormsModule, CommonModule,],
+  imports: [RouterModule, ReactiveFormsModule, FormsModule, CommonModule, LoaderComponent],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss'
 })
-export class ProductDetailsComponent implements OnInit {
+export class ProductDetailsComponent implements OnInit, AfterViewInit {
 
   productData!: Product; // Use the interface for type checking
   http = inject(HttpClient);
-  singlePoductapi = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/morrisparts/part'
+  singlePoductapi = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/morrisparts/part';
+  similarProductApi = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/morrisparts/relatedparts'
   enquiryApi = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/enquiries';
   token = 'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
   selectedProduct: any = null;
   fileError: string | null = null;
   selectedFile: File | null = null;
   enquiryForm: FormGroup;
+  similarProducts: any[] = [];
+
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router,
   ) {
 
     this.enquiryForm = this.fb.group({
@@ -67,8 +76,22 @@ export class ProductDetailsComponent implements OnInit {
 
     this.selectedProduct = this.route.snapshot.paramMap.get('id') || '';
 
-    this.getSelectedProduct()
+    this.getSelectedProduct();
+    // this.getProductDetails();
+    this.getsimilarProduct();
   }
+
+
+  //   ngOnInit(): void {
+  //   this.route.paramMap.subscribe(params => {
+  //     this.selectedProduct = params.get('id') || '';
+
+  //     if (this.selectedProduct) {
+  //       this.getSelectedProduct();
+  //       this.getsimilarProduct();
+  //     }
+  //   });
+  // }
 
   submitEnquiry() {
     if (!this.selectedProduct) {
@@ -167,20 +190,105 @@ export class ProductDetailsComponent implements OnInit {
   }
 
 
+  images: string[] = [];
+
+  selectedImage: string | null = null;
+
+  loading = false;
+
+changeImage(img: string) {
+  this.loading = true;
+  this.selectedImage = img;
+}
+
+onImageLoad() {
+  this.loading = false;
+}
 
   getSelectedProduct() {
+    console.log("slecbro", this.selectedProduct)
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.token}`,
+      'Content-Type': 'application/json',
+    });
+    this.http.get<any>(`${this.singlePoductapi}?id=${this.selectedProduct}`, { headers }).subscribe({
+      next: (response) => {
+        this.productData = response;
+        console.log("this.productData",this.productData)
+        this.images = this.productData?.images || [];
+
+        if (this.images.length > 0) {
+          this.selectedImage = this.images[0]; // ✅ only assign when available
+        } else {
+          this.selectedImage = "assets/Products/noproduct.jpg"; // fallback
+        }
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
+
+  getsimilarProduct() {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.token}`,
       'Content-Type': 'application/json',
     });
 
-    this.http.get<any>(`${this.singlePoductapi}?id=${this.selectedProduct}`, { headers }).subscribe({
-    next: (response) => {
-      this.productData = response;
-    },
-    error: (err) => {
-      console.error(err);
-    },
-  });
+    this.http.get<any>(`${this.similarProductApi}?product_id=${this.selectedProduct}`, { headers }).subscribe({
+      next: (response) => {
+
+        console.log("responseresponse", response)
+        this.similarProducts = response;
+
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
   }
+
+
+
+
+  //  imgId: number = 0;
+  // displayWidth: number = 0;
+
+  ngAfterViewInit() {
+    // this.updateWidth();
+    // this.slideImage();
+  }
+
+
+
+
+  goToProduct(product: any) {
+    console.log("ssssssss", product)
+    this.productData = product
+    this.images=  this.images = this.productData?.images || [];
+     if (this.images.length > 0) {
+          this.selectedImage = this.images[0]; // ✅ only assign when available
+        } else {
+          this.selectedImage = "assets/Products/noproduct.jpg"; // fallback
+        }
+  }
+
+  // =======================================================================================================
+
+  //  product: any;
+
+  // getProductDetails() {
+  //   this.http.get<any>('assets/product-details.json').subscribe(data => {
+  //       this.product = data;
+  //       console.log('Product Data:', this.product);
+  //     });
+  // }
+
+
+
+
+
+
+
+
 }

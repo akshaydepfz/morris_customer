@@ -53,7 +53,7 @@
         @for (item of products| search: searchQuery:['Sub_category_name']; track $index) {
 
           <div class="col-lg-3 col-md-4 col-sm-6 col-12 mt-3">
-            <div class="card product_card" routerLink="/product">
+            <div class="card product_card" routerLink="/sub-product/{{item.category_name}}/{{item.Sub_category_name}}">
               <img src="{{item.image}}" width="380px" height="332px" class="product-img" alt="">
 
               <div class="card-body product_card-body">
@@ -76,33 +76,33 @@
 
 
       <!-- <div class="col-lg-3 col-md-4 col-sm-6 col-12 mt-3">
-        <div class="card product_card" routerLink="/product">
+        <div class="card product_card" routerLink="/sub-product/Engine Parts/sub_category" >
           <img src="assets/Products/p2.png" width="380px" height="332px" class="product-img" alt="">
 
           <div class="card-body product_card-body">
-            <h4 class="card-title"> <a href="" class="buybtn">Air filters</a></h4>
+            <h4 class="card-title"> <a routerLink="/sub-product/Engine Parts/sub_category" class="buybtn">Air filters</a></h4>
           </div>
         </div>
 
       </div>
 
       <div class="col-lg-3 col-md-4 col-sm-6 col-12 mt-3">
-        <div class="card product_card" routerLink="/product">
+        <div class="card product_card" routerLink="/sub-product/Engine Parts/sub_category" >
           <img src="assets/Products/p3.png" width="380px" height="332px" class="product-img" alt="">
 
           <div class="card-body product_card-body">
-            <h4 class="card-title"> <a href="" class="buybtn">Air filters</a></h4>
+            <h4 class="card-title"> <a routerLink="/sub-product/Engine Parts/sub_category"  class="buybtn">Air filters</a></h4>
           </div>
         </div>
 
-      </div>
+      </div> -->
 
-      <div class="col-lg-3 col-md-4 col-sm-6 col-12 mt-3">
+      <!-- <div class="col-lg-3 col-md-4 col-sm-6 col-12 mt-3">
         <div class="card product_card" routerLink="/product">
           <img src="assets/Products/p4.png" width="380px" height="332px" class="product-img" alt="">
 
           <div class="card-body product_card-body">
-             <h4 class="card-title"> <a href="" class="buybtn">Air filters</a></h4>
+             <h4 class="card-title"> <a routerLink="/product" class="buybtn">Air filters</a></h4>
           </div>
         </div>
 
@@ -113,7 +113,7 @@
           <img src="assets/Products/p5.png" width="380px" height="332px" class="product-img" alt="">
 
           <div class="card-body product_card-body">
-             <h4 class="card-title"> <a href="" class="buybtn">Air filters</a></h4>
+             <h4 class="card-title"> <a routerLink="/product" class="buybtn">Air filters</a></h4>
           </div>
         </div>
 
@@ -124,7 +124,7 @@
           <img src="assets/Products/p6.png" width="380px" height="332px" class="product-img" alt="">
 
           <div class="card-body product_card-body">
-             <h4 class="card-title"> <a href="" class="buybtn">Air filters</a></h4>
+             <h4 class="card-title"> <a routerLink="/product" class="buybtn">Air filters</a></h4>
           </div>
         </div>
 
@@ -136,7 +136,7 @@
           <img src="assets/Products/p7.png" width="380px" height="332px" class="product-img" alt="">
 
           <div class="card-body product_card-body">
-             <h4 class="card-title"> <a href="" class="buybtn">Air filters</a></h4>
+             <h4 class="card-title"> <a routerLink="/product" class="buybtn">Air filters</a></h4>
           </div>
         </div>
 
@@ -147,7 +147,7 @@
           <img src="assets/Products/p4.png" width="380px" height="332px" class="product-img" alt="">
 
           <div class="card-body product_card-body">
-             <h4 class="card-title"> <a href="" class="buybtn">Air filters</a></h4>
+             <h4 class="card-title"> <a routerLink="/product" class="buybtn">Air filters</a></h4>
           </div>
         </div>
 
@@ -157,7 +157,7 @@
           <img src="assets/Products/p1.png" width="380px" height="332px" class="product-img" alt="">
 
           <div class="card-body product_card-body">
-             <h4 class="card-title"> <a href="" class="buybtn">Air filters</a></h4>
+             <h4 class="card-title"> <a routerLink="/product" class="buybtn">Air filters</a></h4>
           </div>
         </div>
 
@@ -168,7 +168,7 @@
           <img src="assets/Products/p2.png" width="380px" height="332px" class="product-img" alt="">
 
           <div class="card-body product_card-body">
-             <h4 class="card-title"> <a href="" class="buybtn">Air filters</a></h4>
+             <h4 class="card-title"> <a routerLink="/product" class="buybtn">Air filters</a></h4>
           </div>
         </div>
 

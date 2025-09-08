@@ -33,13 +33,15 @@ export class ProductListComponent implements OnInit {
 
 
 
-
+// mysterious-alejandra-morrisuae-99776981.koyeb.app/subcategories?category_name=PERKINS&category_type=PARTS
 
 
   ngOnInit() {
-    this.category = this.route.snapshot.paramMap.get('category') || '';
-    this.id = this.route.snapshot.paramMap.get('id') || '';
 
+    this.category = this.route.snapshot.paramMap.get('category') || '';
+    this.id = this.route.snapshot.paramMap.get('subcategory') || '';
+    console.log(this.category)
+    console.log(this.id)
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.token}`,
       'Content-Type': 'application/json',
@@ -49,9 +51,11 @@ export class ProductListComponent implements OnInit {
       .set('category_name', this.category)
       .set('category_type', this.id);
 
+    
+
     this.http.get<any>(this.apiUrl1, { params, headers }).subscribe({
       next: (response) => {
-       
+        console.log("ssss",response)
         this.products = response || [];
         this.isLoading = false;
       },

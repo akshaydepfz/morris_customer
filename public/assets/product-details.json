@@ -1,0 +1,23 @@
+{
+        "id": 32716,
+        "name": "Oil Filter",
+        "part_number": "OF-12345",
+        "part_description": "High-quality oil filter for diesel engines",
+        "super_ss_number": "SS98765",
+        "weight": "2.5kg",
+        "hs_code": "84099199",
+        "remain_part_number": "OF-12345A",
+        "coo": "Japan",
+        "ref_no": "REF20250821",
+        "image": "https://morriuae.s3.amazonaws.com/MorrisPartsImages/1755789270_main.jpg",
+        "images": [
+            "https://morriuae.s3.amazonaws.com/MorrisPartsImages/1755789274523300000_ChatGPT Image Jul 6, 2025, 12_05_16 PM.png",
+            "https://morriuae.s3.amazonaws.com/MorrisPartsImages/1755789275298601000_1751389183.jpg"
+        ],
+        "main_category": "Engine Parts",
+        "sub_category": "sub_category",
+        "dimension": "10x8x6 cm",
+        "compatible_engine_models": "Toyota 2KD, Mitsubishi 4D56",
+        "available_location": "available_location",
+        "price": 100
+  }

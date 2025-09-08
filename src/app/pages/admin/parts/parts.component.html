@@ -37,6 +37,14 @@
                 <th scope="col" class="table-header" style="width: 60px;">Image</th>
                 <th scope="col" class="table-header" style="width: 80px;">Category</th>
                 <th scope="col" class="table-header" style="width: 90px;">Sub category</th>
+                <th scope="col" class="table-header" style="width: 90px;">Dimension</th>
+                <th scope="col" class="table-header" style="width: 90px;">Compatible for <br> engine models</th>
+                <th scope="col" class="table-header" style="width: 90px;">Available <br> Location</th>
+                <th scope="col" class="table-header" style="width: 90px;">Price</th>
+
+
+
+
               </tr>
             </thead>
             <tbody>
@@ -82,6 +90,18 @@
                   <td>
                     <div class="shimmer shimmer-cell"></div>
                   </td>
+                  <td>
+                    <div class="shimmer shimmer-cell"></div>
+                  </td>
+                  <td>
+                    <div class="shimmer shimmer-cell"></div>
+                  </td>
+                  <td>
+                    <div class="shimmer shimmer-cell"></div>
+                  </td>
+                  <td>
+                    <div class="shimmer shimmer-cell"></div>
+                  </td>
                 </tr>
               </ng-container>
 
@@ -115,6 +135,11 @@
                   </td>
                   <td>{{ item.main_category }}</td>
                   <td>{{ item.sub_category }}</td>
+
+                  <td>{{ item.dimension }}</td>
+                  <td>{{ item.compatible_engine_models }}</td>
+                  <td>{{ item.available_location }}</td>
+                  <td>{{ item.price }}</td>
                 </tr>
               </ng-template>
             </tbody>
@@ -167,9 +192,9 @@
 
 
             <div class="mb-3 col-lg-6 col-md-6 col-12">
-              <label for="itemName" class="form-label">Name</label>
-              <input type="text" class="form-control" [(ngModel)]="itemName" name="itemName" placeholder="Enter Name"
-                id="itemName" />
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" [(ngModel)]="name" name="name" placeholder="Enter Name"
+                id="name" />
             </div>
 
             <div class="mb-3 col-lg-6 col-md-6 col-12">
@@ -220,10 +245,53 @@
             </div>
 
             <div class="mb-3 col-lg-6 col-md-6 col-12">
-              <label for="selectedFile" class="form-label">Image</label>
-              <input type="file" class="form-control" #imageInput (change)="onFileSelected($event)" name="selectedFile"
-                placeholder="" id="selectedFile" />
+              <label for="dimension" class="form-label">Dimension</label>
+              <input type="text" class="form-control" [(ngModel)]="dimension" name="dimension"
+                placeholder="Enter Dimension" id="dimension" />
             </div>
+
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="compatible_engine_models" class="form-label">Compatible Engine Models</label>
+              <input type="text" class="form-control" [(ngModel)]="compatible_engine_models"
+                name="compatible_engine_models" placeholder="Enter Compatible Engine Models"
+                id="compatible_engine_models" />
+            </div>
+
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="available_location" class="form-label">Available Location</label>
+              <input type="text" class="form-control" [(ngModel)]="available_location" name="available_location"
+                placeholder="Enter Available location" id="available_location" />
+            </div>
+
+             <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="price" class="form-label">Price</label>
+              <input type="text" class="form-control" [(ngModel)]="price" name="price"
+                placeholder="Enter Price" id="price" />
+            </div>
+
+
+
+            <!--
+            <div class="mb-3 col-lg-12 col-md-12 col-12">
+              <label for="selectedFile" class="form-label">Image</label>
+              <input type="file" class="form-control" #imageInput (change)="onFilesSelected($event)" name="selectedFile"
+                placeholder="" id="selectedFile"   />
+            </div> -->
+
+
+            <div class="mb-3 col-lg-6 col-md-12 col-12">
+              <label for="selectedFile" class="form-label">Image</label>
+              <input type="file" class="form-control"  #fileInput (change)="onFileChange($event)" multiple id="selectedFiles" name="selectedFiles" />
+
+               <div class="d-flex flex-wrap mt-3">
+              <div *ngFor="let img of imagePreviews; let i = index" class="me-2 mb-2 text-center position-relative">
+                <img [src]="img" alt="preview" width="90" height="90" class="rounded border" />
+                 <a type="button" class="btn btn-sm btn-danger removepreviewimage-btn" (click)="removeImage2(i)"><i class="bi bi-x"></i></a>
+                <p class="small">Image {{ i+1 }}</p>
+              </div>
+            </div>
+            </div>
+
 
 
           </div>
@@ -276,9 +344,9 @@
 
 
             <div class="mb-3 col-lg-6 col-md-6 col-12">
-              <label for="itemName" class="form-label">Name</label>
-              <input type="text" class="form-control" [(ngModel)]="itemName" name="itemName" placeholder="Enter Name"
-                id="itemName" />
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" [(ngModel)]="name" name="name" placeholder="Enter Name"
+                id="name" />
             </div>
 
             <div class="mb-3 col-lg-6 col-md-6 col-12">
@@ -328,14 +396,61 @@
                 placeholder="Enter super ss number" id="ref_no" />
             </div>
 
+
             <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="dimension" class="form-label">Dimension</label>
+              <input type="text" class="form-control" [(ngModel)]="dimension" name="dimension"
+                placeholder="Enter Dimension" id="dimension" />
+            </div>
+
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="compatible_engine_models" class="form-label">Compatible Engine Models</label>
+              <input type="text" class="form-control" [(ngModel)]="compatible_engine_models"
+                name="compatible_engine_models" placeholder="Enter Compatible Engine Models"
+                id="compatible_engine_models" />
+            </div>
+
+            <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="available_location" class="form-label">Available Location</label>
+              <input type="text" class="form-control" [(ngModel)]="available_location" name="available_location"
+                placeholder="Enter Available location" id="available_location" />
+            </div>
+
+             <div class="mb-3 col-lg-6 col-md-6 col-12">
+              <label for="price" class="form-label">Price</label>
+              <input type="text" class="form-control" [(ngModel)]="price" name="price"
+                placeholder="Enter Price" id="price" />
+            </div>
+
+
+
+
+
+            <!-- <div class="mb-3 col-lg-6 col-md-6 col-12">
               <label for="selectedFile" class="form-label">Image</label>
               <input type="file" class="form-control" #imageupdate (change)="onFileSelected($event)" name="selectedFile" id="selectedFile" />
-              <!-- Image preview -->
+
               <div class="mt-3">
                 <img [src]="previewImage || 'assets/Products/noproduct.jpg'" alt="Preview" class="img-thumbnail" style="max-width: 150px; max-height: 150px;" />
               </div>
+            </div> -->
+
+
+
+             <div class="mb-3 col-lg-6 col-md-12 col-12">
+              <label for="selectedFile" class="form-label">Image</label>
+              <input type="file" class="form-control"  #fileInput (change)="onFileChange($event)" multiple id="selectedFiles" name="selectedFiles" />
+
+              <div class="d-flex flex-wrap mt-3">
+              <div *ngFor="let img of imagePreviews; let i = index" class="me-2 mb-2 text-center position-relative">
+                <img [src]="img" alt="preview" width="90" height="90" class="rounded border" />
+                 <a type="button" class="btn btn-sm btn-danger removepreviewimage-btn" (click)="removeImage2(i)"><i class="bi bi-x"></i></a>
+                <p class="small">Image {{ i+1 }}</p>
+              </div>
             </div>
+            </div>
+
+
 
 
 
@@ -345,11 +460,11 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Close </button>
           <button type="submit" class="btn save-btn" data-bs-dismiss="modal" [disabled]="isLoading">
-              @if (isLoading) {
-              <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>Loading...
-              }
-              <span *ngIf="!isLoading">Update</span>
-            </button>
+            @if (isLoading) {
+            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>Loading...
+            }
+            <span *ngIf="!isLoading">Update</span>
+          </button>
         </div>
       </form>
     </div>

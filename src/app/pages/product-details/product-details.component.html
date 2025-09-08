@@ -1,38 +1,40 @@
 <section class="breadcrumb-sec" style="background-color: #eee;">
-  <nav aria-label="breadcrumb">
+  <!-- <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item active" aria-current="page">Products</li>
     </ol>
-  </nav>
+  </nav> -->
 
-  <nav aria-label="breadcrumb">
+  <!-- <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a [routerLink]="['/home']" routerLinkActive="router-link-active" >Home</a></li>
+      <li class="breadcrumb-item"><a [routerLink]="['/home']" routerLinkActive="router-link-active">Home</a></li>
       <li class="breadcrumb-item active" aria-current="page">Products</li>
     </ol>
-  </nav>
+  </nav> -->
 
 
 </section>
 
 
-<section class="py-70" style="padding: 120px 0;">
+<!-- <section class="py-70" style="padding: 120px 0;">
   <div class="container">
     <div class="row">
       <div class="col-lg-6 col-12">
         <div class="product-single-image">
           @if (productData.image) {
-           <img src="{{productData.image}}" class="product-img" alt="morriesuae">
+          <img src="{{productData.image}}" class="product-img" alt="morriesuae">
 
           }
           @else {
-            <img src="assets/Products/noproduct.jpg" class="product-img" alt="morriesuae">
+          <img src="assets/Products/noproduct.jpg" class="product-img" alt="morriesuae">
 
           }
+
 
 
 
         </div>
+
 
       </div>
       <div class="col-lg-6 col-12">
@@ -40,10 +42,10 @@
         <div class="product-info-wrapper">
           <h3 class="prouduct-title">{{productData.part_number}} {{productData.part_description}}</h3>
           <ul class="ps-0">
-            <!-- <li class="d-flex gap-4">
+            <li class="d-flex gap-4">
               <p class="info-title">Description:</p>
               <p>{{productData.part_description}} </p>
-            </li> -->
+            </li>
             <li class="d-flex gap-1">
               <p class="info-title">COO :</p>
               <p>{{productData.super_ss_number}}</p>
@@ -61,25 +63,250 @@
 
             <li class="d-flex gap-1">
               <p class="info-title">Reference:</p>
-             <p>{{productData.ref_no}}</p>
+              <p>{{productData.ref_no}}</p>
             </li>
 
-             <li class="d-flex gap-1">
+            <li class="d-flex gap-1">
               <p class="info-title">Price :</p>
-             <p> @if(productData.price ){ {{productData.price}} } @else {00.0 AED}</p>
+              <p> @if(productData.price ){ {{productData.price}} } @else {00.0 AED}</p>
             </li>
 
           </ul>
 
-           <div class="">
+          <div class="">
             <button class="btn enq-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-            (click)="openModal('item')">Enquiry Now</button>
-           </div>
+              (click)="openModal('item')">Enquiry Now</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
+</section> -->
+
+
+<!-- ================================================ OLD END ===================================== -->
+
+<!-- ============*********************** NEW START ******************============================== -->
+<section class="detail-sec" style="padding: 120px 0;">
+
+
+
+  <div class="card-wrapper container">
+    <div class="card border-0">
+      <!-- card left -->
+      <!-- <div class="product-imgs" style="box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;">
+        <div class="img-display">
+          <div class="img-showcase">
+            @if (productData.images && productData.images.length > 0) {
+            @for (img of productData.images; track $index) {
+            <img [src]="img" alt="shoe image" class="product-img" />
+            }
+            }
+            @else if (productData.image && productData.images == null) {
+            <img [src]="productData.image" class="product-img" alt="morriesuae" />
+            }
+            @else {
+            <img src="assets/Products/noproduct.jpg" class="product-img" alt="morriesuae" />
+            }
+          </div>
+        </div>
+        @if (productData.images) {
+        <div class="img-select">
+          <div class="img-item" *ngFor="let img of productData.images; let i = index">
+            <a href="#" (click)="selectImage(i, $event)">
+              <img [src]="img" alt="shoe image">
+            </a>
+          </div>
+        </div>
+        }
+      </div> -->
+
+
+
+      <div class="gallery-container">
+        <!-- Main Image -->
+        <div class="main-image">
+          <img [src]="selectedImage" [class.loaded]="!loading" (load)="onImageLoad()" alt="Product Image"
+            class="product-main-img" />
+          <div *ngIf="loading" class="spinner">Loading...</div>
+        </div>
+
+        <div class="thumbnails" *ngIf="images.length > 0">
+          <img *ngFor="let img of images" [src]="img" [class.active]="img === selectedImage" (click)="changeImage(img)"
+            class="thumbnail-img" />
+        </div>
+      </div>
+
+
+
+      <!-- card right -->
+      <div class="product-content">
+        <div class="product-info-wrapper">
+          <h3 class="prouduct-title">{{productData.part_number}} {{productData.part_description}}</h3>
+          <ul class="ps-0">
+            <!-- <li class="d-flex gap-4">
+              <p class="info-title">Description:</p>
+              <p>{{product.part_description}} </p>
+            </li> -->
+            <li class="d-flex gap-1">
+              <p class="info-title">Country of origin :</p>
+              <p>{{productData.super_ss_number}}</p>
+            </li>
+
+            <li class="d-flex gap-1">
+              <p class="info-title">Weight :</p>
+              <p>{{productData.weight}}</p>
+            </li>
+
+            <li class="d-flex gap-1">
+              <p class="info-title">HS Code:</p>
+              <p>{{productData.hs_code}}</p>
+            </li>
+
+            <li class="d-flex gap-1">
+              <p class="info-title">Reference:</p>
+              <p>{{productData.ref_no}}</p>
+            </li>
+
+            <li class="d-flex gap-1">
+              <p class="info-title">Super Session p/n:</p>
+              <p>{{productData.super_ss_number}}</p>
+            </li>
+
+            <li class="d-flex gap-1">
+              <p class="info-title">Dimension:</p>
+              <p>{{productData.dimension}}</p>
+            </li>
+
+            <li class="d-flex gap-1">
+              <p class="info-title">Compatible for engine models:</p>
+              <p>{{productData.compatible_engine_models}}</p>
+            </li>
+
+            <li class="d-flex gap-1">
+              <p class="info-title">Available Location:</p>
+              <p>{{productData.available_location}}</p>
+            </li>
+
+            <li class="d-flex gap-1">
+              <h4 class="info-title">Price :</h4>
+              <h4> @if(productData.price ){ {{productData.price}} } @else {00.0 AED}</h4>
+            </li>
+
+          </ul>
+
+          <div class="">
+            <button class="btn enq-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+              (click)="openModal('item')">Enquiry Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
 </section>
+
+
+
+
+<section class="rltdProdSection pb-5 position-relative">
+  <div class="container">
+    @if (similarProducts.length >0) {
+    <div class="row">
+      <h4 class="section-title">Similar products</h4>
+      @defer () {
+      @for (item of similarProducts; track $index) {
+      <div class="col-lg-3 col-md-4 col-sm-6 col-12 mt-3">
+        <div class="card product_card">
+          <div class="prod-img-card" (click)="goToProduct(item)">
+            <!-- <div class="overaly" (click)="goToProduct(item)">
+              <img src="assets/Untitled design (1).png" alt="">
+            </div> -->
+            @if (item.image) {
+            <img src="{{item.image}}" width="380px" height="332px" class="product-img" (click)="goToProduct(item)">
+            }@else {
+            <img src="assets/Products/noproduct.jpg" width="380px" height="332px" class="product-img"
+              (click)="goToProduct(item)">
+            }
+          </div>
+
+          <div class="card-body product_card-body">
+            <h5 class="card-title text-white"> <a class="buybtn text-white"
+                (click)="goToProduct(item)">{{item.name}}</a></h5>
+
+            <ul class="ps-0">
+              <li class="itemsinfo d-flex">
+                <div class="info-title"> Part no : </div>
+                <div>{{item.part_number}}</div>
+              </li>
+
+              <li class="itemsinfo d-flex">
+                <div class="info-title">Description : </div>
+                <div>{{item.part_description}}</div>
+              </li>
+              <li class="itemsinfo d-flex">
+                <div class="info-title">COO : </div>
+                <div>{{item.coo}}</div>
+              </li>
+              <li class="itemsinfo d-flex">
+                <div class="info-title">Weight : </div>
+                <div>{{item.weight}}</div>
+              </li>
+
+
+
+
+
+              <li class="itemsinfo d-flex">
+                <div class="info-title">HS code: </div>
+                <div>{{item.hs_code}}</div>
+              </li>
+
+
+
+
+              <li class="itemsinfo d-flex">
+                <div class="info-title"> Refernce : </div>
+                <div>{{item.ref_no}}</div>
+              </li>
+
+
+
+            </ul>
+          </div>
+        </div>
+
+      </div>
+      }
+      }
+
+      @placeholder {
+      <app-loader></app-loader>
+
+      }
+      @loading {
+      <app-loader></app-loader>
+      }
+
+    </div>
+    }
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -101,31 +328,26 @@
               <label for="email" class="form-label">Email</label>
               <input type="email" class="form-control" placeholder="Enter Your Email" id="email"
                 formControlName="email">
-              <div *ngIf="enquiryForm.get('email')?.invalid && enquiryForm.get('email')?.touched" class="text-danger validator-text">
+              <div *ngIf="enquiryForm.get('email')?.invalid && enquiryForm.get('email')?.touched"
+                class="text-danger validator-text">
                 Valid email is required.
               </div>
             </div>
             <div class="mb-3 col-lg-6 col-md-6 col-12">
               <label for="name" class="form-label">Name</label>
               <input type="text" class="form-control" placeholder="Enter Your Name" id="name" formControlName="name">
-              <div *ngIf="enquiryForm.get('name')?.invalid && enquiryForm.get('name')?.touched" class="text-danger validator-text">
+              <div *ngIf="enquiryForm.get('name')?.invalid && enquiryForm.get('name')?.touched"
+                class="text-danger validator-text">
                 Name is required.
               </div>
             </div>
 
             <div class="mb-3 col-lg-6 col-md-6 col-12">
               <label for="phone" class="form-label">Phone</label>
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Enter Your phone"
-                id="phone"
-                formControlName="phone"
-                inputmode="tel"
-                (keypress)="allowOnlyPhoneNumbers($event)"
-                (paste)="validatePaste($event)"
-              >
-              <div *ngIf="enquiryForm.get('phone')?.invalid && enquiryForm.get('phone')?.touched" class="text-danger validator-text">
+              <input type="text" class="form-control" placeholder="Enter Your phone" id="phone" formControlName="phone"
+                inputmode="tel" (keypress)="allowOnlyPhoneNumbers($event)" (paste)="validatePaste($event)">
+              <div *ngIf="enquiryForm.get('phone')?.invalid && enquiryForm.get('phone')?.touched"
+                class="text-danger validator-text">
                 Phone must start with a "+" (optional) and contain only numbers.
               </div>
             </div>
@@ -133,14 +355,8 @@
 
             <div class="mb-3 col-lg-6 col-md-6 col-12">
               <label for="image" class="form-label">Attachments</label>
-              <input
-                type="file"
-                class="form-control"
-                (change)="onFileSelected($event)"
-                id="attachement"  #imageInput
-                formControlName="attachement"
-
-              />
+              <input type="file" class="form-control" (change)="onFileSelected($event)" id="attachement" #imageInput
+                formControlName="attachement" />
               <div *ngIf="fileError" class="text-danger validator-text">
                 {{ fileError }}
               </div>

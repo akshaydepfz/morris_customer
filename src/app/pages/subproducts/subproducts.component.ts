@@ -48,8 +48,11 @@ export interface Product {
 export class SubproductsComponent implements OnInit {
   apiUrl1 = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/admin/parts';
   enquiryApi = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/enquiries';
-  token =
-    'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
+
+  apiurl2 = "https://mysterious-alejandra-morrisuae-99776981.koyeb.app/morrisparts"; //change
+
+  token ='eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
+
   http = inject(HttpClient);
   searchQuery: string = '';
   products: Product[] = [];
@@ -81,6 +84,9 @@ export class SubproductsComponent implements OnInit {
   ngOnInit(): void {
     this.mainCategory = this.route.snapshot.paramMap.get('category') || '';
     this.subacategory = this.route.snapshot.paramMap.get('subcategory') || '';
+    console.log("this.mainCategory",this.mainCategory);
+    console.log("this.subacategory",this.subacategory);
+
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.token}`,
       'Content-Type': 'application/json',
@@ -89,11 +95,12 @@ export class SubproductsComponent implements OnInit {
     const params = new HttpParams()
       .set('main_category', this.mainCategory)
       .set('sub_category', this.subacategory);
-    this.http.get<Product[]>(this.apiUrl1, { params, headers }).subscribe({
-      next: (response) => {
 
+    this.http.get<any[]>(this.apiurl2, { params, headers }).subscribe({
+      next: (response) => {
+        console.log("response",response)
         this.products = response || [];
-         this.isLoading = false;
+        this.isLoading = false;
       },
       error: (err) => {
 

@@ -1,0 +1,49 @@
+.product-bg{
+  background: url('../../../../public/assets/breadcrumb/breadcrump.jpg');
+  min-height: 443px;
+  height: auto;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: 0.7;
+    left: 0;
+    top: 0;
+  }
+  .title{
+    position: relative;
+    z-index: 4;
+    font-family: var(--secondary-font);
+
+  }
+}
+.brand-card {
+  height: 126px;
+  max-height: 126px;
+  overflow: hidden;
+  transform: translateY(0);
+  transition: 0.4s all ease-in-out;
+  border: none;
+  box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+  &:hover {
+    cursor: pointer;
+  transform: translateY(-3px);
+  transition: 0.4s all ease-in-out;
+
+
+  }
+}
+.brandimage{
+      width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
