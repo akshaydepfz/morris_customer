@@ -27,7 +27,7 @@
           <i class="bi bi-search search-icon"></i>
           <input type="search" class="form-control product-search-control" [(ngModel)]="searchQuery"
             placeholder="Search by  Part number or Refernce" name="" id="">
-          <p class="text-danger ft-small">The country of origin or weight may change</p>
+          <!-- <p class="text-danger ft-small">The country of origin or weight may change</p> -->
         </div>
       </div>
 
@@ -43,94 +43,90 @@
       @if (isLoading) {
       <app-loader />
       }
-      @if (products.length > 0 || products != null) {
 
-      @for(item of products | search: searchQuery:['part_number','name'] | paginate: { itemsPerPage: 20, currentPage: currentPage }; track $index) {
 
-      <div class="col-lg-3 col-md-4 col-sm-6 col-12 mt-3">
-        <div class="card product_card">
-          <div class="prod-img-card">
-            <div class="overaly">
-              <img src="assets/Untitled design (1).png" alt=""     routerLink="/details/{{item.id}}">
+
+        @if (products.length > 0 || products != null) {
+
+            @for(item of products | search: searchQuery:['part_number','name'] | paginate: { itemsPerPage: 20, currentPage: currentPage }; track $index) {
+
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12 mt-3">
+              <div class="card product_card">
+                <div class="prod-img-card">
+                  <div class="overaly">
+                    <img src="assets/Untitled design (1).png" alt=""     routerLink="/details/{{item.id}}">
+                  </div>
+                  @if (item.image) {
+                    <img src="{{item.image}}" width="380px" height="332px" class="product-img"   routerLink="/details/{{item.id}}" >
+                  }@else {
+                    <img src="assets/Products/noproduct.jpg" width="380px" height="332px" class="product-img"  routerLink="/details/{{item.id}}">
+                  }
+                </div>
+
+                <div class="card-body product_card-body" routerLink="/details/{{item.id}}">
+                  <h5 class="card-title"> <a class="buybtn">{{item.name }}</a></h5>
+
+                  <ul class="ps-0">
+                    <li class="itemsinfo d-flex">
+                      <div class="info-title"> Part no : </div>
+                      <div>{{item.part_number}}</div>
+                    </li>
+
+                    <li class="itemsinfo d-flex">
+                      <div class="info-title">Description : </div>
+                      <div>{{item.part_description}}</div>
+                    </li>
+                    <li class="itemsinfo d-flex">
+                      <div class="info-title">COO : </div>
+                      <div>{{item.coo}}</div>
+                    </li>
+                    <li class="itemsinfo d-flex">
+                      <div class="info-title">Weight : </div>
+                      <div>{{item.weight}}</div>
+                    </li>
+                    <!-- <li class="itemsinfo d-flex">
+                      <div class="info-title">Supersed : </div>
+                      <div>{{item.super_ss_number}}</div>
+                    </li> -->
+
+
+
+
+                    <li class="itemsinfo d-flex">
+                      <div class="info-title">HS code: </div>
+                      <div>{{item.hs_code}}</div>
+                    </li>
+
+
+
+
+                    <li class="itemsinfo d-flex">
+                      <!-- <div class="info-title"> Refernce : </div> -->
+                      <div>{{item.ref_no}}</div>
+                    </li>
+
+
+
+                  </ul>
+                </div>
+              </div>
+
             </div>
-            @if (item.image) {
-              <img src="{{item.image}}" width="380px" height="332px" class="product-img"   routerLink="/details/{{item.id}}" >
-            }@else {
-              <img src="assets/Products/noproduct.jpg" width="380px" height="332px" class="product-img"  routerLink="/details/{{item.id}}">
+
             }
-          </div>
 
-          <div class="card-body product_card-body" routerLink="/details/{{item.id}}">
-            <h5 class="card-title"> <a class="buybtn">{{item.name }}</a></h5>
-
-            <ul class="ps-0">
-              <li class="itemsinfo d-flex">
-                <div class="info-title"> Part no : </div>
-                <div>{{item.part_number}}</div>
-              </li>
-
-              <li class="itemsinfo d-flex">
-                <div class="info-title">Description : </div>
-                <div>{{item.part_description}}</div>
-              </li>
-              <li class="itemsinfo d-flex">
-                <div class="info-title">COO : </div>
-                <div>{{item.coo}}</div>
-              </li>
-              <li class="itemsinfo d-flex">
-                <div class="info-title">Weight : </div>
-                <div>{{item.weight}}</div>
-              </li>
-              <!-- <li class="itemsinfo d-flex">
-                <div class="info-title">Supersed : </div>
-                <div>{{item.super_ss_number}}</div>
-              </li> -->
+            <div class="pagination-controls web">
+              <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+            </div>
 
 
+        }
 
-
-              <li class="itemsinfo d-flex">
-                <div class="info-title">HS code: </div>
-                <div>{{item.hs_code}}</div>
-              </li>
-
-
-
-
-              <li class="itemsinfo d-flex">
-                <div class="info-title"> Refernce : </div>
-                <div>{{item.ref_no}}</div>
-              </li>
-
-
-
-            </ul>
-          </div>
+        @else {
+        <div class="empty">
+          <p class="">No data to display</p>
         </div>
-
-      </div>
-
-
-
-
-
-      }
-
-
-
-
-        <div class="pagination-controls web">
-            <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
-          </div>
-
-      }
-
-      @else {
-      <div class="empty">
-        <p class="">No data to display</p>
-
-      </div>
-      }
+        }
 
 
 

@@ -20,6 +20,8 @@
                 <th scope="col" style="width: 300px;">Phone</th>
                 <th scope="col" style="width: 300px;">Enquiry</th>
                 <th scope="col" style="width: 150px;">Attachments</th>
+                <th scope="col" style="width: 150px;">Country</th>
+                <th scope="col" style="width: 150px;">Company Name</th>
 
               </tr>
             </thead>
@@ -57,6 +59,8 @@
                   <td> <a href="{{enquiry.attachment}}" download="{{enquiry.attachment}}"> Download  File <i class="bi bi-file-earmark-arrow-down"></i></a>
                   </td>
 
+                    <td>{{enquiry.companyname}}</td>
+                      <td>{{enquiry.country}}</td>
                 </tr>
                 }
 

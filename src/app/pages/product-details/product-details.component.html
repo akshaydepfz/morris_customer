@@ -164,7 +164,7 @@
             </li>
 
             <li class="d-flex gap-1">
-              <p class="info-title">Reference:</p>
+              <!-- <p class="info-title">Reference:</p> -->
               <p>{{productData.ref_no}}</p>
             </li>
 
@@ -190,7 +190,7 @@
 
             <li class="d-flex gap-1">
               <h4 class="info-title">Price :</h4>
-              <h4> @if(productData.price ){ {{productData.price}} } @else {00.0 AED}</h4>
+              <h4> @if(productData.price ) { {{productData.price}} AED } @else {00.0 AED}</h4>
             </li>
 
           </ul>
@@ -271,7 +271,7 @@
 
 
               <li class="itemsinfo d-flex">
-                <div class="info-title"> Refernce : </div>
+                <!-- <div class="info-title"> Refernce : </div> -->
                 <div>{{item.ref_no}}</div>
               </li>
 

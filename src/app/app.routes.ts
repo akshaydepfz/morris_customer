@@ -36,6 +36,8 @@ export const routes: Routes = [
       // { path: 'products', component: SubproductsComponent, title: 'Morris | Products',},
       { path: 'productss/:id', component: ProductsComponent, title: 'Morris | Products',},
       { path: 'submainproduct/:category/:subcategory', component: ProductListComponent, title: 'Morris | Products',},
+
+      
       { path: 'sub-product/:category/:subcategory', component: SubproductsComponent, title: 'Morris | Product',},
       { path: 'enginproduct/:category/:subcategory', component: EngindataPageComponent, title: 'Morris | Products',},
       { path: 'catalogue/:category/:subcategory', component: CatalogsDataComponent, title: 'Morris | Products',},

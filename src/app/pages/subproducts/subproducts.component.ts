@@ -84,9 +84,6 @@ export class SubproductsComponent implements OnInit {
   ngOnInit(): void {
     this.mainCategory = this.route.snapshot.paramMap.get('category') || '';
     this.subacategory = this.route.snapshot.paramMap.get('subcategory') || '';
-    console.log("this.mainCategory",this.mainCategory);
-    console.log("this.subacategory",this.subacategory);
-
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.token}`,
       'Content-Type': 'application/json',

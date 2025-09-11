@@ -28,6 +28,49 @@ export class CatalogsDataComponent {
 
     token ='eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
 
+
+     countries: string[] = [
+    "Afghanistan", "Albania", "Algeria", "Andorra", "Angola",
+    "Antigua and Barbuda", "Argentina", "Armenia", "Australia",
+    "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh",
+    "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan",
+    "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil",
+    "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde",
+    "Cambodia", "Cameroon", "Canada", "Central African Republic",
+    "Chad", "Chile", "China", "Colombia", "Comoros",
+    "Congo (Congo-Brazzaville)", "Democratic Republic of the Congo",
+    "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czechia (Czech Republic)",
+    "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador",
+    "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia",
+    "Eswatini (fmr. Swaziland)", "Ethiopia", "Fiji", "Finland", "France",
+    "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada",
+    "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras",
+    "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland",
+    "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya",
+    "Kiribati", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon",
+    "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg",
+    "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta",
+    "Marshall Islands", "Mauritania", "Mauritius", "Mexico",
+    "Micronesia (Federated States of)", "Moldova", "Monaco", "Mongolia",
+    "Montenegro", "Morocco", "Mozambique", "Myanmar (Burma)", "Namibia",
+    "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger",
+    "Nigeria", "North Korea", "North Macedonia", "Norway", "Oman", "Pakistan",
+    "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru",
+    "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda",
+    "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines",
+    "Samoa", "San Marino", "São Tomé and Príncipe", "Saudi Arabia", "Senegal",
+    "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia",
+    "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan",
+    "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria",
+    "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo",
+    "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan",
+    "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom",
+    "United States of America", "Uruguay", "Uzbekistan", "Vanuatu",
+    "Vatican City (Holy See)", "Venezuela", "Vietnam", "Yemen", "Zambia",
+    "Zimbabwe"
+  ];
+
+
     http = inject(HttpClient);
     searchQuery: string = '';
     products: any[] = [];
@@ -50,8 +93,8 @@ export class CatalogsDataComponent {
         email: ['', [Validators.required, Validators.email]],
         name: ['', Validators.required],
         phone: ['', [Validators.required, Validators.pattern('^[+]?[0-9]*$')]],
-        attachement: [''],
-        comment: ['', Validators.required],
+        companyname: ['',Validators.required],
+        country: ['', Validators.required],
       });
     }
 
@@ -104,17 +147,14 @@ export class CatalogsDataComponent {
         disableTimeOut: true,
         closeButton: true,
       });
+      debugger;
       const payload = new FormData();
       payload.append('part_no', this.selectedProduct.part_number);
       payload.append('email', this.enquiryForm.get('email')?.value || '');
       payload.append('name', this.enquiryForm.get('name')?.value || '');
       payload.append('phone', this.enquiryForm.get('phone')?.value || '');
-      payload.append('enquiry', this.enquiryForm.get('comment')?.value || '');
-
-      if (this.selectedFile) {
-        payload.append('attachment', this.selectedFile);
-      }
-
+      payload.append('company_name', this.enquiryForm.get('companyname')?.value || '');
+      payload.append('country', this.enquiryForm.get('country')?.value || '');
       const headers = new HttpHeaders({
         Authorization: `Bearer ${this.token}`,
       });
@@ -124,6 +164,15 @@ export class CatalogsDataComponent {
           next: (response: string) => {
             this.toastr.remove(toastrRef.toastId);
             this.toastr.success('Enquiry submitted successfully');
+            try {
+    const res = typeof response === 'string' ? JSON.parse(response) : response;
+    if (res.pdf_url) {
+      window.open(res.pdf_url, '_blank'); // open PDF in new tab
+    }
+  } catch (e) {
+    console.error('Invalid response format', e);
+  }
+
             this.enquiryForm.reset();
             this.selectedFile = null;
           },
@@ -131,25 +180,26 @@ export class CatalogsDataComponent {
 
             this.toastr.remove(toastrRef.toastId);
             this.toastr.error('Enquiry submitted successfully', error);
+
           },
         });
     }
 
-    onFileSelected(event: Event): void {
-      const input = event.target as HTMLInputElement;
-      if (input.files && input.files.length > 0) {
-        const file = input.files[0];
+    // onFileSelected(event: Event): void {
+    //   const input = event.target as HTMLInputElement;
+    //   if (input.files && input.files.length > 0) {
+    //     const file = input.files[0];
 
-        if (file.size > 10 * 1024 * 1024) {
-          // 10MB size limit
-          this.fileError = 'File size must not exceed 10MB.';
-          this.selectedFile = null;
-        } else {
-          this.fileError = null;
-          this.selectedFile = file;
-        }
-      }
-    }
+    //     if (file.size > 10 * 1024 * 1024) {
+    //       // 10MB size limit
+    //       this.fileError = 'File size must not exceed 10MB.';
+    //       this.selectedFile = null;
+    //     } else {
+    //       this.fileError = null;
+    //       this.selectedFile = file;
+    //     }
+    //   }
+    // }
 
     allowOnlyPhoneNumbers(event: KeyboardEvent): void {
       const allowedChars = /^[0-9+]*$/; // Allows only numbers and the "+" symbol

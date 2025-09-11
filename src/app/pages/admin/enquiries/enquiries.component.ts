@@ -15,7 +15,7 @@ export class EnquiriesComponent  implements OnInit{
   enquiries:any[]=[];
   currentPage = 1;
 
-  api = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/enquiries';
+  api = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/customerdetails';
    token =
       'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
     http = inject(HttpClient);
@@ -36,7 +36,7 @@ export class EnquiriesComponent  implements OnInit{
         this.http.get<any>(`${this.api}`, { headers }).subscribe({
           next: (response) => {
             this.enquiries = response;
-           
+
             this.isLoading = false
           },
           error: (err) => {
