@@ -28,6 +28,7 @@ export class CatalogsDataComponent {
 
     token ='eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
 
+    pdfUrl='';
 
      countries: string[] = [
     "Afghanistan", "Albania", "Algeria", "Andorra", "Angola",
@@ -116,8 +117,11 @@ export class CatalogsDataComponent {
 
       this.http.get<any[]>(this.apiUrl1, { params, headers }).subscribe({
         next: (response) => {
-          console.log("response",response)
+
           this.products = response || [];
+          if (this.products.length > 0) {
+      this.pdfUrl = this.products[0].pdf_url; // save pdf_url into a variable
+    }
           this.isLoading = false;
         },
         error: (err) => {
@@ -164,17 +168,11 @@ export class CatalogsDataComponent {
           next: (response: string) => {
             this.toastr.remove(toastrRef.toastId);
             this.toastr.success('Enquiry submitted successfully');
-            try {
-    const res = typeof response === 'string' ? JSON.parse(response) : response;
-    if (res.pdf_url) {
-      window.open(res.pdf_url, '_blank'); // open PDF in new tab
-    }
-  } catch (e) {
-    console.error('Invalid response format', e);
-  }
+            if (this.pdfUrl) {
+              window.open(this.pdfUrl, '_blank');
+            }
 
             this.enquiryForm.reset();
-            this.selectedFile = null;
           },
           error: (error: any) => {
 
