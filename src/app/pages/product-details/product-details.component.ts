@@ -40,6 +40,17 @@ export interface Product {
   styleUrl: './product-details.component.scss'
 })
 export class ProductDetailsComponent implements OnInit, AfterViewInit {
+  quantity: number = 1; // default quantity
+
+  increaseQuantity(): void {
+    this.quantity++;
+  }
+
+  decreaseQuantity(): void {
+    if (this.quantity > 1) {
+      this.quantity--;
+    }
+  }
 
   productData!: Product; // Use the interface for type checking
   http = inject(HttpClient);
