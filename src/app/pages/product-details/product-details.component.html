@@ -1,4 +1,4 @@
-<section class="breadcrumb-sec" style="background-color: #eee;">
+<!-- <section class="breadcrumb-sec" style="background-color: #eee;"> -->
   <!-- <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item active" aria-current="page">Products</li>
@@ -13,7 +13,7 @@
   </nav> -->
 
 
-</section>
+<!-- </section> -->
 
 
 <!-- <section class="py-70" style="padding: 120px 0;">
@@ -126,14 +126,24 @@
       <div class="gallery-container">
         <!-- Main Image -->
         <div class="main-image">
+            <div class="overaly">
+                    <img src="assets/Untitled design (1).png" alt="">
+                  </div>
           <img [src]="selectedImage" [class.loaded]="!loading" (load)="onImageLoad()" alt="Product Image"
             class="product-main-img" />
           <div *ngIf="loading" class="spinner">Loading...</div>
         </div>
 
         <div class="thumbnails" *ngIf="images.length > 0">
-          <img *ngFor="let img of images" [src]="img" [class.active]="img === selectedImage" (click)="changeImage(img)"
+          <div *ngFor="let img of images" style="position: relative;
+    overflow: hidden;">
+            <div class="overaly" (click)="changeImage(img)">
+                    <img src="assets/Untitled design (1).png" alt="">
+                  </div>
+                  <img  [src]="img" [class.active]="img === selectedImage" (click)="changeImage(img)"
             class="thumbnail-img" />
+          </div>
+
         </div>
       </div>
 
@@ -142,7 +152,9 @@
       <!-- card right -->
       <div class="product-content">
         <div class="product-info-wrapper">
-          <h3 class="prouduct-title">{{productData.part_number}} {{productData.part_description}}</h3>
+          <h3 class="prouduct-title" style="    font-weight: 900;
+    border-bottom: 7px solid #023e8a;
+    display: inline-block;">{{productData.part_number}} {{productData.part_description}}</h3>
           <ul class="ps-0">
             <!-- <li class="d-flex gap-4">
               <p class="info-title">Description:</p>
@@ -224,6 +236,9 @@
       <div class="col-lg-3 col-md-4 col-sm-6 col-12 mt-3">
         <div class="card product_card">
           <div class="prod-img-card" (click)="goToProduct(item)">
+              <div class="overaly" (click)="goToProduct(item)">
+                    <img src="assets/Untitled design (1).png" alt="">
+                  </div>
             <!-- <div class="overaly" (click)="goToProduct(item)">
               <img src="assets/Untitled design (1).png" alt="">
             </div> -->

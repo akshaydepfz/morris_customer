@@ -416,3 +416,19 @@
   font-size: 14px;
   color: #023e8a;
 }
+
+  .overaly{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 8;
+    // background-color: #ffffff57;
+    // opacity: 0.4;
+    img {
+      height: 100%;
+    width: 100%;
+    }
+  }
+
