@@ -7,6 +7,13 @@
   background-position: center;
 }
 
+.desc-text {
+  white-space: nowrap;      /* prevent text from wrapping */
+  overflow: hidden;         /* hide overflowed text */
+  text-overflow: ellipsis;  /* show "..." at the end */
+  max-width: 200px;         /* set a fixed width (important for ellipsis to work) */
+}
+
 .product_card {
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 

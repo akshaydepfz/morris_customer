@@ -48,7 +48,7 @@
 
         @if (products.length > 0 || products != null) {
 
-            @for(item of products | search: searchQuery:['part_number','name'] | paginate: { itemsPerPage: 20, currentPage: currentPage }; track $index) {
+            @for(item of products | search: searchQuery:['part_number','ref_no'] | paginate: { itemsPerPage: 20, currentPage: currentPage }; track $index) {
 
             <div class="col-lg-3 col-md-4 col-sm-6 col-12 mt-3">
               <div class="card product_card">
@@ -74,8 +74,9 @@
 
                     <li class="itemsinfo d-flex">
                       <div class="info-title">Description : </div>
-                      <div>{{item.part_description}}</div>
+                      <div class="desc-text">{{ item.part_description }}</div>
                     </li>
+                    
                     <li class="itemsinfo d-flex">
                       <div class="info-title">COO : </div>
                       <div>{{item.coo}}</div>

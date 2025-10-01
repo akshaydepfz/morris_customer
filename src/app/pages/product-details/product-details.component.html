@@ -152,16 +152,19 @@
       <!-- card right -->
       <div class="product-content">
         <div class="product-info-wrapper">
-          <h3 class="prouduct-title" style="    font-weight: 900;
-    border-bottom: 7px solid #023e8a;
-    display: inline-block;">{{productData.part_number}} {{productData.part_description}}</h3>
+          <h3 class="prouduct-title" 
+          style="font-weight:900; border-bottom:7px solid #023e8a; display:inline-block;">
+        <span>{{ productData.part_number }}</span><br>
+        <span>{{ productData.part_description }}</span>
+      </h3>
+      
           <ul class="ps-0">
             <!-- <li class="d-flex gap-4">
               <p class="info-title">Description:</p>
               <p>{{product.part_description}} </p>
             </li> -->
             <li class="d-flex gap-1">
-              <p class="info-title">Cross Reference p/n: </p>
+              <p class="info-title">Cross Reference: </p>
               <p>{{productData.ref_no}}</p>
             </li>
             <li class="d-flex gap-1">
