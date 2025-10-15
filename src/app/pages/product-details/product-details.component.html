@@ -260,70 +260,117 @@
       <h4 class="section-title">Similar products</h4>
       @defer () {
       @for (item of similarProducts; track $index) {
-      <div class="col-lg-3 col-md-4 col-sm-6 col-12 mt-3">
-        <div class="card product_card">
-          <div class="prod-img-card" (click)="goToProduct(item)">
-              <div class="overaly" (click)="goToProduct(item)">
-                    <img src="assets/Untitled design (1).png" alt="">
-                  </div>
-            <!-- <div class="overaly" (click)="goToProduct(item)">
-              <img src="assets/Untitled design (1).png" alt="">
-            </div> -->
-            @if (item.image) {
-            <img src="{{item.image}}" width="380px" height="332px" class="product-img" (click)="goToProduct(item)">
-            }@else {
-            <img src="assets/Products/noproduct.jpg" width="380px" height="332px" class="product-img"
-              (click)="goToProduct(item)">
-            }
-          </div>
 
-          <div class="card-body product_card-body">
-            <h5 class="card-title text-white"> <a class="buybtn text-white"
-                (click)="goToProduct(item)">{{item.name}}</a></h5>
-
-            <ul class="ps-0">
-              <li class="itemsinfo d-flex">
-                <div class="info-title"> Part no : </div>
-                <div>{{item.part_number}}</div>
-              </li>
-
-              <li class="itemsinfo d-flex">
-                <div class="info-title">Description : </div>
-                <div>{{item.part_description}}</div>
-              </li>
-              <li class="itemsinfo d-flex">
-                <div class="info-title">COO : </div>
-                <div>{{item.coo}}</div>
-              </li>
-              <li class="itemsinfo d-flex">
-                <div class="info-title">Weight : </div>
-                <div>{{item.weight}}</div>
-              </li>
-
-
-
-
-
-              <li class="itemsinfo d-flex">
-                <div class="info-title">HS code: </div>
-                <div>{{item.hs_code}}</div>
-              </li>
-
-
-
-
-              <li class="itemsinfo d-flex">
-                <!-- <div class="info-title"> Refernce : </div> -->
-                <div>{{item.ref_no}}</div>
-              </li>
-
-
-
-            </ul>
+        
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12 mt-3">
+          <div
+            class="product-card text-center"
+            style="
+              border: none;
+              box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15);
+              border-radius: 6px;
+              overflow: hidden;
+              background: #fff;
+              transition: transform 0.2s ease, box-shadow 0.25s ease;
+            "
+            onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.12)'"
+            onmouseout="this.style.transform='none'; this.style.boxShadow='0px 4px 6px rgba(0, 0, 0, 0.15)'"
+          >
+            <!-- Product Image -->
+            <div
+              class="product-image"
+              style="
+                width: 100%;
+                height: 230px;
+                background-color: #fff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+                border-bottom: 2px solid #004aad; /* blue border line */
+              "
+            >
+              <img
+                src="{{ item.image || 'assets/Products/noproduct.jpg' }}"
+                alt="Product"
+                routerLink="/details/{{ item.id }}"
+                style="width: 100%; height: 100%; object-fit: contain;"
+              />
+            </div>
+        
+            <!-- Product Info -->
+            <div
+              class="product-info"
+              routerLink="/details/{{ item.id }}"
+              style="
+                background: #004aad; /* solid blue background */
+                color: #fff;
+                padding: 12px 14px;
+                text-align: left;
+              "
+            >
+              <!-- Part No -->
+              <div
+                class="info-row"
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  font-size: 14px;
+                  margin-bottom: 6px;
+                  line-height: 1.3;
+                "
+              >
+                <span class="info-title" style="font-weight: 600;">Part no :</span>
+                <span class="info-value" style="font-weight: 600;">{{ item.part_number }}</span>
+              </div>
+        
+              <!-- Description -->
+              <div
+                class="info-row"
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  font-size: 14px;
+                  margin-bottom: 6px;
+                  line-height: 1.3;
+                "
+              >
+                <span class="info-title" style="font-weight: 600;">Description :</span>
+                <span
+                  class="info-value"
+                  style="
+                    font-weight: 600;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    max-width: 140px;
+                  "
+                  >{{ item.part_description }}</span
+                >
+              </div>
+        
+              <!-- More Details -->
+              <div
+                class="more-details"
+                style="
+                  margin-top: 6px;
+                  text-align: center;
+                  background: rgba(0, 0, 0, 0.15);
+                  padding: 6px 0;
+                  border-radius: 0 0 6px 6px;
+                  font-size: 13px;
+                  font-weight: 500;
+                  cursor: pointer;
+                  transition: background 0.15s ease;
+                "
+                onmouseover="this.style.background='#007bff'; this.style.color='#fff'"
+                onmouseout="this.style.background='rgba(0, 0, 0, 0.15)'; this.style.color='#fff'"
+              >
+                More Details
+              </div>
+            </div>
           </div>
         </div>
-
-      </div>
       }
       }
 
