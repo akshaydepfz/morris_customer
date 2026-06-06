@@ -25,7 +25,7 @@ export interface Product {
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [RouterLink,LoaderComponent],
+  imports: [RouterLink, LoaderComponent],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
@@ -33,38 +33,38 @@ export class ProductsComponent implements OnInit {
 
   productService = inject(ProductService);
   isLoading = true
-  cateogories :any[] = []
-  apiUrl1 = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/categories'; // Replace with your API
-  token ='eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
+  cateogories: any[] = []
+  apiUrl1 = 'https://clinical-hermina-morrisuae-21fb553a.koyeb.app/categories'; // Replace with your API
+  token = 'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
   http = inject(HttpClient);
   productId: string | null = null;
 
   ngOnInit(): void {
 
-     this.productId = this.route.snapshot.paramMap.get('id');
+    this.productId = this.route.snapshot.paramMap.get('id');
     console.log(this.productId); // will print the id from URL
 
     this.getcategories()
 
   }
 
-    constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute) { }
 
   getcategories() {
-      const headers = new HttpHeaders({
-        Authorization: `Bearer ${this.token}`,
-        'Content-Type': 'application/json',
-      });
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.token}`,
+      'Content-Type': 'application/json',
+    });
 
-      this.http.get<any>(`${this.apiUrl1}`, { headers }).subscribe({
-        next: (response) => {
+    this.http.get<any>(`${this.apiUrl1}`, { headers }).subscribe({
+      next: (response) => {
 
-          this.cateogories = response ;
-          this.isLoading = false
-        },
-        error: (err) => {
+        this.cateogories = response;
+        this.isLoading = false
+      },
+      error: (err) => {
 
-        },
-      });
-    }
+      },
+    });
+  }
 }

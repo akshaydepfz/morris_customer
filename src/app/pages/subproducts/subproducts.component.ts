@@ -40,18 +40,18 @@ export interface Product {
     ReactiveFormsModule,
     SearchPipe,
     LoaderComponent,
-    NgxPaginationModule,RouterLink,
+    NgxPaginationModule, RouterLink,
   ],
   templateUrl: './subproducts.component.html',
   styleUrl: './subproducts.component.scss',
 })
 export class SubproductsComponent implements OnInit {
-  apiUrl1 = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/admin/parts';
-  enquiryApi = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/enquiries';
+  apiUrl1 = 'https://clinical-hermina-morrisuae-21fb553a.koyeb.app/admin/parts';
+  enquiryApi = 'https://clinical-hermina-morrisuae-21fb553a.koyeb.app/enquiries';
 
-  apiurl2 = "https://mysterious-alejandra-morrisuae-99776981.koyeb.app/morrisparts"; //change
+  apiurl2 = "https://clinical-hermina-morrisuae-21fb553a.koyeb.app/morrisparts"; //change
 
-  token ='eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
+  token = 'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
 
   http = inject(HttpClient);
   searchQuery: string = '';
@@ -95,7 +95,7 @@ export class SubproductsComponent implements OnInit {
 
     this.http.get<any[]>(this.apiurl2, { params, headers }).subscribe({
       next: (response) => {
-        console.log("response",response)
+        console.log("response", response)
         this.products = response || [];
         this.isLoading = false;
       },

@@ -26,11 +26,11 @@ export class BannersComponent implements OnInit {
   bannerTitle: string = '';
   selectedFile: File | null = null;
   @ViewChild('imageInput') imageInput!: ElementRef;
-  apiUrl = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/banner';
-  token ='eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
+  apiUrl = 'https://clinical-hermina-morrisuae-21fb553a.koyeb.app/banner';
+  token = 'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
   http = inject(HttpClient);
 
-  constructor( private toastr: ToastrService){}
+  constructor(private toastr: ToastrService) { }
   ngOnInit(): void {
     this.getBanner();
   }

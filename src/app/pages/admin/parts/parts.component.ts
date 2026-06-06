@@ -26,12 +26,12 @@ export class PartsComponent implements OnInit, AfterViewInit {
   constructor(private toastr: ToastrService) { }
 
   partId!: number;
-  apiUrl1 = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/admin/parts'; // Replace with your API
-  deleteApi = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/morrisparts';
-  categoryAPI = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/categories';
-  postParts = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/morrisparts';
-  subCategoryAPI = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/admin/subcategory';
-  updateApi = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/morrisparts';
+  apiUrl1 = 'https://clinical-hermina-morrisuae-21fb553a.koyeb.app/admin/parts'; // Replace with your API
+  deleteApi = 'https://clinical-hermina-morrisuae-21fb553a.koyeb.app/morrisparts';
+  categoryAPI = 'https://clinical-hermina-morrisuae-21fb553a.koyeb.app/categories';
+  postParts = 'https://clinical-hermina-morrisuae-21fb553a.koyeb.app/morrisparts';
+  subCategoryAPI = 'https://clinical-hermina-morrisuae-21fb553a.koyeb.app/admin/subcategory';
+  updateApi = 'https://clinical-hermina-morrisuae-21fb553a.koyeb.app/morrisparts';
   token =
     'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
   http = inject(HttpClient);
@@ -52,7 +52,7 @@ export class PartsComponent implements OnInit, AfterViewInit {
   available_location: string = '';
   dimension: string = '';
   compatible_engine_models: string = '';
-  price : number = 0;
+  price: number = 0;
   currentPage = 1;
   //previewImage: string | null = null;
   //selectedFile: File | null = null;
@@ -161,52 +161,52 @@ export class PartsComponent implements OnInit, AfterViewInit {
   }
 
   onFileChange(event: Event) {
-  const input = event.target as HTMLInputElement;
+    const input = event.target as HTMLInputElement;
 
-  if (input.files && input.files.length > 0) {
-    const newFiles = Array.from(input.files);
+    if (input.files && input.files.length > 0) {
+      const newFiles = Array.from(input.files);
 
-    // Calculate how many files can be added
-    const remainingSlots = 3 - this.selectedFiles.length;
+      // Calculate how many files can be added
+      const remainingSlots = 3 - this.selectedFiles.length;
 
-    if (remainingSlots <= 0) {
-      alert('You can only upload up to 3 images.');
+      if (remainingSlots <= 0) {
+        alert('You can only upload up to 3 images.');
+        this.fileInput.nativeElement.value = '';
+        return;
+      }
+
+      // Take only allowed number of files
+      const filesToAdd = newFiles.slice(0, remainingSlots);
+
+      // Add to selectedFiles array
+      this.selectedFiles.push(...filesToAdd);
+
+      // Generate previews
+      filesToAdd.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = (e: ProgressEvent<FileReader>) => {
+          if (e.target?.result) {
+            this.imagePreviews.push(e.target.result as string);
+          }
+        };
+        reader.readAsDataURL(file);
+      });
+
+      // Reset file input to allow re-selection if user removed any files
       this.fileInput.nativeElement.value = '';
-      return;
     }
+  }
 
-    // Take only allowed number of files
-    const filesToAdd = newFiles.slice(0, remainingSlots);
+  @ViewChild('fileInput') fileInput!: ElementRef;
 
-    // Add to selectedFiles array
-    this.selectedFiles.push(...filesToAdd);
+  removeImage2(index: number) {
+    // Remove from arrays
+    this.selectedFiles.splice(index, 1);
+    this.imagePreviews.splice(index, 1);
 
-    // Generate previews
-    filesToAdd.forEach(file => {
-      const reader = new FileReader();
-      reader.onload = (e: ProgressEvent<FileReader>) => {
-        if (e.target?.result) {
-          this.imagePreviews.push(e.target.result as string);
-        }
-      };
-      reader.readAsDataURL(file);
-    });
-
-    // Reset file input to allow re-selection if user removed any files
+    // Reset the file input
     this.fileInput.nativeElement.value = '';
   }
-}
-
-@ViewChild('fileInput') fileInput!: ElementRef;
-
-removeImage2(index: number) {
-  // Remove from arrays
-  this.selectedFiles.splice(index, 1);
-  this.imagePreviews.splice(index, 1);
-
-  // Reset the file input
-  this.fileInput.nativeElement.value = '';
-}
 
 
   resetForm() {
@@ -234,13 +234,13 @@ removeImage2(index: number) {
     this.price = 0;
 
     // Clear files and previews
-  this.selectedFiles = [];
-  this.imagePreviews = [];
+    this.selectedFiles = [];
+    this.imagePreviews = [];
 
-  // Reset file input element
-  if (this.fileInput) {
-    this.fileInput.nativeElement.value = '';
-  }
+    // Reset file input element
+    if (this.fileInput) {
+      this.fileInput.nativeElement.value = '';
+    }
   }
 
   openModal() {
@@ -256,35 +256,35 @@ removeImage2(index: number) {
   }
 
 
-updateParts(id: number) {
-  this.resetForm();
-  this.partId = id;
-  const part = this.Parts.find((p) => p.id === id);
+  updateParts(id: number) {
+    this.resetForm();
+    this.partId = id;
+    const part = this.Parts.find((p) => p.id === id);
 
-  console.log("Editing part:", part); // ✅ Debug
+    console.log("Editing part:", part); // ✅ Debug
 
-  if (part) {
-    this.main_category = part.main_category;
-    this.sub_category = part.sub_category;
-    this.name = part.name;
-    this.part_number = part.part_number;
-    this.part_description = part.part_description;
-    this.super_ss_number = part.super_ss_number;
-    this.weight = part.weight;
-    this.hs_code = part.hs_code;
-    this.remain_part_number = part.remain_part_number;
-    this.coo = part.coo;
-    this.ref_no = part.ref_no;
-    this.dimension = part.dimension;
-    this.available_location = part.available_location;
-    this.compatible_engine_models = part.compatible_engine_models;
-    this.price = part.price;
+    if (part) {
+      this.main_category = part.main_category;
+      this.sub_category = part.sub_category;
+      this.name = part.name;
+      this.part_number = part.part_number;
+      this.part_description = part.part_description;
+      this.super_ss_number = part.super_ss_number;
+      this.weight = part.weight;
+      this.hs_code = part.hs_code;
+      this.remain_part_number = part.remain_part_number;
+      this.coo = part.coo;
+      this.ref_no = part.ref_no;
+      this.dimension = part.dimension;
+      this.available_location = part.available_location;
+      this.compatible_engine_models = part.compatible_engine_models;
+      this.price = part.price;
 
-    this.imagePreviews = part.images ? [part.images] : ['assets/Products/noproduct.jpg'];
-  } else {
-    this.imagePreviews = ['assets/Products/noproduct.jpg'];
+      this.imagePreviews = part.images ? [part.images] : ['assets/Products/noproduct.jpg'];
+    } else {
+      this.imagePreviews = ['assets/Products/noproduct.jpg'];
+    }
   }
-}
 
 
 
@@ -318,7 +318,7 @@ updateParts(id: number) {
     formData.append('available_location', this.available_location);
     formData.append('dimension', this.dimension);
     formData.append('compatible_engine_models', this.compatible_engine_models);
-    formData.append('price', String( this.price));
+    formData.append('price', String(this.price));
 
     // formData.append('image', this.selectedFile);
     formData.append('main_category', this.main_category);

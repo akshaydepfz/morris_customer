@@ -6,27 +6,27 @@ import { Injectable } from '@angular/core';
 })
 export class ProductService {
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
 
   apiUrl = ''
 
-  apiUrl1 = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/'; // Replace with your API
+  apiUrl1 = 'https://clinical-hermina-morrisuae-21fb553a.koyeb.app/'; // Replace with your API
   token = 'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
 
 
-  getCategories(){
+  getCategories() {
     return this.http.get<any>('assets/categories.json');
   }
 
 
-  getproduct(id:string){
+  getproduct(id: string) {
     return this.http.get<any>('assets/products.json');
   }
 
 
-  getsubproducts(id:string){
-    this.http.post(`${this.apiUrl},`,id)
+  getsubproducts(id: string) {
+    this.http.post(`${this.apiUrl},`, id)
   }
 
 

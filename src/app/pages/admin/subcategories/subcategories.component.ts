@@ -22,9 +22,9 @@ export class SubcategoriesComponent implements OnInit {
   isLoading = true;
   subCategories: any[] = [];
   cateogories: any[] = [];
-  apiUrl1 = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/admin/subcategory'; // Replace with your API
-  postapi = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/subcategories'; // Replace with your API
-  catapi = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/categories'; // Replace with your API
+  apiUrl1 = 'https://clinical-hermina-morrisuae-21fb553a.koyeb.app/admin/subcategory'; // Replace with your API
+  postapi = 'https://clinical-hermina-morrisuae-21fb553a.koyeb.app/subcategories'; // Replace with your API
+  catapi = 'https://clinical-hermina-morrisuae-21fb553a.koyeb.app/categories'; // Replace with your API
   token =
     'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
   http = inject(HttpClient);
@@ -35,7 +35,7 @@ export class SubcategoriesComponent implements OnInit {
   @ViewChild('imageInput') imageInput!: ElementRef;
   currentPage = 1;
 
-  constructor(private toastr: ToastrService) {}
+  constructor(private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getsubcategories();
@@ -151,7 +151,7 @@ export class SubcategoriesComponent implements OnInit {
   resetForm(): void {
     this.categoryName = '';
     this.selectedFile = null;
-    this.subCategoryName =''
+    this.subCategoryName = ''
     if (this.imageInput) {
       this.imageInput.nativeElement.value = '';
     }

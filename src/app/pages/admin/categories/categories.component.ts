@@ -14,14 +14,14 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-categories',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonModule,NgxPaginationModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, NgxPaginationModule],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.scss',
 })
 export class CategoriesComponent implements OnInit {
   isLoading = true;
   currentPage = 1;
-  apiUrl1 = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/categories';
+  apiUrl1 = 'https://clinical-hermina-morrisuae-21fb553a.koyeb.app/categories';
   token =
     'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
 
@@ -32,7 +32,7 @@ export class CategoriesComponent implements OnInit {
   @ViewChild('exampleModal') modal!: ElementRef;
   @ViewChild('imageInput') imageInput!: ElementRef;
 
-  constructor(private toastr: ToastrService){
+  constructor(private toastr: ToastrService) {
 
   }
   ngOnInit(): void {
@@ -111,7 +111,7 @@ export class CategoriesComponent implements OnInit {
     this.http.post(this.apiUrl1, formData, { headers }).subscribe({
       next: (response) => {
         this.toastr.remove(toastrRef.toastId);
-          this.toastr.success('Category added successfully');
+        this.toastr.success('Category added successfully');
         this.getcategories();
         this.resetForm();
         this.isLoading = false;

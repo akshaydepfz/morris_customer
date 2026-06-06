@@ -37,9 +37,9 @@ export class HomeProductsComponent implements OnInit {
   subacategory = '';
   currentPage = 1;
   selectedFile: File | null = null; // Variable to hold selected file
-  enquiryApi = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/enquiries';
+  enquiryApi = 'https://clinical-hermina-morrisuae-21fb553a.koyeb.app/enquiries';
 
-  apiUrl1 = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/part/subcategory';
+  apiUrl1 = 'https://clinical-hermina-morrisuae-21fb553a.koyeb.app/part/subcategory';
   token =
     'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
   http = inject(HttpClient);
@@ -125,7 +125,7 @@ export class HomeProductsComponent implements OnInit {
           this.selectedFile = null;
         },
         error: (error: any) => {
-          this.toastr.error('Error submitting enquiry',error);
+          this.toastr.error('Error submitting enquiry', error);
         },
       });
   }

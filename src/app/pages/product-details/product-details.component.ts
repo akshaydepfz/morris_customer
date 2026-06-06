@@ -54,9 +54,9 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
 
   productData!: Product; // Use the interface for type checking
   http = inject(HttpClient);
-  singlePoductapi = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/morrisparts/part';
-  similarProductApi = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/morrisparts/relatedparts'
-  enquiryApi = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/enquiries';
+  singlePoductapi = 'https://clinical-hermina-morrisuae-21fb553a.koyeb.app/morrisparts/part';
+  similarProductApi = 'https://clinical-hermina-morrisuae-21fb553a.koyeb.app/morrisparts/relatedparts'
+  enquiryApi = 'https://clinical-hermina-morrisuae-21fb553a.koyeb.app/enquiries';
   token = 'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
   selectedProduct: any = null;
   fileError: string | null = null;
@@ -207,14 +207,14 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
 
   loading = false;
 
-changeImage(img: string) {
-  this.loading = true;
-  this.selectedImage = img;
-}
+  changeImage(img: string) {
+    this.loading = true;
+    this.selectedImage = img;
+  }
 
-onImageLoad() {
-  this.loading = false;
-}
+  onImageLoad() {
+    this.loading = false;
+  }
 
   getSelectedProduct() {
     console.log("slecbro", this.selectedProduct)
@@ -225,7 +225,7 @@ onImageLoad() {
     this.http.get<any>(`${this.singlePoductapi}?id=${this.selectedProduct}`, { headers }).subscribe({
       next: (response) => {
         this.productData = response;
-        console.log("this.productData",this.productData)
+        console.log("this.productData", this.productData)
         this.images = this.productData?.images || [];
 
         if (this.images.length > 0) {
@@ -276,12 +276,12 @@ onImageLoad() {
   goToProduct(product: any) {
     console.log("ssssssss", product)
     this.productData = product
-    this.images=  this.images = this.productData?.images || [];
-     if (this.images.length > 0) {
-          this.selectedImage = this.images[0]; // ✅ only assign when available
-        } else {
-          this.selectedImage = "assets/Products/noproduct.jpg"; // fallback
-        }
+    this.images = this.images = this.productData?.images || [];
+    if (this.images.length > 0) {
+      this.selectedImage = this.images[0]; // ✅ only assign when available
+    } else {
+      this.selectedImage = "assets/Products/noproduct.jpg"; // fallback
+    }
   }
 
   // =======================================================================================================

@@ -10,30 +10,30 @@ import { LoaderComponent } from '../../shared/loader/loader.component';
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [RouterLink,SearchPipe,CommonModule,ReactiveFormsModule,FormsModule,LoaderComponent],
+  imports: [RouterLink, SearchPipe, CommonModule, ReactiveFormsModule, FormsModule, LoaderComponent],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss'
 })
 export class ProductListComponent implements OnInit {
 
-  apiUrl1 = 'https://mysterious-alejandra-morrisuae-99776981.koyeb.app/subcategories'; // Replace with your API
-  token ='eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
+  apiUrl1 = 'https://clinical-hermina-morrisuae-21fb553a.koyeb.app/subcategories'; // Replace with your API
+  token = 'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMjg0MTUwOSwiaWF0IjoxNzIyODQxNTA5fQ.QwY-_-nZul24Md6rC079pt8-Z1LnKJmwtXUiMNTDtrY';
 
   productService = inject(ProductService)
   searchQuery: string = '';
   categoryTitle = ''
   subcategory = ''
-  products :any[] = []
-  isLoading =true
+  products: any[] = []
+  isLoading = true
   http = inject(HttpClient);
   category!: string;
   id!: string;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute) { }
 
 
 
-// mysterious-alejandra-morrisuae-99776981.koyeb.app/subcategories?category_name=PERKINS&category_type=PARTS
+  // mysterious-alejandra-morrisuae-99776981.koyeb.app/subcategories?category_name=PERKINS&category_type=PARTS
 
 
   ngOnInit() {
@@ -51,11 +51,11 @@ export class ProductListComponent implements OnInit {
       .set('category_name', this.category)
       .set('category_type', this.id);
 
-    
+
 
     this.http.get<any>(this.apiUrl1, { params, headers }).subscribe({
       next: (response) => {
-        console.log("ssss",response)
+        console.log("ssss", response)
         this.products = response || [];
         this.isLoading = false;
       },
