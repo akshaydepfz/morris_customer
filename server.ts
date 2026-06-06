@@ -17,8 +17,11 @@ export function app(): express.Express {
   server.set('view engine', 'html');
   server.set('views', browserDistFolder);
 
-  // Example Express Rest API endpoints
-  // server.get('/api/**', (req, res) => { });
+  // Health check for Koyeb and other PaaS platforms
+  server.get('/health', (_req, res) => {
+    res.status(200).send('OK');
+  });
+
   // Serve static files from /browser
   server.get('**', express.static(browserDistFolder, {
     maxAge: '1y',
@@ -45,12 +48,12 @@ export function app(): express.Express {
 }
 
 function run(): void {
-  const port = process.env['PORT'] || 4000;
+  const port = Number(process.env['PORT']) || 4000;
 
   // Start up the Node server
   const server = app();
-  server.listen(port, () => {
-    console.log(`Node Express server listening on http://localhost:${port}`);
+  server.listen(port, '0.0.0.0', () => {
+    console.log(`Node Express server listening on http://0.0.0.0:${port}`);
   });
 }
 

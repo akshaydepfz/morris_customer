@@ -1,10 +1,14 @@
 {
   "name": "morries-industries",
   "version": "0.0.0",
+  "engines": {
+    "node": ">=18.19.0"
+  },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "node dist/morries_industries/server/server.mjs",
+    "start:dev": "ng serve",
+    "build": "NODE_OPTIONS=--max-old-space-size=4096 ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:morries_industries": "node dist/morries_industries/server/server.mjs"
